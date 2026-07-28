@@ -20,7 +20,6 @@
       --light: #f7f4ef;
       --white: #ffffff;
       --green: #23a455;
-      --nequi: #200020;
       --shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
     }
 
@@ -458,35 +457,6 @@
       font-weight: 800;
       font-size: 14px;
       flex-shrink: 0;
-    }
-
-    /* ESTILOS PARA LA CARGA DE LA CAPTURA */
-    .upload-box {
-      background: #fdf3f0;
-      border: 2px dashed var(--orange);
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .upload-box:hover {
-      background: #fbebe6;
-    }
-
-    .file-input {
-      display: none;
-    }
-
-    .file-preview {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-      font-weight: 600;
-      color: var(--green);
     }
 
     .whatsapp-banner {
@@ -929,11 +899,7 @@
           </div>
           <div class="instruction-step">
             <span class="step-number">2</span>
-            <p><strong>Toma captura del comprobante:</strong> Guarda la imagen con la referencia de pago exitoso.</p>
-          </div>
-          <div class="instruction-step">
-            <span class="step-number">3</span>
-            <p><strong>Adjúntala en el formulario:</strong> Súbela abajo para validarla inmediatamente por WhatsApp.</p>
+            <p><strong>Paga a la cuenta oficial:</strong> Transfiere al número <strong>324 604 4424</strong>.</p>
           </div>
         </div>
       </div>
@@ -1040,17 +1006,6 @@
             </select>
           </div>
 
-          <!-- APARTADO DE CAPTURA DE PAGO -->
-          <div class="field full">
-            <label>Enviar captura de pago (Nequi / Daviplata / Transferencia)</label>
-            <div class="upload-box" onclick="document.getElementById('capturaPago').click()">
-              📸 <strong>Haz clic para adjuntar comprobante de Nequi</strong>
-              <p style="font-size: 12px; color: #777; margin-top:4px;">Adjunta tu captura antes de finalizar el pedido</p>
-              <input type="file" id="capturaPago" class="file-input" accept="image/*">
-            </div>
-            <div id="filePreview" class="file-preview"></div>
-          </div>
-
           <div class="field full">
             <label for="observaciones">Observaciones / Tu Pedido *</label>
             <textarea id="observaciones" rows="4" placeholder="Ej: 1 Combo del día sin cebolla, 1 jugo natural." required></textarea>
@@ -1089,19 +1044,7 @@
   </nav>
 
   <script>
-    // PREVISUALIZACIÓN DE ARCHIVO ADJUNTADO
-    const capturaInput = document.getElementById('capturaPago');
-    const filePreview = document.getElementById('filePreview');
-
-    capturaInput.addEventListener('change', function () {
-      if (this.files && this.files[0]) {
-        filePreview.innerHTML = `✅ Captura seleccionada: <strong>${this.files[0].name}</strong>`;
-      } else {
-        filePreview.innerHTML = '';
-      }
-    });
-
-    // FORMULARIO DE PEDIDO CON DETALLES DE PAGO EN EL MENSAJE
+    // FORMULARIO DE PEDIDO CON NÚMERO DE CUENTA DIRECTO EN EL MENSAJE
     document.getElementById('pedidoForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -1112,7 +1055,6 @@
       const referencia = document.getElementById('referencia').value.trim() || "Ninguno";
       const pago = document.getElementById('pago').value;
       const observaciones = document.getElementById('observaciones').value.trim();
-      const tieneCaptura = capturaInput.files.length > 0;
 
       if (!nombre || !whatsapp || !direccion || !barrio || !pago || !observaciones) {
         alert("Por favor completa los campos obligatorios.");
@@ -1120,10 +1062,6 @@
       }
 
       const telefonoNegocio = "573246044424";
-
-      let estadoCapturaText = tieneCaptura 
-        ? "📎 *Captura seleccionada para adjuntar en el chat.*" 
-        : "⚠️ *Sin captura adjunta.*";
 
       const mensaje = `🍽️ *NUEVO PEDIDO WEB*
 
@@ -1133,15 +1071,12 @@
 🏘️ *Barrio:* ${barrio}
 📍 *Referencia:* ${referencia}
 💳 *Forma de pago:* ${pago}
-📸 *Estado del comprobante:* ${estadoCapturaText}
 
 🏦 *CUENTA PARA PAGOS (Nequi / Daviplata):*
 📲 *Número:* 324 604 4424
 
 📝 *Detalle del pedido:*
-${observaciones}
-
-📌 *Si pagas por Nequi/Daviplata/Transferencia, por favor adjunta la captura del comprobante a continuación.*`;
+${observaciones}`;
 
       const url = `https://wa.me/${telefonoNegocio}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
