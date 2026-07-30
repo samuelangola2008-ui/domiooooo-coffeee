@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="es"><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dominio & Coffee | E-commerce Domicilios</title>
@@ -44,14 +46,6 @@
     }
 
     /* TOPBAR & MAIN NAV */
-    .header-nav {
-      background: #b3d854;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .topbar {
       background: var(--dark);
       color: var(--white);
@@ -84,16 +78,8 @@
       transform: translateY(-2px);
     }
 
-    .nav-item:active {
-      transform: translateY(1px);
-    }
-
     .nav-item.active {
       background: var(--red-accent);
-    }
-
-    .nav-item.active:hover {
-      background: #e60000;
     }
 
     .cart-badge {
@@ -118,7 +104,7 @@
       border-radius: 28px;
       overflow: hidden;
       box-shadow: var(--shadow);
-      min-height: 380px;
+      min-height: 300px;
     }
 
     .hero-text {
@@ -130,15 +116,15 @@
     }
 
     .hero-text h2 {
-      font-size: 2.8rem;
-      line-height: 1;
-      margin-bottom: 16px;
+      font-size: 2.5rem;
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
 
     .hero-text p {
       font-size: 1.1rem;
       opacity: 0.95;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .hero-info {
@@ -165,38 +151,26 @@
       opacity: 0.9;
     }
 
+    /* ESTILOS ESTADO ABIERTO/CERRADO */
     .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      display: inline-block;
       padding: 3px 8px;
       border-radius: 12px;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 11px;
-      margin-top: 4px;
       text-transform: uppercase;
+      margin-top: 4px;
     }
 
-    .status-badge.open {
-      background: rgba(35, 164, 85, 0.2);
-      color: #4caf50;
-      border: 1px solid #4caf50;
+    .status-open {
+      background: #28a745;
+      color: #fff;
     }
 
-    .status-badge.closed {
-      background: rgba(229, 57, 53, 0.2);
-      color: #f44336;
-      border: 1px solid #f44336;
+    .status-closed {
+      background: #dc3545;
+      color: #fff;
     }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .status-badge.open .status-dot { background: #4caf50; }
-    .status-badge.closed .status-dot { background: #f44336; }
 
     .hero-image img {
       height: 100%;
@@ -207,7 +181,7 @@
       margin: 26px auto 0;
     }
 
-    /* VISTA DE E-COMMERCE / CATÁLOGO */
+    /* CATALOGO */
     .shop-layout {
       display: grid;
       grid-template-columns: 240px 1fr;
@@ -262,26 +236,27 @@
       align-items: center;
       background: var(--white);
       border-radius: 12px;
-      padding: 10px;
+      padding: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
 
     .product-img {
-      height: 180px;
+      height: 160px;
       border-radius: 8px;
       overflow: hidden;
       background: #222;
     }
 
     .product-info h4 {
-      font-size: 14px;
+      font-size: 16px;
       color: #777;
       margin-bottom: 5px;
+      font-weight: 700;
     }
 
     .product-info h3 {
       font-size: 22px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 15px;
       color: #222;
     }
@@ -305,11 +280,7 @@
       transform: translateY(-2px);
     }
 
-    .btn-buy:active {
-      transform: translateY(0);
-    }
-
-    /* MODAL CONFIGURACIÓN DE PRODUCTO */
+    /* MODAL DE CONFIGURACIÓN */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -341,6 +312,13 @@
     .modal-content h2 {
       color: var(--red-accent);
       font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .modal-price-tag {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
       margin-bottom: 15px;
     }
 
@@ -360,8 +338,8 @@
 
     .opt-box {
       background: var(--green-light);
-      border-radius: 8px;
-      padding: 10px 14px;
+      border-radius: 12px;
+      padding: 8px 12px;
       margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
@@ -372,11 +350,18 @@
       text-transform: uppercase;
     }
 
+    .opt-box .price-add {
+      margin-left: auto;
+      margin-right: 15px;
+      color: #222;
+      font-weight: 800;
+    }
+
     .qty-counter {
       display: flex;
       align-items: center;
       background: var(--white);
-      border-radius: 6px;
+      border-radius: 4px;
       overflow: hidden;
       border: 1px solid #ccc;
     }
@@ -388,12 +373,15 @@
       font-weight: bold;
       cursor: pointer;
       font-size: 14px;
+      color: #333;
     }
 
     .qty-counter span {
       padding: 0 8px;
       font-size: 13px;
       color: #333;
+      min-width: 20px;
+      text-align: center;
     }
 
     .modal-comments {
@@ -403,14 +391,22 @@
       padding: 10px;
       margin-top: 15px;
       font-family: inherit;
+      resize: vertical;
     }
 
     .modal-footer-action {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 15px;
+      justify-content: space-between;
       margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .item-total-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
     }
 
     .btn-add-cart {
@@ -426,7 +422,11 @@
       gap: 8px;
     }
 
-    /* SECCIÓN CANASTA / CART VIEW */
+    .btn-add-cart:hover {
+      background: #000;
+    }
+
+    /* CARRITO / CANASTA */
     .cart-section {
       display: none;
       margin-top: 20px;
@@ -442,6 +442,8 @@
       margin-bottom: 25px;
       background: var(--white);
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     .cart-table th {
@@ -461,13 +463,6 @@
       font-size: 14px;
     }
 
-    .cart-table img {
-      width: 120px;
-      height: 90px;
-      border-radius: 6px;
-      margin: 0 auto;
-    }
-
     .cart-summary {
       display: flex;
       flex-direction: column;
@@ -477,8 +472,8 @@
     }
 
     .subtotal-text {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 800;
     }
 
     .btn-action-cart {
@@ -489,22 +484,17 @@
       border-radius: 4px;
       font-weight: 700;
       cursor: pointer;
-      width: 220px;
+      width: 240px;
       text-align: center;
       text-transform: uppercase;
-      transition: background 0.2s, transform 0.2s;
+      transition: background 0.2s;
     }
 
     .btn-action-cart:hover {
       background: #000;
-      transform: translateY(-2px);
     }
 
-    .btn-action-cart:active {
-      transform: translateY(0);
-    }
-
-    /* FORMULARIO DE REGISTRO / PEDIDO */
+    /* FORMULARIO DE CHECKOUT */
     .checkout-section {
       display: none;
       margin-top: 20px;
@@ -585,42 +575,8 @@
       cursor: pointer;
     }
 
-    /* FOOTER & BOTTOM NAV */
-    .footer {
-      margin-top: 40px;
-      background: #111;
-      color: var(--white);
-      padding: 30px 18px 100px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: var(--white);
-      border-top: 1px solid #e9e9e9;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      z-index: 60;
-    }
-
-    .bottom-nav a {
-      padding: 12px 6px;
-      text-align: center;
-      color: #666;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      font-size: 18px;
-    }
-
-    .bottom-nav a span {
-      font-size: 11px;
+    .submit-btn:hover {
+      background: #e66e00;
     }
 
     @media (max-width: 768px) {
@@ -628,15 +584,16 @@
       .shop-layout { grid-template-columns: 1fr; }
       .product-card { grid-template-columns: 1fr; }
       .grid-form { grid-template-columns: 1fr; }
-      .footer { grid-template-columns: 1fr; }
     }
-  </style></head><body>
+  </style>
+</head>
+<body>
 
-  <!-- BARRA SUPERIOR CON SELECCIÓN DINÁMICA -->
+  <!-- TOPBAR -->
   <header class="topbar">
     <div class="nav-item" onclick="showSection('catalog', this)">Categorías ▾</div>
     <div class="nav-item" onclick="showSection('catalog', this)">Información ▾</div>
-    <div class="nav-item active" onclick="showSection('cart', this)">
+    <div class="nav-item active" id="cartNavBtn" onclick="showSection('cart', this)">
       🛍️ Canasta <span class="cart-badge" id="cartBadgeCount">0</span>
     </div>
     <div class="nav-item" onclick="window.open('https://wa.me/573246044424')">Contáctenos</div>
@@ -657,10 +614,7 @@
           <div class="info-box">
             <strong>🕒 Horario</strong>
             <span>10:00 am - 4:30 pm</span>
-            <div id="statusBadge" class="status-badge closed">
-              <span class="status-dot"></span>
-              <span id="statusText">Cerrado</span>
-            </div>
+            <div id="storeStatusBadge" class="status-badge">Cargando...</div>
           </div>
         </div>
       </div>
@@ -673,90 +627,136 @@
 
   <main class="container">
 
-    <!-- SECCIÓN 1: CATÁLOGO DE PRODUCTOS -->
+    <!-- SECCIÓN 1: CATÁLOGO -->
     <section id="catalogSection">
       <div class="shop-layout">
-        <!-- SIDEBAR CATEGORÍAS -->
         <aside class="categories-sidebar">
           <h3>Categorías</h3>
           <ul class="categories-list">
             <li>A ELIGE TU SABOR FAVORITO</li>
             <li>BOWL</li>
             <li>BURRITO</li>
+            <li>SANDWICHS</li>
+            <li>NACHOS</li>
+            <li>TOTOPOS WED</li>
+            <li>PORCION DE TORTA</li>
+            <li>CAFÉ</li>
+            <li>MALTEADA</li>
             <li>BEBIDAS</li>
+            <li>SODA ITALIANA</li>
           </ul>
         </aside>
 
-        <!-- LISTA DE PRODUCTOS -->
+        <!-- PRODUCTOS -->
         <div class="products-list">
-
-          <!-- PRODUCTO 1: BOWL -->
+          <!-- BOWL -->
           <div class="product-card">
-            <div class="product-img">
-              <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Bowl">
-            </div>
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Bowl"></div>
             <div class="product-info">
               <h4>$ 19.000</h4>
               <h3>Bowl</h3>
-              <button class="btn-buy" onclick="openProductModal('Bowl', 19000, 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', true)">¡COMPRAR!</button>
+              <button class="btn-buy" onclick="openProductModal('Bowl', 19000, 'food')">¡COMPRAR!</button>
             </div>
           </div>
 
-          <!-- PRODUCTO 2: BURRITO -->
+          <!-- BURRITO -->
           <div class="product-card">
-            <div class="product-img">
-              <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80" alt="Burrito">
-            </div>
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80" alt="Burrito"></div>
             <div class="product-info">
               <h4>$ 24.000</h4>
               <h3>Burrito</h3>
-              <button class="btn-buy" onclick="openProductModal('Burrito', 24000, 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80', true)">¡COMPRAR!</button>
+              <button class="btn-buy" onclick="openProductModal('Burrito', 24000, 'food')">¡COMPRAR!</button>
             </div>
           </div>
 
-          <!-- PRODUCTO 3: COCA-COLA -->
+          <!-- SANDWICH -->
           <div class="product-card">
-            <div class="product-img">
-              <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80" alt="Coca-Cola">
-            </div>
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80" alt="Sandwich"></div>
             <div class="product-info">
-              <h4>$ 5.500</h4>
-              <h3>Coca-Cola</h3>
-              <button class="btn-buy" onclick="openProductModal('Coca-Cola', 5500, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80', false)">¡COMPRAR!</button>
+              <h4>$ 20.000</h4>
+              <h3>Sandwich</h3>
+              <button class="btn-buy" onclick="openProductModal('Sandwich', 20000, 'food')">¡COMPRAR!</button>
             </div>
           </div>
 
-          <!-- PRODUCTO 4: SODA -->
+          <!-- NACHOS -->
           <div class="product-card">
-            <div class="product-img">
-              <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Soda de Frutas">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80" alt="Nachos"></div>
+            <div class="product-info">
+              <h4>$ 24.000</h4>
+              <h3>Nachos</h3>
+              <button class="btn-buy" onclick="openProductModal('Nachos', 24000, 'food')">¡COMPRAR!</button>
             </div>
+          </div>
+
+          <!-- CAFÉ DE LA CASA -->
+          <div class="product-card">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Café"></div>
             <div class="product-info">
               <h4>$ 6.000</h4>
-              <h3>Soda Saborizada</h3>
-              <button class="btn-buy" onclick="openProductModal('Soda Saborizada', 6000, 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80', false)">¡COMPRAR!</button>
+              <h3>Café de la Casa</h3>
+              <button class="btn-buy" onclick="openProductModal('Café de la Casa', 6000, 'coffee')">¡COMPRAR!</button>
             </div>
           </div>
 
+          <!-- MALTEADA -->
+          <div class="product-card">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Malteada"></div>
+            <div class="product-info">
+              <h4>$ 15.000</h4>
+              <h3>Malteada</h3>
+              <button class="btn-buy" onclick="openProductModal('Malteada', 15000, 'drink')">¡COMPRAR!</button>
+            </div>
+          </div>
+
+          <!-- PORCION DE TORTA -->
+          <div class="product-card">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Porción De Torta"></div>
+            <div class="product-info">
+              <h4>$ 8.000</h4>
+              <h3>Porción De Torta</h3>
+              <button class="btn-buy" onclick="openProductModal('Porción De Torta', 8000, 'dessert')">¡COMPRAR!</button>
+            </div>
+          </div>
+
+          <!-- SODA ITALIANA -->
+          <div class="product-card">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Soda Italiana"></div>
+            <div class="product-info">
+              <h4>$ 12.000</h4>
+              <h3>Soda Italiana</h3>
+              <button class="btn-buy" onclick="openProductModal('Soda Italiana', 12000, 'drink')">¡COMPRAR!</button>
+            </div>
+          </div>
+
+          <!-- TOTOPOS WED -->
+          <div class="product-card">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80" alt="Totopos Wed"></div>
+            <div class="product-info">
+              <h4>$ 11.000</h4>
+              <h3>Totopos Wed</h3>
+              <button class="btn-buy" onclick="openProductModal('Totopos Wed', 11000, 'food')">¡COMPRAR!</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 2: CANASTA (CARRITO) -->
+    <!-- SECCIÓN 2: CANASTA -->
     <section id="cartSection" class="cart-section">
       <table class="cart-table">
         <thead>
           <tr>
             <th>PRODUCTO</th>
-            <th>NOMBRE</th>
-            <th>PRECIO</th>
+            <th>DETALLES</th>
+            <th>PRECIO UNIT.</th>
             <th>CANTIDAD</th>
             <th>TOTAL</th>
-            <th>🗑️</th>
+            <th>ELIMINAR</th>
           </tr>
         </thead>
         <tbody id="cartTableBody">
-          <!-- Renderizado dinámico vía JavaScript -->
+          <!-- Dinámico -->
         </tbody>
       </table>
 
@@ -767,14 +767,14 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: REGISTRO / CHECKOUT -->
+    <!-- SECCIÓN 3: REGISTRO DE PEDIDO -->
     <section id="checkoutSection" class="checkout-section">
       <h2>Datos para la entrega</h2>
       <div class="form-alert-notice">
         ⚠️ Es importante que pongas bien tus datos para garantizar la entrega de tu carrito.
       </div>
 
-      <form id="checkoutForm">
+      <form id="checkoutForm" onsubmit="sendOrderToWhatsApp(event)">
         <div class="grid-form">
           <div class="field">
             <label for="nombre">Nombre de quien recibe *</label>
@@ -809,13 +809,12 @@
               <option value="Nequi">Nequi</option>
               <option value="Daviplata">Daviplata</option>
               <option value="Transferencia">Transferencia</option>
-              <option value="Tarjeta">Tarjeta</option>
             </select>
           </div>
 
           <div class="field full">
-            <label for="observaciones">Notas adicionales / Especificaciones</label>
-            <textarea id="observaciones" rows="3" placeholder="Ej: La sopa sin cilantro, entregar en la portería."></textarea>
+            <label for="observaciones">Notas adicionales</label>
+            <textarea id="observaciones" rows="3" placeholder="Ej: Entregar en recepción."></textarea>
           </div>
         </div>
 
@@ -825,419 +824,373 @@
 
   </main>
 
-  <!-- MODAL DE CONFIGURACIÓN / PERSONALIZACIÓN DEL PRODUCTO -->
+  <!-- MODAL DE CONFIGURACIÓN -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
-      <h2>Configuración</h2>
-      <h3 id="modalProductName" style="margin-bottom: 10px;">Bowl</h3>
+      <h2 id="modalProductName">Producto</h2>
+      <div class="modal-price-tag">Precio Base: <span id="modalBasePrice">$ 0</span></div>
 
-      <!-- OPCIONES DE COMIDA -->
+      <!-- OPCIONES PERSONALIZABLES PARA COMIDA -->
       <div id="foodCustomOptions">
-        <!-- a BASES -->
-        <div class="section-title"><span class="dynamic-type">a BASES DE BOWL</span> <span>(Opcional) Máximo 3</span></div>
+        <!-- SALSA BASE -->
+        <div class="section-title">v. SALSA BASE <span>(Opcional) Máximo 1</span></div>
         <div class="opt-box">
-          <span>b. ARROZ AL CILANTRO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('base_arroz', -1)">-</button><span id="base_arroz">0</span><button onclick="updateOptQty('base_arroz', 1)">+</button></div>
+          <span>w. SALSA BBQ</span>
+          <div class="qty-counter"><button onclick="updateOptQty('salsa_bbq', -1)">-</button><span id="salsa_bbq" data-price="0" data-name="Salsa BBQ">0</span><button onclick="updateOptQty('salsa_bbq', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>c. LECHUGAS MIX</span>
-          <div class="qty-counter"><button onclick="updateOptQty('base_lechuga', -1)">-</button><span id="base_lechuga">0</span><button onclick="updateOptQty('base_lechuga', 1)">+</button></div>
+          <span>x. SALSA TATEMADA</span>
+          <div class="qty-counter"><button onclick="updateOptQty('salsa_tatemada', -1)">-</button><span id="salsa_tatemada" data-price="0" data-name="Salsa Tatemada">0</span><button onclick="updateOptQty('salsa_tatemada', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>d. PPL</span>
-          <div class="qty-counter"><button onclick="updateOptQty('base_ppl', -1)">-</button><span id="base_ppl">0</span><button onclick="updateOptQty('base_ppl', 1)">+</button></div>
-        </div>
-
-        <!-- e. PROTEÍNA -->
-        <div class="section-title"><span class="dynamic-type">e. PROTEINA DE BOWL</span> <span>(Opcional) Máximo 1</span></div>
-        <div class="opt-box">
-          <span>f. CARNE DESMECHADA +$2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_carne', -1)">-</button><span id="prot_carne">0</span><button onclick="updateOptQty('prot_carne', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>f. CERDO PULLED PORK</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_cerdo', -1)">-</button><span id="prot_cerdo">0</span><button onclick="updateOptQty('prot_cerdo', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>g. TENDERS DE PECHUGA</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_tenders', -1)">-</button><span id="prot_tenders">0</span><button onclick="updateOptQty('prot_tenders', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>i. COSTILLA BBQ +$2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_costilla', -1)">-</button><span id="prot_costilla">0</span><button onclick="updateOptQty('prot_costilla', 1)">+</button></div>
+          <span>y. SALSA DE AJO</span>
+          <div class="qty-counter"><button onclick="updateOptQty('salsa_ajo', -1)">-</button><span id="salsa_ajo" data-price="0" data-name="Salsa de Ajo">0</span><button onclick="updateOptQty('salsa_ajo', 1)">+</button></div>
         </div>
 
-        <!-- J. TOPPINGS -->
-        <div class="section-title"><span class="dynamic-type">J. TOPPINGS DE BOWL</span> <span>(Opcional) Máximo 7</span></div>
-        <div class="opt-box"><span>k. CHICHARRON</span><div class="qty-counter"><button onclick="updateOptQty('top_chicharron', -1)">-</button><span id="top_chicharron">0</span><button onclick="updateOptQty('top_chicharron', 1)">+</button></div></div>
-        <div class="opt-box"><span>l. CHORIZO</span><div class="qty-counter"><button onclick="updateOptQty('top_chorizo', -1)">-</button><span id="top_chorizo">0</span><button onclick="updateOptQty('top_chorizo', 1)">+</button></div></div>
-        <div class="opt-box"><span>m. MADURITO</span><div class="qty-counter"><button onclick="updateOptQty('top_madurito', -1)">-</button><span id="top_madurito">0</span><button onclick="updateOptQty('top_madurito', 1)">+</button></div></div>
-        <div class="opt-box"><span>ñ. GUACAMOLE</span><div class="qty-counter"><button onclick="updateOptQty('top_guacamole', -1)">-</button><span id="top_guacamole">0</span><button onclick="updateOptQty('top_guacamole', 1)">+</button></div></div>
-        <div class="opt-box"><span>n. MAIZCITOS</span><div class="qty-counter"><button onclick="updateOptQty('top_maizcitos', -1)">-</button><span id="top_maizcitos">0</span><button onclick="updateOptQty('top_maizcitos', 1)">+</button></div></div>
-        <div class="opt-box"><span>o. PICO DE GALLO</span><div class="qty-counter"><button onclick="updateOptQty('top_pico', -1)">-</button><span id="top_pico">0</span><button onclick="updateOptQty('top_pico', 1)">+</button></div></div>
-        <div class="opt-box"><span>p. DORITOX</span><div class="qty-counter"><button onclick="updateOptQty('top_doritox', -1)">-</button><span id="top_doritox">0</span><button onclick="updateOptQty('top_doritox', 1)">+</button></div></div>
-        <div class="opt-box"><span>q. CEBOLLA CRISPY</span><div class="qty-counter"><button onclick="updateOptQty('top_cebolla', -1)">-</button><span id="top_cebolla">0</span><button onclick="updateOptQty('top_cebolla', 1)">+</button></div></div>
-        <div class="opt-box"><span>r. QUESO MOZARELLA +$2.000</span><div class="qty-counter"><button onclick="updateOptQty('top_queso', -1)">-</button><span id="top_queso">0</span><button onclick="updateOptQty('top_queso', 1)">+</button></div></div>
-        <div class="opt-box"><span>s. SOUR CREEM</span><div class="qty-counter"><button onclick="updateOptQty('top_sour', -1)">-</button><span id="top_sour">0</span><button onclick="updateOptQty('top_sour', 1)">+</button></div></div>
-        <div class="opt-box"><span>t. PEPINO</span><div class="qty-counter"><button onclick="updateOptQty('top_pepino', -1)">-</button><span id="top_pepino">0</span><button onclick="updateOptQty('top_pepino', 1)">+</button></div></div>
-        <div class="opt-box"><span>u. JALAPEÑOS</span><div class="qty-counter"><button onclick="updateOptQty('top_jalapenos', -1)">-</button><span id="top_jalapenos">0</span><button onclick="updateOptQty('top_jalapenos', 1)">+</button></div></div>
+        <!-- ADICION DE PROTEINA -->
+        <div class="section-title">z. ADICIÓN DE PROTEÍNA <span>(Opcional)</span></div>
+        <div class="opt-box">
+          <span>CARNE DESMECHADA</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_carne', -1)">-</button><span id="add_carne" data-price="8000" data-name="Add. Carne Desmechada">0</span><button onclick="updateOptQty('add_carne', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>CERDO PULLED PORK</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_cerdo', -1)">-</button><span id="add_cerdo" data-price="8000" data-name="Add. Cerdo Pulled Pork">0</span><button onclick="updateOptQty('add_cerdo', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>COSTILLA BBQ</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_costilla', -1)">-</button><span id="add_costilla" data-price="8000" data-name="Add. Costilla BBQ">0</span><button onclick="updateOptQty('add_costilla', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>TENDERS DE POLLO</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_tenders', -1)">-</button><span id="add_tenders" data-price="8000" data-name="Add. Tenders de Pollo">0</span><button onclick="updateOptQty('add_tenders', 1)">+</button></div>
+        </div>
 
-        <!-- v. SALSA -->
-        <div class="section-title"><span class="dynamic-type">v. SALSA DE BOWL</span> <span>(Opcional) Máximo 1</span></div>
-        <div class="opt-box"><span>w. SALSA BBQ</span><div class="qty-counter"><button onclick="updateOptQty('salsa_bbq', -1)">-</button><span id="salsa_bbq">0</span><button onclick="updateOptQty('salsa_bbq', 1)">+</button></div></div>
-        <div class="opt-box"><span>x. SALSA TATEMADA</span><div class="qty-counter"><button onclick="updateOptQty('salsa_tatemada', -1)">-</button><span id="salsa_tatemada">0</span><button onclick="updateOptQty('salsa_tatemada', 1)">+</button></div></div>
-        <div class="opt-box"><span>y. SALSA DE AJO</span><div class="qty-counter"><button onclick="updateOptQty('salsa_ajo', -1)">-</button><span id="salsa_ajo">0</span><button onclick="updateOptQty('salsa_ajo', 1)">+</button></div></div>
-
-        <!-- z. ADICCION DE PROTEINA -->
-        <div class="section-title"><span class="dynamic-type">z. ADICCION DE PROTEINA DE BOWL</span> <span>(Opcional) Máximo 2</span></div>
-        <div class="opt-box"><span>za. CARNE DESMECHADA +$8.000</span><div class="qty-counter"><button onclick="updateOptQty('add_carne', -1)">-</button><span id="add_carne">0</span><button onclick="updateOptQty('add_carne', 1)">+</button></div></div>
-        <div class="opt-box"><span>zb. CERDO PULLED PORK +$8.000</span><div class="qty-counter"><button onclick="updateOptQty('add_cerdo', -1)">-</button><span id="add_cerdo">0</span><button onclick="updateOptQty('add_cerdo', 1)">+</button></div></div>
-        <div class="opt-box"><span>zc. COSTILLA BBQ +$8.000</span><div class="qty-counter"><button onclick="updateOptQty('add_costilla', -1)">-</button><span id="add_costilla">0</span><button onclick="updateOptQty('add_costilla', 1)">+</button></div></div>
-        <div class="opt-box"><span>zd. TENDERS DE POLLO +$8.000</span><div class="qty-counter"><button onclick="updateOptQty('add_tenders', -1)">-</button><span id="add_tenders">0</span><button onclick="updateOptQty('add_tenders', 1)">+</button></div></div>
-
-        <!-- ze. ADICCION DE TOPPINGS -->
-        <div class="section-title"><span class="dynamic-type">ze. ADICCION DE TOPPINGS DE BOWL</span> <span>(Opcional) Máximo 12</span></div>
-        <div class="opt-box"><span>zf. CHICHARRON +$3.000</span><div class="qty-counter"><button onclick="updateOptQty('add_chicharron', -1)">-</button><span id="add_chicharron">0</span><button onclick="updateOptQty('add_chicharron', 1)">+</button></div></div>
-        <div class="opt-box"><span>zg. CHORIZO +$3.000</span><div class="qty-counter"><button onclick="updateOptQty('add_chorizo', -1)">-</button><span id="add_chorizo">0</span><button onclick="updateOptQty('add_chorizo', 1)">+</button></div></div>
-        <div class="opt-box"><span>zh. MADURITO +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_madurito', -1)">-</button><span id="add_madurito">0</span><button onclick="updateOptQty('add_madurito', 1)">+</button></div></div>
-        <div class="opt-box"><span>zi. MAIZCITOS +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_maizcitos', -1)">-</button><span id="add_maizcitos">0</span><button onclick="updateOptQty('add_maizcitos', 1)">+</button></div></div>
-        <div class="opt-box"><span>zj. GUACAMOLE +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_guacamole', -1)">-</button><span id="add_guacamole">0</span><button onclick="updateOptQty('add_guacamole', 1)">+</button></div></div>
-        <div class="opt-box"><span>zk. PICO DE GALLO +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_pico', -1)">-</button><span id="add_pico">0</span><button onclick="updateOptQty('add_pico', 1)">+</button></div></div>
-        <div class="opt-box"><span>zl. DORITOX +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_doritox', -1)">-</button><span id="add_doritox">0</span><button onclick="updateOptQty('add_doritox', 1)">+</button></div></div>
-        <div class="opt-box"><span>zm. SOUR CREEM +$3.000</span><div class="qty-counter"><button onclick="updateOptQty('add_sour', -1)">-</button><span id="add_sour">0</span><button onclick="updateOptQty('add_sour', 1)">+</button></div></div>
-        <div class="opt-box"><span>zn. CEBOLLA CRISPY +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_cebolla', -1)">-</button><span id="add_cebolla">0</span><button onclick="updateOptQty('add_cebolla', 1)">+</button></div></div>
-        <div class="opt-box"><span>zñ. QUESO MOZARELLA +$2.000</span><div class="qty-counter"><button onclick="updateOptQty('add_queso', -1)">-</button><span id="add_queso">0</span><button onclick="updateOptQty('add_queso', 1)">+</button></div></div>
-        <div class="opt-box"><span>zo. PEPINO +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_pepino', -1)">-</button><span id="add_pepino">0</span><button onclick="updateOptQty('add_pepino', 1)">+</button></div></div>
-        <div class="opt-box"><span>zp. JALAPEÑOS +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_jalapenos', -1)">-</button><span id="add_jalapenos">0</span><button onclick="updateOptQty('add_jalapenos', 1)">+</button></div></div>
-
-        <!-- zq. ADICCION SALSA -->
-        <div class="section-title"><span class="dynamic-type">zq. ADICCION SALSA BOWL</span> <span>(Opcional) Máximo 3</span></div>
-        <div class="opt-box"><span>zr. SALSA TATEMADA +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_salsa_tatemada', -1)">-</button><span id="add_salsa_tatemada">0</span><button onclick="updateOptQty('add_salsa_tatemada', 1)">+</button></div></div>
-        <div class="opt-box"><span>zs. SALSA DE AJO +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_salsa_ajo', -1)">-</button><span id="add_salsa_ajo">0</span><button onclick="updateOptQty('add_salsa_ajo', 1)">+</button></div></div>
-        <div class="opt-box"><span>zt. SALSA BBQ +$1.500</span><div class="qty-counter"><button onclick="updateOptQty('add_salsa_bbq', -1)">-</button><span id="add_salsa_bbq">0</span><button onclick="updateOptQty('add_salsa_bbq', 1)">+</button></div></div>
+        <!-- ADICION DE TOPPINGS -->
+        <div class="section-title">ADICIÓN DE TOPPINGS <span>(Opcional)</span></div>
+        <div class="opt-box">
+          <span>CHICHARRÓN</span> <span class="price-add">$ 3.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_chicharron', -1)">-</button><span id="add_chicharron" data-price="3000" data-name="Add. Chicharrón">0</span><button onclick="updateOptQty('add_chicharron', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>CHORIZO</span> <span class="price-add">$ 3.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_chorizo', -1)">-</button><span id="add_chorizo" data-price="3000" data-name="Add. Chorizo">0</span><button onclick="updateOptQty('add_chorizo', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>MADURITO</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_madurito', -1)">-</button><span id="add_madurito" data-price="1500" data-name="Add. Madurito">0</span><button onclick="updateOptQty('add_madurito', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>MAIZCITOS</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_maizcitos', -1)">-</button><span id="add_maizcitos" data-price="1500" data-name="Add. Maizcitos">0</span><button onclick="updateOptQty('add_maizcitos', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>GUACAMOLE</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_guacamole', -1)">-</button><span id="add_guacamole" data-price="1500" data-name="Add. Guacamole">0</span><button onclick="updateOptQty('add_guacamole', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>PICO DE GALLO</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_pico', -1)">-</button><span id="add_pico" data-price="1500" data-name="Add. Pico de Gallo">0</span><button onclick="updateOptQty('add_pico', 1)">+</button></div>
+        </div>
       </div>
 
-      <textarea class="modal-comments" id="modalComments" rows="2" placeholder="Comentarios / Especificaciones"></textarea>
+      <!-- OPCIONES PERSONALIZABLES PARA CAFÉ -->
+      <div id="coffeeCustomOptions" style="display:none;">
+        <div class="section-title">TIPO DE PREPARACIÓN</div>
+        <div class="opt-box">
+          <span>CALIENTE</span>
+          <div class="qty-counter"><button onclick="updateOptQty('cafe_caliente', -1)">-</button><span id="cafe_caliente" data-price="0" data-name="Café Caliente">1</span><button onclick="updateOptQty('cafe_caliente', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>FRÍO / CON HIELO</span>
+          <div class="qty-counter"><button onclick="updateOptQty('cafe_frio', -1)">-</button><span id="cafe_frio" data-price="0" data-name="Café Frío">0</span><button onclick="updateOptQty('cafe_frio', 1)">+</button></div>
+        </div>
 
-      <div class="modal-footer-action">
+        <div class="section-title">VARIEDAD</div>
+        <div class="opt-box">
+          <span>ESPRESSO</span> <span class="price-add">$ 0</span>
+          <div class="qty-counter"><button onclick="updateOptQty('cafe_espresso', -1)">-</button><span id="cafe_espresso" data-price="0" data-name="Espresso">0</span><button onclick="updateOptQty('cafe_espresso', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>AMERICANO</span> <span class="price-add">$ 0</span>
+          <div class="qty-counter"><button onclick="updateOptQty('cafe_americano', -1)">-</button><span id="cafe_americano" data-price="0" data-name="Americano">0</span><button onclick="updateOptQty('cafe_americano', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>CAPUCHINO</span> <span class="price-add">$ 2.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('cafe_capuchino', -1)">-</button><span id="cafe_capuchino" data-price="2000" data-name="Capuchino">0</span><button onclick="updateOptQty('cafe_capuchino', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>LATTE</span> <span class="price-add">$ 2.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('cafe_latte', -1)">-</button><span id="cafe_latte" data-price="2000" data-name="Latte">0</span><button onclick="updateOptQty('cafe_latte', 1)">+</button></div>
+        </div>
+
+        <div class="section-title">ADICIONALES DE CAFÉ</div>
+        <div class="opt-box">
+          <span>LECHE ENTERA</span> <span class="price-add">$ 1.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_leche', -1)">-</button><span id="add_leche" data-price="1000" data-name="Add. Leche Entera">0</span><button onclick="updateOptQty('add_leche', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>LECHE DESLACTOSADA</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_deslactosada', -1)">-</button><span id="add_deslactosada" data-price="1500" data-name="Add. Leche Deslactosada">0</span><button onclick="updateOptQty('add_deslactosada', 1)">+</button></div>
+        </div>
+        <div class="opt-box">
+          <span>SIROPE DE VAINILLA / CARAMELO</span> <span class="price-add">$ 2.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_sirope', -1)">-</button><span id="add_sirope" data-price="2000" data-name="Add. Sirope">0</span><button onclick="updateOptQty('add_sirope', 1)">+</button></div>
+        </div>
+      </div>
+
+      <textarea id="modalComment" class="modal-comments" placeholder="Comentarios / Especificaciones del producto..."></textarea>
+
+      <!-- SECCIÓN INFERIOR CON CANTIDAD Y BOTÓN DE AGREGAR -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <span>Cantidad:</span>
+          <span style="font-weight: bold;">Cantidad:</span>
           <div class="qty-counter">
-            <button onclick="updateMainQty(-1)">-</button>
-            <span id="modalMainQty">1</span>
-            <button onclick="updateMainQty(1)">+</button>
+            <button onclick="updateItemMainQty(-1)">-</button>
+            <span id="itemMainQty">1</span>
+            <button onclick="updateItemMainQty(1)">+</button>
           </div>
         </div>
+        <div class="item-total-price">Total: <span id="modalCalculatedTotal">$ 0</span></div>
+      </div>
+
+      <div class="modal-footer-action">
+        <button class="btn-add-cart" style="background:#888;" onclick="closeProductModal()">CANCELAR</button>
         <button class="btn-add-cart" onclick="confirmAddToCart()">Agregar A La Canasta 🛍️</button>
       </div>
     </div>
   </div>
 
-  <footer class="footer">
-    <div>
-      <h4>Sobre nosotros</h4>
-      <p>Somos un negocio de comidas caseras en el centro de Cali, listo para domicilios rápidos y seguros.</p>
-    </div>
-    <div>
-      <h4>Contáctanos</h4>
-      <p>📞 324 6044424</p>
-      <p>📍 Cali, Valle del Cauca</p>
-    </div>
-    <div>
-      <h4>Síguenos</h4>
-      <p>Instagram, Facebook y TikTok</p>
-    </div>
-  </footer>
-
-  <nav class="bottom-nav">
-    <a href="#" onclick="showSection('catalog')">🏠<span>Inicio</span></a>
-    <a href="#" onclick="showSection('catalog')">🍴<span>Menú</span></a>
-    <a href="#" onclick="showSection('cart')">🛍️<span>Canasta</span></a>
-    <a href="https://wa.me/573246044424" target="_blank">💬<span>Contacto</span></a>
-  </nav>
-
   <script>
-    // ESTADO DEL CARRITO Y SELECCIÓN ACTUAL
     let cart = [];
-    let currentProduct = null;
-    let mainQty = 1;
-    let optionsQty = {};
+    let currentProduct = {
+      name: '',
+      basePrice: 0,
+      type: 'food',
+      quantity: 1
+    };
 
-    function showSection(section, element) {
-      document.getElementById('catalogSection').style.display = 'none';
-      document.getElementById('cartSection').classList.remove('active');
-      document.getElementById('checkoutSection').classList.remove('active');
+    // VERIFICACIÓN DEL HORARIO DE ATENCIÓN (10:00 AM A 4:30 PM)
+    function checkStoreStatus() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const currentTimeInMinutes = hours * 60 + minutes;
 
-      if (section === 'catalog') {
-        document.getElementById('catalogSection').style.display = 'block';
-      } else if (section === 'cart') {
-        renderCart();
-        document.getElementById('cartSection').classList.add('active');
-      } else if (section === 'checkout') {
-        document.getElementById('checkoutSection').classList.add('active');
-      }
+      const openTime = 10 * 60; // 10:00 AM (600 mins)
+      const closeTime = 16 * 60 + 30; // 4:30 PM (990 mins)
 
-      if (element && element.classList.contains('nav-item')) {
-        document.querySelectorAll('.topbar .nav-item').forEach(item => {
-          item.classList.remove('active');
-        });
-        element.classList.add('active');
+      const badge = document.getElementById('storeStatusBadge');
+      if (currentTimeInMinutes >= openTime && currentTimeInMinutes < closeTime) {
+        badge.innerText = '• ABIERTO AHÓRA';
+        badge.className = 'status-badge status-open';
+      } else {
+        badge.innerText = '• CERRADO';
+        badge.className = 'status-badge status-closed';
       }
     }
 
-    // ABRIR MODAL CONFIGURACIÓN
-    function openProductModal(name, basePrice, img, isFood = true) {
-      currentProduct = { name, basePrice, img, isFood };
-      mainQty = 1;
-      optionsQty = {
-        base_arroz: 0, base_lechuga: 0, base_ppl: 0,
-        prot_carne: 0, prot_cerdo: 0, prot_tenders: 0, prot_costilla: 0,
-        top_chicharron: 0, top_chorizo: 0, top_madurito: 0, top_guacamole: 0, top_maizcitos: 0, top_pico: 0, top_doritox: 0, top_cebolla: 0, top_queso: 0, top_sour: 0, top_pepino: 0, top_jalapenos: 0,
-        salsa_bbq: 0, salsa_tatemada: 0, salsa_ajo: 0,
-        add_carne: 0, add_cerdo: 0, add_costilla: 0, add_tenders: 0,
-        add_chicharron: 0, add_chorizo: 0, add_madurito: 0, add_maizcitos: 0, add_guacamole: 0, add_pico: 0, add_doritox: 0, add_sour: 0, add_cebolla: 0, add_queso: 0, add_pepino: 0, add_jalapenos: 0,
-        add_salsa_tatemada: 0, add_salsa_ajo: 0, add_salsa_bbq: 0
-      };
+    function formatMoney(amount) {
+      return '$ ' + amount.toLocaleString('es-CO');
+    }
 
-      document.getElementById('modalProductName').textContent = name;
-      document.getElementById('modalMainQty').textContent = '1';
-      document.getElementById('modalComments').value = '';
+    function showSection(section, element) {
+      document.getElementById('catalogSection').style.display = section === 'catalog' ? 'block' : 'none';
+      document.getElementById('cartSection').classList.toggle('active', section === 'cart');
+      document.getElementById('checkoutSection').classList.toggle('active', section === 'checkout');
 
-      // Cambiar los títulos dinámicamente si es Bowl o Burrito
-      document.querySelectorAll('.dynamic-type').forEach(el => {
-        el.textContent = el.textContent.replace('BOWL', name.toUpperCase()).replace('BURRITO', name.toUpperCase());
+      document.querySelectorAll('.topbar .nav-item').forEach(el => el.classList.remove('active'));
+      if (element) {
+        element.classList.add('active');
+      } else if(section === 'cart') {
+        document.getElementById('cartNavBtn').classList.add('active');
+      }
+    }
+
+    function openProductModal(name, price, type) {
+      currentProduct = { name, basePrice: price, type, quantity: 1 };
+      document.getElementById('modalProductName').innerText = name;
+      document.getElementById('modalBasePrice').innerText = formatMoney(price);
+      document.getElementById('itemMainQty').innerText = '1';
+      document.getElementById('modalComment').value = '';
+
+      // Mostrar/ocultar según tipo
+      document.getElementById('foodCustomOptions').style.display = (type === 'food') ? 'block' : 'none';
+      document.getElementById('coffeeCustomOptions').style.display = (type === 'coffee') ? 'block' : 'none';
+
+      // Resetear contadores
+      document.querySelectorAll('.opt-box .qty-counter span').forEach(span => {
+        span.innerText = '0';
       });
 
-      const foodOptionsContainer = document.getElementById('foodCustomOptions');
-      if (isFood) {
-        foodOptionsContainer.style.display = 'block';
-      } else {
-        foodOptionsContainer.style.display = 'none';
+      if (type === 'coffee') {
+        const cal = document.getElementById('cafe_caliente');
+        if (cal) cal.innerText = '1';
       }
 
-      resetModalQtyDisplays();
+      calculateModalTotal();
       document.getElementById('productModal').classList.add('active');
     }
 
-    function resetModalQtyDisplays() {
-      for (let key in optionsQty) {
-        let el = document.getElementById(key);
-        if (el) el.textContent = optionsQty[key];
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('active');
+    }
+
+    function updateOptQty(id, change) {
+      const el = document.getElementById(id);
+      if (el) {
+        let val = parseInt(el.innerText) + change;
+        if (val < 0) val = 0;
+        el.innerText = val;
+        calculateModalTotal();
       }
     }
 
-    function updateOptQty(key, delta) {
-      optionsQty[key] = Math.max(0, (optionsQty[key] || 0) + delta);
-      document.getElementById(key).textContent = optionsQty[key];
+    function updateItemMainQty(change) {
+      let qty = currentProduct.quantity + change;
+      if (qty < 1) qty = 1;
+      currentProduct.quantity = qty;
+      document.getElementById('itemMainQty').innerText = qty;
+      calculateModalTotal();
     }
 
-    function updateMainQty(delta) {
-      mainQty = Math.max(1, mainQty + delta);
-      document.getElementById('modalMainQty').textContent = mainQty;
-    }
-
-    // AGREGAR AL CARRITO CALCULANDO PRECIOS DE ADICIONES
-    function confirmAddToCart() {
-      let extraPrice = 0;
-      let details = [];
-
-      if (currentProduct.isFood) {
-        // BASES
-        if (optionsQty.base_arroz > 0) details.push(`Arroz al cilantro (${optionsQty.base_arroz})`);
-        if (optionsQty.base_lechuga > 0) details.push(`Lechugas mix (${optionsQty.base_lechuga})`);
-        if (optionsQty.base_ppl > 0) details.push(`PPL (${optionsQty.base_ppl})`);
-
-        // PROTEINAS
-        if (optionsQty.prot_carne > 0) { details.push(`Carne desmechada (${optionsQty.prot_carne})`); extraPrice += 2000 * optionsQty.prot_carne; }
-        if (optionsQty.prot_cerdo > 0) details.push(`Cerdo Pulled Pork (${optionsQty.prot_cerdo})`);
-        if (optionsQty.prot_tenders > 0) details.push(`Tenders de Pechuga (${optionsQty.prot_tenders})`);
-        if (optionsQty.prot_costilla > 0) { details.push(`Costilla BBQ (${optionsQty.prot_costilla})`); extraPrice += 2000 * optionsQty.prot_costilla; }
-
-        // TOPPINGS
-        if (optionsQty.top_chicharron > 0) details.push(`Chicharrón (${optionsQty.top_chicharron})`);
-        if (optionsQty.top_chorizo > 0) details.push(`Chorizo (${optionsQty.top_chorizo})`);
-        if (optionsQty.top_madurito > 0) details.push(`Madurito (${optionsQty.top_madurito})`);
-        if (optionsQty.top_guacamole > 0) details.push(`Guacamole (${optionsQty.top_guacamole})`);
-        if (optionsQty.top_maizcitos > 0) details.push(`Maizcitos (${optionsQty.top_maizcitos})`);
-        if (optionsQty.top_pico > 0) details.push(`Pico de Gallo (${optionsQty.top_pico})`);
-        if (optionsQty.top_doritox > 0) details.push(`Doritox (${optionsQty.top_doritox})`);
-        if (optionsQty.top_cebolla > 0) details.push(`Cebolla Crispy (${optionsQty.top_cebolla})`);
-        if (optionsQty.top_queso > 0) { details.push(`Queso Mozarella (${optionsQty.top_queso})`); extraPrice += 2000 * optionsQty.top_queso; }
-        if (optionsQty.top_sour > 0) details.push(`Sour Creem (${optionsQty.top_sour})`);
-        if (optionsQty.top_pepino > 0) details.push(`Pepino (${optionsQty.top_pepino})`);
-        if (optionsQty.top_jalapenos > 0) details.push(`Jalapeños (${optionsQty.top_jalapenos})`);
-
-        // SALSAS
-        if (optionsQty.salsa_bbq > 0) details.push(`Salsa BBQ (${optionsQty.salsa_bbq})`);
-        if (optionsQty.salsa_tatemada > 0) details.push(`Salsa Tatemada (${optionsQty.salsa_tatemada})`);
-        if (optionsQty.salsa_ajo > 0) details.push(`Salsa de Ajo (${optionsQty.salsa_ajo})`);
-
-        // ADICIONES PROTEINA (8,000 c/u)
-        if (optionsQty.add_carne > 0) { details.push(`Adición Carne Desmechada (${optionsQty.add_carne})`); extraPrice += 8000 * optionsQty.add_carne; }
-        if (optionsQty.add_cerdo > 0) { details.push(`Adición Cerdo Pulled Pork (${optionsQty.add_cerdo})`); extraPrice += 8000 * optionsQty.add_cerdo; }
-        if (optionsQty.add_costilla > 0) { details.push(`Adición Costilla BBQ (${optionsQty.add_costilla})`); extraPrice += 8000 * optionsQty.add_costilla; }
-        if (optionsQty.add_tenders > 0) { details.push(`Adición Tenders Pollo (${optionsQty.add_tenders})`); extraPrice += 8000 * optionsQty.add_tenders; }
-
-        // ADICIONES TOPPINGS
-        if (optionsQty.add_chicharron > 0) { details.push(`Adición Chicharrón (${optionsQty.add_chicharron})`); extraPrice += 3000 * optionsQty.add_chicharron; }
-        if (optionsQty.add_chorizo > 0) { details.push(`Adición Chorizo (${optionsQty.add_chorizo})`); extraPrice += 3000 * optionsQty.add_chorizo; }
-        if (optionsQty.add_madurito > 0) { details.push(`Adición Madurito (${optionsQty.add_madurito})`); extraPrice += 1500 * optionsQty.add_madurito; }
-        if (optionsQty.add_maizcitos > 0) { details.push(`Adición Maizcitos (${optionsQty.add_maizcitos})`); extraPrice += 1500 * optionsQty.add_maizcitos; }
-        if (optionsQty.add_guacamole > 0) { details.push(`Adición Guacamole (${optionsQty.add_guacamole})`); extraPrice += 1500 * optionsQty.add_guacamole; }
-        if (optionsQty.add_pico > 0) { details.push(`Adición Pico de Gallo (${optionsQty.add_pico})`); extraPrice += 1500 * optionsQty.add_pico; }
-        if (optionsQty.add_doritox > 0) { details.push(`Adición Doritox (${optionsQty.add_doritox})`); extraPrice += 1500 * optionsQty.add_doritox; }
-        if (optionsQty.add_sour > 0) { details.push(`Adición Sour Creem (${optionsQty.add_sour})`); extraPrice += 3000 * optionsQty.add_sour; }
-        if (optionsQty.add_cebolla > 0) { details.push(`Adición Cebolla Crispy (${optionsQty.add_cebolla})`); extraPrice += 1500 * optionsQty.add_cebolla; }
-        if (optionsQty.add_queso > 0) { details.push(`Adición Queso Mozarella (${optionsQty.add_queso})`); extraPrice += 2000 * optionsQty.add_queso; }
-        if (optionsQty.add_pepino > 0) { details.push(`Adición Pepino (${optionsQty.add_pepino})`); extraPrice += 1500 * optionsQty.add_pepino; }
-        if (optionsQty.add_jalapenos > 0) { details.push(`Adición Jalapeños (${optionsQty.add_jalapenos})`); extraPrice += 1500 * optionsQty.add_jalapenos; }
-
-        // ADICIONES SALSAS (1,500 c/u)
-        if (optionsQty.add_salsa_tatemada > 0) { details.push(`Adición Salsa Tatemada (${optionsQty.add_salsa_tatemada})`); extraPrice += 1500 * optionsQty.add_salsa_tatemada; }
-        if (optionsQty.add_salsa_ajo > 0) { details.push(`Adición Salsa de Ajo (${optionsQty.add_salsa_ajo})`); extraPrice += 1500 * optionsQty.add_salsa_ajo; }
-        if (optionsQty.add_salsa_bbq > 0) { details.push(`Adición Salsa BBQ (${optionsQty.add_salsa_bbq})`); extraPrice += 1500 * optionsQty.add_salsa_bbq; }
-      }
-
-      const comment = document.getElementById('modalComments').value.trim();
-      if (comment) details.push(`Nota: ${comment}`);
-
-      const itemPrice = currentProduct.basePrice + extraPrice;
-
-      cart.push({
-        id: Date.now(),
-        name: currentProduct.name,
-        price: itemPrice,
-        qty: mainQty,
-        img: currentProduct.img,
-        details: details.join(', ')
+    function calculateModalTotal() {
+      let extra = 0;
+      const activeOptions = (currentProduct.type === 'food') ? '#foodCustomOptions' : '#coffeeCustomOptions';
+      
+      document.querySelectorAll(activeOptions + ' .opt-box .qty-counter span').forEach(span => {
+        const count = parseInt(span.innerText);
+        const price = parseInt(span.getAttribute('data-price') || 0);
+        extra += count * price;
       });
 
-      document.getElementById('productModal').classList.remove('active');
-      updateCartBadge();
+      const totalUnit = currentProduct.basePrice + extra;
+      const grandTotal = totalUnit * currentProduct.quantity;
+      document.getElementById('modalCalculatedTotal').innerText = formatMoney(grandTotal);
+      return { totalUnit, grandTotal };
+    }
+
+    function confirmAddToCart() {
+      let selectedExtras = [];
+      const activeOptions = (currentProduct.type === 'food') ? '#foodCustomOptions' : '#coffeeCustomOptions';
+
+      document.querySelectorAll(activeOptions + ' .opt-box .qty-counter span').forEach(span => {
+        const count = parseInt(span.innerText);
+        if (count > 0) {
+          const name = span.getAttribute('data-name') || 'Opción';
+          const price = parseInt(span.getAttribute('data-price') || 0);
+          selectedExtras.push({ name, count, price });
+        }
+      });
+
+      const totals = calculateModalTotal();
+      const comment = document.getElementById('modalComment').value.trim();
+
+      cart.push({
+        name: currentProduct.name,
+        unitPrice: totals.totalUnit,
+        quantity: currentProduct.quantity,
+        totalPrice: totals.grandTotal,
+        extras: selectedExtras,
+        comment: comment
+      });
+
+      updateCartUI();
+      closeProductModal();
       showSection('cart');
     }
 
-    function updateCartBadge() {
-      const count = cart.reduce((acc, item) => acc + item.qty, 0);
-      document.getElementById('cartBadgeCount').textContent = count;
-    }
-
-    // RENDERIZAR TABLA DE CANASTA
-    function renderCart() {
+    function updateCartUI() {
       const tbody = document.getElementById('cartTableBody');
       tbody.innerHTML = '';
 
       let subtotal = 0;
+      let totalItems = 0;
 
-      cart.forEach((item, index) => {
-        const itemTotal = item.price * item.qty;
-        subtotal += itemTotal;
+      cart.forEach((item, idx) => {
+        subtotal += item.totalPrice;
+        totalItems += item.quantity;
+
+        let extrasHTML = '';
+        if (item.extras.length > 0) {
+          extrasHTML += '<ul style="text-align:left; font-size:12px; color:#555; padding-left:15px;">';
+          item.extras.forEach(e => {
+            extrasHTML += `<li>${e.count}x ${e.name} (+${formatMoney(e.price)})</li>`;
+          });
+          extrasHTML += '</ul>';
+        }
+        if (item.comment) {
+          extrasHTML += `<div style="font-size:11px; color:#888; text-align:left;"><em>Nota: ${item.comment}</em></div>`;
+        }
 
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td><img src="${item.img}" alt="${item.name}"></td>
-          <td>
-            <strong>${item.name}</strong>
-            ${item.details ? `<br><small style="color:#666">${item.details}</small>` : ''}
-          </td>
-          <td>$ ${item.price.toLocaleString('es-CO')}</td>
-          <td>
-            <div class="qty-counter" style="margin: auto; width: fit-content;">
-              <button onclick="changeCartQty(${index}, -1)">-</button>
-              <span>${item.qty}</span>
-              <button onclick="changeCartQty(${index}, 1)">+</button>
-            </div>
-          </td>
-          <td>$ ${itemTotal.toLocaleString('es-CO')}</td>
-          <td><button style="border:none; background:none; cursor:pointer;" onclick="removeCartItem(${index})">🗑️</button></td>
+          <td><strong>${item.name}</strong></td>
+          <td>${extrasHTML || 'Sin adiciones'}</td>
+          <td>${formatMoney(item.unitPrice)}</td>
+          <td>${item.quantity}</td>
+          <td><strong>${formatMoney(item.totalPrice)}</strong></td>
+          <td><button onclick="removeFromCart(${idx})" style="background:var(--red); color:#fff; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">✕</button></td>
         `;
         tbody.appendChild(row);
       });
 
-      document.getElementById('cartSubtotal').textContent = `$ ${subtotal.toLocaleString('es-CO')}`;
+      document.getElementById('cartSubtotal').innerText = formatMoney(subtotal);
+      document.getElementById('cartBadgeCount').innerText = totalItems;
     }
 
-    function changeCartQty(index, delta) {
-      cart[index].qty += delta;
-      if (cart[index].qty <= 0) {
-        cart.splice(index, 1);
-      }
-      updateCartBadge();
-      renderCart();
-    }
-
-    function removeCartItem(index) {
+    function removeFromCart(index) {
       cart.splice(index, 1);
-      updateCartBadge();
-      renderCart();
+      updateCartUI();
     }
 
-    // ENVIAR PEDIDO A WHATSAPP
-    document.getElementById('checkoutForm').addEventListener('submit', function (e) {
+    function sendOrderToWhatsApp(e) {
       e.preventDefault();
-
       if (cart.length === 0) {
-        alert("Tu canasta está vacía. Agrega productos antes de finalizar.");
+        alert('Tu carrito está vacío.');
         return;
       }
 
-      const nombre = document.getElementById('nombre').value.trim();
-      const whatsapp = document.getElementById('whatsapp').value.trim();
-      const direccion = document.getElementById('direccion').value.trim();
-      const barrio = document.getElementById('barrio').value.trim();
-      const referencia = document.getElementById('referencia').value.trim() || "Ninguna";
+      const nombre = document.getElementById('nombre').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      const direccion = document.getElementById('direccion').value;
+      const barrio = document.getElementById('barrio').value;
+      const referencia = document.getElementById('referencia').value;
       const pago = document.getElementById('pago').value;
-      const observaciones = document.getElementById('observaciones').value.trim();
+      const observaciones = document.getElementById('observaciones').value;
 
-      let orderSummary = "";
-      let subtotal = 0;
+      let msg = `*NUEVO PEDIDO - DOMINIO & COFFEE*\n\n`;
+      msg += `*Cliente:* ${nombre}\n`;
+      msg += `*WhatsApp:* ${whatsapp}\n`;
+      msg += `*Dirección:* ${direccion} (${barrio})\n`;
+      if (referencia) msg += `*Ref:* ${referencia}\n`;
+      msg += `*Pago:* ${pago}\n`;
+      if (observaciones) msg += `*Notas:* ${observaciones}\n`;
 
-      cart.forEach(item => {
-        const itemTotal = item.price * item.qty;
-        subtotal += itemTotal;
-        orderSummary += `• ${item.qty}x ${item.name} ($${itemTotal.toLocaleString('es-CO')})\n  ${item.details ? '  Config: ' + item.details : ''}\n`;
+      msg += `\n*DETALLE DEL PEDIDO:*\n`;
+
+      let total = 0;
+      cart.forEach((item, i) => {
+        msg += `\n${i + 1}. *${item.name}* x${item.quantity} - ${formatMoney(item.totalPrice)}\n`;
+        if (item.extras.length > 0) {
+          item.extras.forEach(ex => {
+            msg += `   • ${ex.count}x ${ex.name}\n`;
+          });
+        }
+        if (item.comment) msg += `   • _Nota: ${item.comment}_\n`;
+        total += item.totalPrice;
       });
 
-      const mensaje = `🍽️ *NUEVO PEDIDO WEB (CANASTA)*
+      msg += `\n*TOTAL A PAGAR: ${formatMoney(total)}*`;
 
-👤 *Nombre:* ${nombre}
-📱 *WhatsApp:* ${whatsapp}
-📍 *Dirección:* ${direccion}
-🏘️ *Barrio:* ${barrio}
-📍 *Referencia:* ${referencia}
-💳 *Forma de pago:* ${pago}
-
-🛒 *DETALLE DEL PEDIDO:*${orderSummary}
-💰 *TOTAL A PAGAR:* $${subtotal.toLocaleString('es-CO')}
-
-📝 *Notas adicionales:* ${observaciones || 'Sin notas'}`;
-
-      const telefonoNegocio = "573246044424";
-      const url = `https://wa.me/${telefonoNegocio}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, "_blank");
-    });
-
-    // HORARIO ABIERTO / CERRADO
-    function checkOpenStatus() {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const timeInMinutes = hours * 60 + minutes;
-
-      const openTime = 10 * 60; // 10:00 AM
-      const closeTime = 16 * 60 + 30; // 4:30 PM
-
-      const statusBadge = document.getElementById('statusBadge');
-      const statusText = document.getElementById('statusText');
-
-      if (timeInMinutes >= openTime && timeInMinutes < closeTime) {
-        statusBadge.className = 'status-badge open';
-        statusText.textContent = 'Abierto';
-      } else {
-        statusBadge.className = 'status-badge closed';
-        statusText.textContent = 'Cerrado';
-      }
+      const encoded = encodeURIComponent(msg);
+      window.open(`https://wa.me/573246044424?text=${encoded}`, '_blank');
     }
 
-    checkOpenStatus();
-  </script></body></html>
+    // Ejecutar la verificación de horario al cargar la página
+    window.onload = function() {
+      checkStoreStatus();
+    };
+  </script>
+</body>
+</html>
