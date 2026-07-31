@@ -680,7 +680,7 @@
             <div class="product-info">
               <h4>$ 25.000</h4>
               <h3>Burrito + Soda</h3>
-              <button class="btn-buy" onclick="openProductModal('Burrito + Soda', 25000, 'food')">¡COMPRAR!</button>
+              <button class="btn-buy" onclick="openProductModal('Burrito + Soda', 25000, 'burrito')">¡COMPRAR!</button>
             </div>
           </div>
 
@@ -779,7 +779,7 @@
 
   </main>
 
-  <!-- MODAL DE CONFIGURACIÓN DEL BOWL -->
+  <!-- MODAL DE CONFIGURACIÓN DEL BOWL / BURRITO -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
       <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
@@ -885,7 +885,7 @@
         <div class="opt-box" id="box_top_jalapenos" onclick="toggleTop('jalapenos', 'Jalapeños', 0)"><span>JALAPEÑOS</span></div>
 
         <!-- ADICIÓN DE TOPPINGS DE BOWL (Máximo 12 unidades en total) -->
-        <div class="section-title">ADICIÓN DE TOPPINGS DEL BOWL <span id="addTopCounterText">(Opcional • Máximo 12 unidades)</span></div>
+        <div class="section-title">ADICIÓN DE TOPPINGS <span id="addTopCounterText">(Opcional • Máximo 12 unidades)</span></div>
         <div class="opt-box" id="box_add_chicharron">
           <span>CHICHARRÓN</span> <span class="price-add">+ $ 3.000</span>
           <div class="qty-controls">
@@ -989,8 +989,16 @@
         <div class="opt-box" id="box_salsabase_tatemada" onclick="selectSalsaBase('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
         <div class="opt-box" id="box_salsabase_ajo" onclick="selectSalsaBase('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
 
-        <!-- ADICIÓN DE SALSA DEL BOWL (Máx 3 unidades en total) -->
-        <div class="section-title">ADICIÓN DE SALSA DEL BOWL <span id="addSalsaCounterText">(Opcional • Máximo 3 unidades)</span></div>
+        <!-- ADICIÓN DE SALSA (Máx 3 unidades en total) -->
+        <div class="section-title">ADICIÓN DE SALSA <span id="addSalsaCounterText">(Opcional • Máximo 3 unidades)</span></div>
+        <div class="opt-box" id="box_addsalsa_bbq">
+          <span>SALSA BBQ</span> <span class="price-add">+ $ 1.500</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', -1)">-</button>
+            <span class="qty-value" id="qty_addsalsa_bbq">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', 1)">+</button>
+          </div>
+        </div>
         <div class="opt-box" id="box_addsalsa_tatemada">
           <span>SALSA TATEMADA</span> <span class="price-add">+ $ 1.500</span>
           <div class="qty-controls">
@@ -1007,70 +1015,54 @@
             <button type="button" class="qty-btn" onclick="changeAddSalsaQty('ajo', 1)">+</button>
           </div>
         </div>
-        <div class="opt-box" id="box_addsalsa_bbq">
-          <span>SALSA BBQ</span> <span class="price-add">+ $ 1.500</span>
-          <div class="qty-controls">
-            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', -1)">-</button>
-            <span class="qty-value" id="qty_addsalsa_bbq">0</span>
-            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', 1)">+</button>
-          </div>
-        </div>
-
       </div>
 
-      <!-- ACCIONES DENTRO DEL MODAL -->
+      <!-- FOOTER ACCIÓN MODAL -->
       <div class="modal-footer-action">
-        <div class="item-total-price">Total: <span id="modalTotalPrice">$ 0</span></div>
-        <button class="btn-add-cart" onclick="addToCart()">Agregar a la canasta</button>
+        <div class="item-total-price" id="modalTotalPrice">$ 0</div>
+        <button class="btn-add-cart" onclick="addCustomProductToCart()">Agregar a la Canasta</button>
       </div>
     </div>
   </div>
 
   <script>
     let cart = [];
-    let currentProduct = null;
+    let currentProduct = { name: '', basePrice: 0, type: '' };
 
-    // Estado de personalización del Bowl
-    let bowlConfig = {
+    // Estado de personalización compartido para Bowl y Burrito
+    let configState = {
       bases: { arroz: 0, lechugas: 0, dia: 0 },
-      protein: { key: '', name: 'Ninguna', price: 0 },
-      addProteins: { carne: 0, cerdo: 0, costilla: 0, tenders: 0 },
-      toppings: [], // máx 7
-      addToppings: { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 }, // máx 12
+      protein: { key: '', name: '', price: 0 },
+      addProtein: { carne: 0, cerdo: 0, costilla: 0, tenders: 0 },
+      toppings: [],
+      addTop: { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 },
       salsaBase: { key: '', name: '' },
-      addSalsas: { tatemada: 0, ajo: 0, bbq: 0 } // máx 3
+      addSalsa: { bbq: 0, tatemada: 0, ajo: 0 }
     };
 
-    // Navegación entre vistas
     function showSection(sectionId) {
-      document.getElementById('catalogSection').style.display = 'none';
-      document.getElementById('cartSection').classList.remove('active');
-      document.getElementById('checkoutSection').classList.remove('active');
+      document.getElementById('catalogSection').style.display = (sectionId === 'catalog') ? 'block' : 'none';
+      document.getElementById('cartSection').classList.toggle('active', sectionId === 'cart');
+      document.getElementById('checkoutSection').classList.toggle('active', sectionId === 'checkout');
 
-      if (sectionId === 'catalog') {
-        document.getElementById('catalogSection').style.display = 'block';
-      } else if (sectionId === 'cart') {
-        document.getElementById('cartSection').classList.add('active');
-        renderCart();
-      } else if (sectionId === 'checkout') {
-        document.getElementById('checkoutSection').classList.add('active');
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Abrir modal de producto
     function openProductModal(name, basePrice, type) {
       currentProduct = { name, basePrice, type };
       document.getElementById('modalProductName').innerText = name;
       document.getElementById('modalBasePrice').innerText = '$ ' + basePrice.toLocaleString();
-      
-      if (type === 'bowl') {
-        document.getElementById('bowlCustomizationContainer').style.display = 'block';
-        resetBowlConfig();
-      } else {
-        document.getElementById('bowlCustomizationContainer').style.display = 'none';
-      }
 
-      updateModalTotal();
+      // Resetear estado
+      configState.bases = { arroz: 0, lechugas: 0, dia: 0 };
+      configState.protein = { key: '', name: '', price: 0 };
+      configState.addProtein = { carne: 0, cerdo: 0, costilla: 0, tenders: 0 };
+      configState.toppings = [];
+      configState.addTop = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
+      configState.salsaBase = { key: '', name: '' };
+      configState.addSalsa = { bbq: 0, tatemada: 0, ajo: 0 };
+
+      updateModalUI();
       document.getElementById('productModal').classList.add('active');
     }
 
@@ -1078,281 +1070,264 @@
       document.getElementById('productModal').classList.remove('active');
     }
 
-    // Restablecer valores de personalización
-    function resetBowlConfig() {
-      bowlConfig.bases = { arroz: 0, lechugas: 0, dia: 0 };
-      bowlConfig.protein = { key: 'cerdo', name: 'Cerdo Pulled Pork', price: 0 };
-      bowlConfig.addProteins = { carne: 0, cerdo: 0, costilla: 0, tenders: 0 };
-      bowlConfig.toppings = [];
-      bowlConfig.addToppings = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
-      bowlConfig.salsaBase = { key: 'bbq', name: 'Salsa BBQ' };
-      bowlConfig.addSalsas = { tatemada: 0, ajo: 0, bbq: 0 };
-
-      refreshBowlUI();
-    }
-
-    // Actualizar interfaz del modal de Bowl
-    function refreshBowlUI() {
-      // Bases
-      for (let k in bowlConfig.bases) {
-        document.getElementById('qty_base_' + k).innerText = bowlConfig.bases[k];
-      }
-      // Proteína principal
-      ['carne', 'cerdo', 'tenders', 'costilla', 'chorizo_cerdo'].forEach(k => {
-        let el = document.getElementById('box_prot_' + k);
-        if(el) el.classList.remove('selected-blue');
-      });
-      if (bowlConfig.protein.key) {
-        let activeProt = document.getElementById('box_prot_' + bowlConfig.protein.key);
-        if(activeProt) activeProt.classList.add('selected-blue');
-      }
-      // Adición de Proteínas
-      for (let k in bowlConfig.addProteins) {
-        document.getElementById('qty_addprot_' + k).innerText = bowlConfig.addProteins[k];
-      }
-      // Toppings incluidos
-      let allTops = ['chicharron', 'chorizo', 'madurito', 'guacamole', 'maizcitos', 'pico', 'doritox', 'cebolla', 'queso', 'sour', 'pepino', 'jalapenos'];
-      allTops.forEach(t => {
-        let el = document.getElementById('box_top_' + t);
-        if (bowlConfig.toppings.includes(t)) {
-          el.classList.add('selected-blue');
-        } else {
-          el.classList.remove('selected-blue');
-        }
-      });
-      document.getElementById('toppingsCounterText').innerText = `(${bowlConfig.toppings.length} / 7)`;
-
-      // Adición de Toppings
-      for (let k in bowlConfig.addToppings) {
-        document.getElementById('qty_add_' + k).innerText = bowlConfig.addToppings[k];
-      }
-
-      // Salsa Base
-      ['bbq', 'tatemada', 'ajo'].forEach(s => {
-        let el = document.getElementById('box_salsabase_' + s);
-        if(el) el.classList.remove('selected-blue');
-      });
-      if(bowlConfig.salsaBase.key) {
-        let sEl = document.getElementById('box_salsabase_' + bowlConfig.salsaBase.key);
-        if(sEl) sEl.classList.add('selected-blue');
-      }
-
-      // Adición de Salsas
-      for (let k in bowlConfig.addSalsas) {
-        document.getElementById('qty_addsalsa_' + k).innerText = bowlConfig.addSalsas[k];
-      }
-    }
-
-    // Lógica de Bases (Máximo 3 en total, 0 a 2 c/u)
     function changeBaseQty(key, delta) {
-      let currentTotal = Object.values(bowlConfig.bases).reduce((a, b) => a + b, 0);
-      let newVal = bowlConfig.bases[key] + delta;
+      let totalBases = Object.values(configState.bases).reduce((a, b) => a + b, 0);
+      let currentVal = configState.bases[key];
+      let newVal = currentVal + delta;
 
       if (newVal < 0 || newVal > 2) return;
-      if (currentTotal + delta > 3) {
-        alert("Solo puedes seleccionar un máximo de 3 porciones.");
-        return;
-      }
-      bowlConfig.bases[key] = newVal;
-      refreshBowlUI();
-      updateModalTotal();
+      if (delta > 0 && totalBases >= 3) return;
+
+      configState.bases[key] = newVal;
+      updateModalUI();
     }
 
-    // Lógica de Proteína principal (1 obligatoria)
     function selectProtein(key, name, price) {
-      bowlConfig.protein = { key, name, price };
-      refreshBowlUI();
-      updateModalTotal();
+      configState.protein = { key, name, price };
+      updateModalUI();
     }
 
-    // Lógica de Adición de Proteínas (Máx 2 en total, 0 a 1 c/u)
     function changeAddProtQty(key, delta) {
-      let currentTotal = Object.values(bowlConfig.addProteins).reduce((a, b) => a + b, 0);
-      let newVal = bowlConfig.addProteins[key] + delta;
-
-      if (newVal < 0 || newVal > 1) return;
-      if (currentTotal + delta > 2) {
-        alert("Solo puedes agregar un máximo de 2 proteínas adicionales.");
-        return;
-      }
-      bowlConfig.addProteins[key] = newVal;
-      refreshBowlUI();
-      updateModalTotal();
-    }
-
-    // Lógica de Toppings incluidos (Máx 7)
-    function toggleTop(key, name, price) {
-      let idx = bowlConfig.toppings.indexOf(key);
-      if (idx > -1) {
-        bowlConfig.toppings.splice(idx, 1);
-      } else {
-        if (bowlConfig.toppings.length >= 7) {
-          alert("Solo puedes seleccionar un máximo de 7 toppings.");
-          return;
-        }
-        bowlConfig.toppings.push(key);
-      }
-      refreshBowlUI();
-      updateModalTotal();
-    }
-
-    // Lógica de Adición de Toppings (Máx 12 en total, 0 a 1 c/u)
-    function changeAddTopQty(key, delta) {
-      let currentTotal = Object.values(bowlConfig.addToppings).reduce((a, b) => a + b, 0);
-      let newVal = bowlConfig.addToppings[key] + delta;
-
-      if (newVal < 0 || newVal > 1) return;
-      if (currentTotal + delta > 12) {
-        alert("Solo puedes seleccionar un máximo de 12 toppings adicionales.");
-        return;
-      }
-      bowlConfig.addToppings[key] = newVal;
-      refreshBowlUI();
-      updateModalTotal();
-    }
-
-    // Lógica de Salsa Base (1 obligatoria)
-    function selectSalsaBase(key, name) {
-      bowlConfig.salsaBase = { key, name };
-      refreshBowlUI();
-    }
-
-    // Lógica de Adición de Salsas (Máx 3 en total)
-    function changeAddSalsaQty(key, delta) {
-      let currentTotal = Object.values(bowlConfig.addSalsas).reduce((a, b) => a + b, 0);
-      let newVal = bowlConfig.addSalsas[key] + delta;
+      let totalAddProt = Object.values(configState.addProtein).reduce((a, b) => a + b, 0);
+      let currentVal = configState.addProtein[key];
+      let newVal = currentVal + delta;
 
       if (newVal < 0) return;
-      if (currentTotal + delta > 3) {
-        alert("Solo puedes seleccionar un máximo de 3 salsas adicionales.");
+      if (delta > 0 && totalAddProt >= 2) return;
+
+      configState.addProtein[key] = newVal;
+      updateModalUI();
+    }
+
+    function toggleTop(key, name, price) {
+      let index = configState.toppings.findIndex(t => t.key === key);
+      if (index > -1) {
+        configState.toppings.splice(index, 1);
+      } else {
+        if (configState.toppings.length >= 7) return;
+        configState.toppings.push({ key, name, price });
+      }
+      updateModalUI();
+    }
+
+    function changeAddTopQty(key, delta) {
+      let totalAddTop = Object.values(configState.addTop).reduce((a, b) => a + b, 0);
+      let currentVal = configState.addTop[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) return;
+      if (delta > 0 && totalAddTop >= 12) return;
+
+      configState.addTop[key] = newVal;
+      updateModalUI();
+    }
+
+    function selectSalsaBase(key, name) {
+      configState.salsaBase = { key, name };
+      updateModalUI();
+    }
+
+    function changeAddSalsaQty(key, delta) {
+      let totalAddSalsa = Object.values(configState.addSalsa).reduce((a, b) => a + b, 0);
+      let currentVal = configState.addSalsa[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) return;
+      if (delta > 0 && totalAddSalsa >= 3) return;
+
+      configState.addSalsa[key] = newVal;
+      updateModalUI();
+    }
+
+    function updateModalUI() {
+      // Bases
+      for (let k in configState.bases) {
+        document.getElementById('qty_base_' + k).innerText = configState.bases[k];
+        document.getElementById('box_base_' + k).classList.toggle('selected-blue', configState.bases[k] > 0);
+      }
+
+      // Protein
+      ['carne', 'cerdo', 'tenders', 'costilla', 'chorizo_cerdo'].forEach(k => {
+        let el = document.getElementById('box_prot_' + k);
+        if (el) el.classList.toggle('selected-blue', configState.protein.key === k);
+      });
+
+      // Add Protein
+      for (let k in configState.addProtein) {
+        document.getElementById('qty_addprot_' + k).innerText = configState.addProtein[k];
+        document.getElementById('box_addprot_' + k).classList.toggle('selected-blue', configState.addProtein[k] > 0);
+      }
+
+      // Toppings
+      let topKeys = ['chicharron', 'chorizo', 'madurito', 'guacamole', 'maizcitos', 'pico', 'doritox', 'cebolla', 'queso', 'sour', 'pepino', 'jalapenos'];
+      topKeys.forEach(k => {
+        let isSelected = configState.toppings.some(t => t.key === k);
+        let el = document.getElementById('box_top_' + k);
+        if (el) el.classList.toggle('selected-blue', isSelected);
+      });
+      document.getElementById('toppingsCounterText').innerText = `(${configState.toppings.length} / 7)`;
+
+      // Add Toppings
+      let addTopPrices = { chicharron: 3000, chorizo: 3000, maduro: 1500, maicitos: 1500, guacamole: 1500, pico: 1500, doritox: 1500, sour: 3000, cebolla: 1500, queso: 2000, pepino: 1500, jalapenos: 1500 };
+      for (let k in configState.addTop) {
+        document.getElementById('qty_add_' + k).innerText = configState.addTop[k];
+        document.getElementById('box_add_' + k).classList.toggle('selected-blue', configState.addTop[k] > 0);
+      }
+      let totalAddTopCount = Object.values(configState.addTop).reduce((a, b) => a + b, 0);
+      document.getElementById('addTopCounterText').innerText = `(Opcional • Máximo 12 unidades) [${totalAddTopCount}/12]`;
+
+      // Salsa Base
+      ['bbq', 'tatemada', 'ajo'].forEach(k => {
+        let el = document.getElementById('box_salsabase_' + k);
+        if (el) el.classList.toggle('selected-blue', configState.salsaBase.key === k);
+      });
+
+      // Add Salsa
+      for (let k in configState.addSalsa) {
+        document.getElementById('qty_addsalsa_' + k).innerText = configState.addSalsa[k];
+        document.getElementById('box_addsalsa_' + k).classList.toggle('selected-blue', configState.addSalsa[k] > 0);
+      }
+      let totalAddSalsaCount = Object.values(configState.addSalsa).reduce((a, b) => a + b, 0);
+      document.getElementById('addSalsaCounterText').innerText = `(Opcional • Máximo 3 unidades) [${totalAddSalsaCount}/3]`;
+
+      // Calcular Precio Total del Item
+      let total = currentProduct.basePrice + configState.protein.price;
+      
+      configState.toppings.forEach(t => total += t.price);
+      
+      let addProtPrices = { carne: 8000, cerdo: 8000, costilla: 8000, tenders: 8000 };
+      for (let k in configState.addProtein) {
+        total += configState.addProtein[k] * addProtPrices[k];
+      }
+
+      for (let k in configState.addTop) {
+        total += configState.addTop[k] * addTopPrices[k];
+      }
+
+      for (let k in configState.addSalsa) {
+        total += configState.addSalsa[k] * 1500;
+      }
+
+      document.getElementById('modalTotalPrice').innerText = '$ ' + total.toLocaleString();
+    }
+
+    function addCustomProductToCart() {
+      if (!configState.protein.key) {
+        alert('Por favor selecciona una proteína obligatoria.');
         return;
       }
-      bowlConfig.addSalsas[key] = newVal;
-      refreshBowlUI();
-      updateModalTotal();
-    }
-
-    // Calcular precio total del producto en el modal
-    function calculateCurrentItemPrice() {
-      if (!currentProduct) return 0;
-      let total = currentProduct.basePrice;
-
-      if (currentProduct.type === 'bowl') {
-        // Proteína principal con costo adicional
-        total += bowlConfig.protein.price;
-
-        // Adición de Proteínas ($8.000 c/u)
-        let totalAddProt = Object.values(bowlConfig.addProteins).reduce((a, b) => a + b, 0);
-        total += totalAddProt * 8000;
-
-        // Toppings con costo adicional (ej. Queso Mozzarella +3.000 en toppings incluidos si aplica)
-        if (bowlConfig.toppings.includes('queso')) total += 3000;
-
-        // Adición de Toppings
-        let topPrices = { chicharron: 3000, chorizo: 3000, maduro: 1500, maicitos: 1500, guacamole: 1500, pico: 1500, doritox: 1500, sour: 3000, cebolla: 1500, queso: 2000, pepino: 1500, jalapenos: 1500 };
-        for (let k in bowlConfig.addToppings) {
-          total += bowlConfig.addToppings[k] * (topPrices[k] || 0);
-        }
-
-        // Adición de Salsas (+1.500 c/u)
-        let totalAddSalsa = Object.values(bowlConfig.addSalsas).reduce((a, b) => a + b, 0);
-        total += totalAddSalsa * 1500;
+      if (!configState.salsaBase.key) {
+        alert('Por favor selecciona una salsa base.');
+        return;
       }
 
-      return total;
-    }
-
-    function updateModalTotal() {
-      let price = calculateCurrentItemPrice();
-      document.getElementById('modalTotalPrice').innerText = '$ ' + price.toLocaleString();
-    }
-
-    // Agregar al carrito
-    function addToCart() {
-      if (!currentProduct) return;
-      let finalPrice = calculateCurrentItemPrice();
-      let detailsText = '';
-
-      if (currentProduct.type === 'bowl') {
-        let baseList = [];
-        for(let k in bowlConfig.bases) {
-          if(bowlConfig.bases[k] > 0) baseList.push(`${k}: ${bowlConfig.bases[k]}`);
-        }
-        let addProtList = [];
-        for(let k in bowlConfig.addProteins) {
-          if(bowlConfig.addProteins[k] > 0) addProtList.push(`${k}`);
-        }
-        let addTopList = [];
-        for(let k in bowlConfig.addToppings) {
-          if(bowlConfig.addToppings[k] > 0) addTopList.push(`${k}`);
-        }
-        let addSalsaList = [];
-        for(let k in bowlConfig.addSalsas) {
-          if(bowlConfig.addSalsas[k] > 0) addSalsaList.push(`${k}`);
-        }
-
-        detailsText = `Bases: [${baseList.join(', ')}] | Prot: ${bowlConfig.protein.name} | Adic. Prot: [${addProtList.join(', ')}] | Toppings: [${bowlConfig.toppings.join(', ')}] | Adic. Toppings: [${addTopList.join(', ')}] | Salsa Base: ${bowlConfig.salsaBase.name} | Adic. Salsas: [${addSalsaList.join(', ')}]`;
-      } else {
-        detailsText = 'Estándar';
+      let details = [];
+      let baseNames = { arroz: 'Arroz al Cilantro', lechugas: 'Lechugas Mix', dia: 'Base del Día' };
+      let bParts = [];
+      for(let k in configState.bases) {
+        if(configState.bases[k] > 0) bParts.push(`${configState.bases[k]}x ${baseNames[k]}`);
       }
+      if(bParts.length > 0) details.append ? null : details.push('Bases: ' + bParts.join(', '));
+
+      details.push('Proteína: ' + configState.protein.name);
+
+      let addProtNames = { carne: 'Carne Desmechada', cerdo: 'Cerdo Pulled Pork', costilla: 'Costilla BBQ', tenders: 'Tenders de Pollo' };
+      let apParts = [];
+      for(let k in configState.addProtein) {
+        if(configState.addProtein[k] > 0) apParts.push(`${configState.addProtein[k]}x ${addProtNames[k]}`);
+      }
+      if(apParts.length > 0) details.push('Adición Proteína: ' + apParts.join(', '));
+
+      if(configState.toppings.length > 0) {
+        details.push('Toppings: ' + configState.toppings.map(t => t.name).join(', '));
+      }
+
+      let addTopNames = { chicharron: 'Chicharrón', chorizo: 'Chorizo', maduro: 'Madurito', maicitos: 'Maizcitos', guacamole: 'Guacamole', pico: 'Pico de Gallo', doritox: 'Doritox', sour: 'Sour Cream', cebolla: 'Cebolla Crispy', queso: 'Queso Mozzarella', pepino: 'Pepino al Cilantro', jalapenos: 'Jalapeños' };
+      let atParts = [];
+      for(let k in configState.addTop) {
+        if(configState.addTop[k] > 0) atParts.push(`${configState.addTop[k]}x ${addTopNames[k]}`);
+      }
+      if(atParts.length > 0) details.push('Adición Toppings: ' + atParts.join(', '));
+
+      details.push('Salsa Base: ' + configState.salsaBase.name);
+
+      let addSalsaNames = { bbq: 'Salsa BBQ', tatemada: 'Salsa Tatemada', ajo: 'Salsa de Ajo' };
+      let asParts = [];
+      for(let k in configState.addSalsa) {
+        if(configState.addSalsa[k] > 0) asParts.push(`${configState.addSalsa[k]}x ${addSalsaNames[k]}`);
+      }
+      if(asParts.length > 0) details.push('Adición Salsa: ' + asParts.join(', '));
+
+      let unitPrice = currentProduct.basePrice + configState.protein.price;
+      let addProtPrices = { carne: 8000, cerdo: 8000, costilla: 8000, tenders: 8000 };
+      for (let k in configState.addProtein) unitPrice += configState.addProtein[k] * addProtPrices[k];
+      let addTopPrices = { chicharron: 3000, chorizo: 3000, maduro: 1500, maicitos: 1500, guacamole: 1500, pico: 1500, doritox: 1500, sour: 3000, cebolla: 1500, queso: 2000, pepino: 1500, jalapenos: 1500 };
+      for (let k in configState.addTop) unitPrice += configState.addTop[k] * addTopPrices[k];
+      configState.toppings.forEach(t => unitPrice += t.price);
+      for (let k in configState.addSalsa) unitPrice += configState.addSalsa[k] * 1500;
 
       cart.push({
         name: currentProduct.name,
-        details: detailsText,
-        unitPrice: finalPrice,
-        quantity: 1,
-        total: finalPrice
+        details: details.join(' | '),
+        unitPrice: unitPrice,
+        qty: 1
       });
 
-      updateCartBadge();
       closeProductModal();
-      alert("¡Producto agregado a la canasta con éxito!");
+      updateCartUI();
+      showSection('cart');
     }
 
-    function updateCartBadge() {
-      document.getElementById('cartBadgeCount').innerText = cart.length;
-    }
-
-    // Renderizar tabla del carrito
-    function renderCart() {
+    function updateCartUI() {
       let tbody = document.getElementById('cartTableBody');
       tbody.innerHTML = '';
       let subtotal = 0;
-
-      if (cart.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6">Tu canasta está vacía.</td></tr>`;
-        document.getElementById('cartSubtotal').innerText = '$ 0';
-        return;
-      }
+      let totalCount = 0;
 
       cart.forEach((item, index) => {
-        subtotal += item.total;
-        let tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${item.name}</strong></td>
-          <td style="font-size: 11px; text-align: left; max-width: 250px;">${item.details}</td>
-          <td>$ ${item.unitPrice.toLocaleString()}</td>
-          <td>${item.quantity}</td>
-          <td>$ ${item.total.toLocaleString()}</td>
-          <td><button class="qty-btn" style="margin: 0 auto; color: var(--red);" onclick="removeItem(${index})">&times;</button></td>
+        let itemTotal = item.unitPrice * item.qty;
+        subtotal += itemTotal;
+        totalCount += item.qty;
+
+        tbody.innerHTML += `
+          <tr>
+            <td><strong>${item.name}</strong></td>
+            <td style="font-size:12px; text-align:left; max-width:250px;">${item.details}</td>
+            <td>$ ${item.unitPrice.toLocaleString()}</td>
+            <td>
+              <div class="qty-controls" style="justify-content:center;">
+                <button type="button" class="qty-btn" onclick="changeCartQty(${index}, -1)">-</button>
+                <span class="qty-value">${item.qty}</span>
+                <button type="button" class="qty-btn" onclick="changeCartQty(${index}, 1)">+</button>
+              </div>
+            </td>
+            <td><strong>$ ${itemTotal.toLocaleString()}</strong></td>
+            <td><button type="button" onclick="removeFromCart(${index})" style="background:none; border:none; color:var(--red); font-weight:bold; cursor:pointer;">❌</button></td>
+          </tr>
         `;
-        tbody.appendChild(tr);
       });
 
       document.getElementById('cartSubtotal').innerText = '$ ' + subtotal.toLocaleString();
+      document.getElementById('cartBadgeCount').innerText = totalCount;
     }
 
-    function removeItem(index) {
+    function changeCartQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(index) {
       cart.splice(index, 1);
-      updateCartBadge();
-      renderCart();
+      updateCartUI();
     }
 
-    // Enviar orden a WhatsApp
-    function sendOrderToWhatsApp(e) {
-      e.preventDefault();
+    function sendOrderToWhatsApp(event) {
+      event.preventDefault();
       if (cart.length === 0) {
-        alert("Tu canasta está vacía.");
+        alert('Tu canasta está vacía.');
         return;
       }
 
@@ -1364,25 +1339,26 @@
       let pago = document.getElementById('pago').value;
       let observaciones = document.getElementById('observaciones').value;
 
-      let message = `*¡Nuevo Pedido - Dominio & Coffee!*%0A%0A`;
-      message += `*Cliente:* ${nombre}%0A`;
-      message += `*WhatsApp:* ${whatsapp}%0A`;
-      message += `*Dirección:* ${direccion} (${barrio})%0A`;
-      if (referencia) message += `*Referencia:* ${referencia}%0A`;
-      message += `*Forma de pago:* ${pago}%0A`;
-      if (observaciones) message += `*Notas:* ${observaciones}%0A%0A`;
-      message += `*--- DETALLE DEL PEDIDO ---*%0A`;
+      let text = `*¡Hola! Nuevo Pedido - Dominio & Coffee*%0A%0A`;
+      text += `*Cliente:* ${nombre}%0A`;
+      text += `*WhatsApp:* ${whatsapp}%0A`;
+      text += `*Dirección:* ${direccion} (${barrio})%0A`;
+      if (referencia) text += `*Referencia:* ${referencia}%0A`;
+      text += `*Forma de Pago:* ${pago}%0A`;
+      if (observaciones) text += `*Notas:* ${observaciones}%0A%0A`;
+      text += `*--- DETALLE DE LA ORDEN ---*%0A`;
 
       let subtotal = 0;
       cart.forEach((item, i) => {
-        subtotal += item.total;
-        message += `${i + 1}. *${item.name}* - $${item.total.toLocaleString()}%0A`;
-        message += `   _Detalles:_${item.details}%0A`;
+        let itemTotal = item.unitPrice * item.qty;
+        subtotal += itemTotal;
+        text += `${i+1}. *${item.name}* (x${item.qty}) - $ ${itemTotal.toLocaleString()}%0A`;
+        text   += `   _Detalles: ${item.details}_%0A`;
       });
 
-      message += `%0A*Subtotal a pagar:* $${subtotal.toLocaleString()}`;
+      text += `%0A*Subtotal Total: $ ${subtotal.toLocaleString()}*`;
 
-      let url = `https://wa.me/573246044424?text=${message}`;
+      let url = `https://wa.me/573246044424?text=${text}`;
       window.open(url, '_blank');
     }
   </script>
