@@ -24,7 +24,7 @@
       --white: #ffffff;
       --green: #23a455;
       --red: #e53935;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
     }
 
     body {
@@ -32,7 +32,6 @@
       background: #faf7f2;
       color: #1f1f1f;
       padding-bottom: 90px;
-      overflow-x: hidden;
     }
 
     a {
@@ -42,7 +41,6 @@
 
     img {
       width: 100%;
-      height: 100%;
       display: block;
       object-fit: cover;
     }
@@ -54,19 +52,18 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      padding: 0 20px;
+      padding: 0 40px;
       position: sticky;
       top: 0;
       z-index: 50;
-      gap: 10px;
-      width: 100%;
+      gap: 15px;
     }
 
     .nav-item {
-      padding: 14px 16px;
+      padding: 16px 20px;
       color: var(--white);
       font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -74,11 +71,11 @@
       transition: all 0.2s ease-in-out;
       border-radius: 4px;
       user-select: none;
-      white-space: nowrap;
     }
 
     .nav-item:hover {
       background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
     }
 
     .nav-item.active {
@@ -89,45 +86,44 @@
       background: var(--white);
       color: var(--dark);
       border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 11px;
+      padding: 2px 7px;
+      font-size: 12px;
       font-weight: 800;
     }
 
     /* HERO SECTION */
     .hero {
-      padding: 20px 20px 0;
-      max-width: 1200px;
-      margin: 0 auto;
+      padding: 18px 18px 0;
     }
 
     .hero-overlay {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 0;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
       background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
-      border-radius: 20px;
+      border-radius: 28px;
       overflow: hidden;
       box-shadow: var(--shadow);
+      min-height: 300px;
     }
 
     .hero-text {
       color: var(--white);
-      padding: 32px;
+      padding: 34px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
     .hero-text h2 {
-      font-size: 2.2rem;
-      line-height: 1.15;
-      margin-bottom: 10px;
+      font-size: 2.5rem;
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
 
     .hero-text p {
-      font-size: 1.05rem;
-      opacity: 0.9;
+      font-size: 1.1rem;
+      opacity: 0.95;
       margin-bottom: 15px;
     }
 
@@ -141,29 +137,33 @@
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 12px;
     }
 
     .info-box strong {
       display: block;
-      margin-bottom: 3px;
-      font-size: 13px;
+      margin-bottom: 4px;
     }
 
     .info-box span {
-      font-size: 11px;
+      font-size: 12px;
       opacity: 0.9;
     }
 
     .status-badge {
       display: inline-block;
-      padding: 2px 6px;
-      border-radius: 10px;
+      padding: 3px 8px;
+      border-radius: 12px;
       font-weight: 800;
-      font-size: 10px;
+      font-size: 11px;
       text-transform: uppercase;
       margin-top: 4px;
+    }
+
+    .status-open {
+      background: #28a745;
+      color: #fff;
     }
 
     .status-closed {
@@ -171,49 +171,46 @@
       color: #fff;
     }
 
-    .hero-image {
-      min-height: 220px;
+    .hero-image img {
+      height: 100%;
     }
 
     .container {
-      width: min(1200px, 100%);
-      margin: 25px auto 0;
-      padding: 0 20px;
+      width: min(1200px, calc(100% - 36px));
+      margin: 26px auto 0;
     }
 
-    /* CATALOGO Y MÁRGENES */
+    /* CATALOGO */
     .shop-layout {
       display: grid;
       grid-template-columns: 240px 1fr;
-      gap: 25px;
-      margin-top: 15px;
-      align-items: start;
+      gap: 30px;
+      margin-top: 20px;
     }
 
     .categories-sidebar {
       background: #f4f4f6;
-      border-radius: 14px;
-      padding: 18px;
-      position: sticky;
-      top: 75px;
+      border-radius: 12px;
+      padding: 20px;
+      height: fit-content;
     }
 
     .categories-sidebar h3 {
-      font-size: 16px;
-      margin-bottom: 12px;
+      font-size: 18px;
+      margin-bottom: 15px;
       border-bottom: 1px solid #ddd;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
     }
 
     .categories-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .categories-list li {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       color: #666;
       cursor: pointer;
@@ -228,71 +225,58 @@
     .products-list {
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      min-width: 0;
+      gap: 25px;
     }
 
-    /* TARJETA DE PRODUCTO ESTILO HORIZONTAL LIMPIO */
     .product-card {
       display: grid;
-      grid-template-columns: 180px 1fr;
+      grid-template-columns: 280px 1fr;
       gap: 20px;
       align-items: center;
       background: var(--white);
-      border-radius: 14px;
-      padding: 14px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      border: 1px solid rgba(0,0,0,0.04);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
 
     .product-img {
-      height: 120px;
-      width: 100%;
-      border-radius: 10px;
+      height: 160px;
+      border-radius: 8px;
       overflow: hidden;
       background: #222;
     }
 
-    .product-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 0;
-      padding-right: 5px;
-    }
-
     .product-info h4 {
-      font-size: 14px;
+      font-size: 16px;
       color: #777;
-      margin-bottom: 2px;
+      margin-bottom: 5px;
       font-weight: 700;
     }
 
     .product-info h3 {
-      font-size: 17px;
+      font-size: 22px;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       color: #222;
-      word-break: break-word;
     }
 
     .btn-buy {
       background: var(--dark-btn);
       color: var(--white);
       border: none;
-      padding: 9px 18px;
+      padding: 10px 24px;
       font-weight: 700;
-      font-size: 12px;
-      border-radius: 6px;
+      font-size: 14px;
+      border-radius: 4px;
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      transition: background 0.2s;
-      width: fit-content;
+      transition: transform 0.2s, background 0.2s;
     }
 
     .btn-buy:hover {
       background: #000;
+      transform: translateY(-2px);
     }
 
     /* MODAL DE CONFIGURACIÓN */
@@ -307,7 +291,6 @@
       z-index: 999;
       justify-content: center;
       align-items: center;
-      padding: 15px;
     }
 
     .modal-overlay.active {
@@ -316,23 +299,23 @@
 
     .modal-content {
       background: var(--white);
-      width: 100%;
-      max-width: 600px;
-      max-height: 90vh;
+      width: 90%;
+      max-width: 650px;
+      max-height: 85vh;
       overflow-y: auto;
       border-radius: 16px;
-      padding: 20px;
+      padding: 24px;
       box-shadow: var(--shadow);
       position: relative;
     }
 
     .modal-close-btn {
       position: absolute;
-      top: 12px;
-      right: 15px;
+      top: 15px;
+      right: 20px;
       background: transparent;
       border: none;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
       color: #666;
@@ -340,27 +323,26 @@
 
     .modal-content h2 {
       color: var(--red-accent);
-      font-size: 18px;
-      margin-bottom: 4px;
-      padding-right: 25px;
+      font-size: 20px;
+      margin-bottom: 5px;
     }
 
     .modal-price-tag {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--dark);
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .section-title {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
-      margin: 15px 0 6px;
+      margin: 18px 0 8px;
       text-transform: uppercase;
     }
 
     .section-title span {
-      font-size: 11px;
+      font-size: 12px;
       color: #777;
       font-weight: normal;
       text-transform: none;
@@ -368,24 +350,23 @@
 
     .opt-box {
       background: var(--green-light);
-      border-radius: 10px;
-      padding: 8px 10px;
-      margin-bottom: 6px;
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--red-accent);
       text-transform: uppercase;
-      gap: 10px;
     }
 
     .opt-box .price-add {
       margin-left: auto;
+      margin-right: 15px;
       color: #222;
       font-weight: 800;
-      white-space: nowrap;
     }
 
     .qty-counter {
@@ -395,7 +376,6 @@
       border-radius: 4px;
       overflow: hidden;
       border: 1px solid #ccc;
-      flex-shrink: 0;
     }
 
     .qty-counter button {
@@ -409,10 +389,10 @@
     }
 
     .qty-counter span {
-      padding: 0 6px;
-      font-size: 12px;
+      padding: 0 8px;
+      font-size: 13px;
       color: #333;
-      min-width: 18px;
+      min-width: 20px;
       text-align: center;
     }
 
@@ -420,14 +400,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 18px;
-      padding-top: 12px;
+      margin-top: 20px;
+      padding-top: 15px;
       border-top: 1px solid #eee;
-      gap: 10px;
     }
 
     .item-total-price {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--dark);
     }
@@ -435,13 +414,14 @@
     .btn-add-cart {
       background: var(--dark-btn);
       color: var(--white);
-      padding: 10px 18px;
+      padding: 12px 20px;
       border: none;
       border-radius: 6px;
       font-weight: 700;
       cursor: pointer;
-      font-size: 13px;
-      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn-add-cart:hover {
@@ -451,70 +431,65 @@
     /* CARRITO / CANASTA */
     .cart-section {
       display: none;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     .cart-section.active {
       display: block;
     }
 
-    .table-responsive {
-      width: 100%;
-      overflow-x: auto;
-      background: var(--white);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
     .cart-table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 550px;
+      margin-bottom: 25px;
+      background: var(--white);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     .cart-table th {
       background: var(--red-accent);
       color: var(--white);
       text-transform: uppercase;
-      font-size: 12px;
-      padding: 10px;
+      font-size: 13px;
+      padding: 12px;
       text-align: center;
     }
 
     .cart-table td {
-      padding: 12px 10px;
+      padding: 15px;
       border-bottom: 1px solid #eee;
       text-align: center;
       vertical-align: middle;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .cart-summary {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 10px;
-      margin-top: 15px;
+      gap: 12px;
+      margin-top: 20px;
     }
 
     .subtotal-text {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
     }
 
     .btn-action-cart {
       background: var(--dark-btn);
       color: var(--white);
-      padding: 12px 20px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
       font-weight: 700;
       cursor: pointer;
       width: 240px;
       text-align: center;
       text-transform: uppercase;
-      font-size: 13px;
+      transition: background 0.2s;
     }
 
     .btn-action-cart:hover {
@@ -524,10 +499,10 @@
     /* FORMULARIO DE CHECKOUT */
     .checkout-section {
       display: none;
-      margin-top: 15px;
+      margin-top: 20px;
       background: var(--white);
-      border-radius: 16px;
-      padding: 24px;
+      border-radius: 20px;
+      padding: 30px;
       box-shadow: var(--shadow);
     }
 
@@ -536,32 +511,32 @@
     }
 
     .checkout-section h2 {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 800;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .form-alert-notice {
       background: #fdf6e2;
       border: 1px solid #f2e3b6;
       color: #856404;
-      padding: 10px 14px;
-      border-radius: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
       font-weight: 600;
-      font-size: 12px;
-      margin-bottom: 15px;
+      font-size: 13px;
+      margin-bottom: 20px;
     }
 
     .grid-form {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
 
     .field.full {
@@ -570,14 +545,14 @@
 
     label {
       font-weight: 700;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     input, select, textarea {
       width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #eee;
       background: #fafafa;
       font-family: inherit;
       font-size: 14px;
@@ -590,15 +565,15 @@
     }
 
     .submit-btn {
-      margin-top: 18px;
+      margin-top: 20px;
       width: 100%;
       background: var(--orange);
       color: var(--white);
-      padding: 15px;
-      font-size: 15px;
+      padding: 16px;
+      font-size: 16px;
       font-weight: 800;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
     }
 
@@ -606,180 +581,11 @@
       background: #e66e00;
     }
 
-    /* =========================================
-       MEDIA QUERIES MÓVIL (MÁRGENES Y IMÁGENES PROTEGIDAS)
-       ========================================= */
     @media (max-width: 768px) {
-      body {
-        padding-bottom: 80px;
-      }
-
-      .container {
-        padding: 0 12px; /* Márgenes laterales seguros en celulares */
-      }
-
-      .hero {
-        padding: 12px 12px 0;
-      }
-
-      .topbar {
-        padding: 0 10px;
-        justify-content: space-around;
-      }
-
-      .nav-item {
-        padding: 12px 8px;
-        font-size: 12px;
-        flex: 1;
-        justify-content: center;
-      }
-
-      .hero-overlay { 
-        grid-template-columns: 1fr; 
-      }
-      
-      .hero-text {
-        padding: 20px 16px;
-      }
-
-      .hero-text h2 {
-        font-size: 1.5rem;
-      }
-
-      .hero-text p {
-        font-size: 0.9rem;
-      }
-
-      .hero-info {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-image {
-        min-height: 180px;
-        max-height: 200px;
-      }
-
-      /* CATÁLOGO EN MÓVIL */
-      .shop-layout { 
-        grid-template-columns: 1fr; 
-        gap: 15px;
-      }
-      
-      .categories-sidebar {
-        position: static;
-        padding: 12px;
-      }
-
-      .categories-list {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 6px;
-        gap: 8px;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .categories-list::-webkit-scrollbar {
-        height: 3px;
-      }
-
-      .categories-list::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 4px;
-      }
-
-      .categories-list li {
-        white-space: nowrap;
-        background: var(--white);
-        padding: 6px 10px;
-        border-radius: 6px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-        font-size: 11px;
-      }
-
-      /* TARJETAS DE PRODUCTOS EN MÓVIL: Apiladas para evitar desbordes de imagen ancha */
-      .product-card { 
-        grid-template-columns: 1fr; 
-        gap: 12px;
-        padding: 12px;
-        border-radius: 12px;
-      }
-
-      .product-img {
-        height: 150px; /* Altura controlada para que luzca cuadrada/equilibrada y no gigante */
-        width: 100%;
-        border-radius: 8px;
-      }
-
-      .product-info h3 {
-        font-size: 16px;
-        margin-bottom: 8px;
-      }
-
-      .btn-buy {
-        width: 100%;
-        padding: 11px;
-        text-align: center;
-      }
-
-      /* FORMULARIO */
-      .grid-form { 
-        grid-template-columns: 1fr; 
-      }
-
-      .checkout-section {
-        padding: 16px;
-      }
-
-      /* CARRITO */
-      .cart-summary {
-        align-items: stretch;
-      }
-
-      .btn-action-cart {
-        width: 100%;
-      }
-
-      .subtotal-text {
-        text-align: center;
-        margin-bottom: 5px;
-      }
-
-      /* MODAL */
-      .modal-content {
-        padding: 15px;
-        max-height: 85vh;
-      }
-
-      .opt-box {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        padding: 10px;
-      }
-
-      .opt-box .price-add {
-        margin-left: 0;
-      }
-
-      .qty-counter {
-        align-self: flex-end;
-      }
-
-      .modal-footer-action {
-        flex-direction: column;
-        gap: 12px;
-        align-items: stretch;
-      }
-
-      .item-total-price {
-        text-align: center;
-      }
-
-      .btn-add-cart {
-        width: 100%;
-        justify-content: center;
-        padding: 12px;
-      }
+      .hero-overlay { grid-template-columns: 1fr; }
+      .shop-layout { grid-template-columns: 1fr; }
+      .product-card { grid-template-columns: 1fr; }
+      .grid-form { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -787,12 +593,12 @@
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <div class="nav-item active" onclick="showSection('catalog')">Menú</div>
-    <div class="nav-item" onclick="showSection('catalog')">Info</div>
+    <div class="nav-item active" onclick="showSection('catalog')">Categorías ▾</div>
+    <div class="nav-item" onclick="showSection('catalog')">Información ▾</div>
     <div class="nav-item" id="cartNavBtn" onclick="showSection('cart')">
       🛍️ Canasta <span class="cart-badge" id="cartBadgeCount">0</span>
     </div>
-    <div class="nav-item" onclick="window.open('https://wa.me/573246044424')">Contacto</div>
+    <div class="nav-item" onclick="window.open('https://wa.me/573246044424')">Contáctenos</div>
   </header>
 
   <!-- HERO BANNER -->
@@ -962,23 +768,21 @@
 
     <!-- SECCIÓN 2: CANASTA -->
     <section id="cartSection" class="cart-section">
-      <div class="table-responsive">
-        <table class="cart-table">
-          <thead>
-            <tr>
-              <th>PRODUCTO</th>
-              <th>DETALLES</th>
-              <th>PRECIO UNIT.</th>
-              <th>CANTIDAD</th>
-              <th>TOTAL</th>
-              <th>ELIMINAR</th>
-            </tr>
-          </thead>
-          <tbody id="cartTableBody">
-            <!-- Dinámico por JS -->
-          </tbody>
-        </table>
-      </div>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>PRODUCTO</th>
+            <th>DETALLES</th>
+            <th>PRECIO UNIT.</th>
+            <th>CANTIDAD</th>
+            <th>TOTAL</th>
+            <th>ELIMINAR</th>
+          </tr>
+        </thead>
+        <tbody id="cartTableBody">
+          <!-- Dinámico por JS -->
+        </tbody>
+      </table>
 
       <div class="cart-summary">
         <div class="subtotal-text">Subtotal: <span id="cartSubtotal">$ 0</span></div>
@@ -1057,123 +861,123 @@
         <div class="section-title">BASES DE BOWL / BURRITO <span>(Máx 3 en total, máx 1 c/u)</span></div>
         <div class="opt-box">
           <span>ARROZ AL CILANTRO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('base_arroz', -1)" type="button">-</button><span id="base_arroz" data-name="Arroz al Cilantro">0</span><button onclick="updateOptQty('base_arroz', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('base_arroz', -1)">-</button><span id="base_arroz" data-name="Arroz al Cilantro">0</span><button onclick="updateOptQty('base_arroz', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>LECHUGAS MIX</span>
-          <div class="qty-counter"><button onclick="updateOptQty('base_lechugas', -1)" type="button">-</button><span id="base_lechugas" data-name="Lechugas Mix">0</span><button onclick="updateOptQty('base_lechugas', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('base_lechugas', -1)">-</button><span id="base_lechugas" data-name="Lechugas Mix">0</span><button onclick="updateOptQty('base_lechugas', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>BASE DEL DÍA</span>
-          <div class="qty-counter"><button onclick="updateOptQty('base_dia', -1)" type="button">-</button><span id="base_dia" data-name="Base del Día">0</span><button onclick="updateOptQty('base_dia', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('base_dia', -1)">-</button><span id="base_dia" data-name="Base del Día">0</span><button onclick="updateOptQty('base_dia', 1)">+</button></div>
         </div>
 
         <!-- PROTEINA BASE -->
         <div class="section-title">PROTEÍNA <span>(1 Incluida, adicional +$3.000)</span></div>
         <div class="opt-box">
           <span>CARNE DESMECHADA</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_carne', -1)" type="button">-</button><span id="prot_carne" data-name="Carne Desmechada">0</span><button onclick="updateOptQty('prot_carne', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_carne', -1)">-</button><span id="prot_carne" data-name="Carne Desmechada">0</span><button onclick="updateOptQty('prot_carne', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CERDO PULLED PORK</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_cerdo', -1)" type="button">-</button><span id="prot_cerdo" data-name="Cerdo Pulled Pork">0</span><button onclick="updateOptQty('prot_cerdo', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_cerdo', -1)">-</button><span id="prot_cerdo" data-name="Cerdo Pulled Pork">0</span><button onclick="updateOptQty('prot_cerdo', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>TENDERS DE PECHUGA</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_tenders', -1)" type="button">-</button><span id="prot_tenders" data-name="Tenders de Pechuga">0</span><button onclick="updateOptQty('prot_tenders', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_tenders', -1)">-</button><span id="prot_tenders" data-name="Tenders de Pechuga">0</span><button onclick="updateOptQty('prot_tenders', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>COSTILLA BBQ</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_costilla', -1)" type="button">-</button><span id="prot_costilla" data-name="Costilla BBQ">0</span><button onclick="updateOptQty('prot_costilla', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_costilla', -1)">-</button><span id="prot_costilla" data-name="Costilla BBQ">0</span><button onclick="updateOptQty('prot_costilla', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CHORIZO DE CERDO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_chorizo', -1)" type="button">-</button><span id="prot_chorizo" data-name="Chorizo de Cerdo">0</span><button onclick="updateOptQty('prot_chorizo', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_chorizo', -1)">-</button><span id="prot_chorizo" data-name="Chorizo de Cerdo">0</span><button onclick="updateOptQty('prot_chorizo', 1)">+</button></div>
         </div>
 
         <!-- TOPPINGS -->
         <div class="section-title">TOPPINGS <span>(Hasta 7 Incluidos en el precio)</span></div>
         <div class="opt-box">
           <span>CHICHARRÓN</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_chicharron', -1)" type="button">-</button><span id="top_chicharron" data-name="Chicharrón">0</span><button onclick="updateOptQty('top_chicharron', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_chicharron', -1)">-</button><span id="top_chicharron" data-name="Chicharrón">0</span><button onclick="updateOptQty('top_chicharron', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CHORIZO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_chorizo', -1)" type="button">-</button><span id="top_chorizo" data-name="Chorizo">0</span><button onclick="updateOptQty('top_chorizo', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_chorizo', -1)">-</button><span id="top_chorizo" data-name="Chorizo">0</span><button onclick="updateOptQty('top_chorizo', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>MADURITO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_madurito', -1)" type="button">-</button><span id="top_madurito" data-name="Madurito">0</span><button onclick="updateOptQty('top_madurito', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_madurito', -1)">-</button><span id="top_madurito" data-name="Madurito">0</span><button onclick="updateOptQty('top_madurito', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>GUACAMOLE</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_guacamole', -1)" type="button">-</button><span id="top_guacamole" data-name="Guacamole">0</span><button onclick="updateOptQty('top_guacamole', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_guacamole', -1)">-</button><span id="top_guacamole" data-name="Guacamole">0</span><button onclick="updateOptQty('top_guacamole', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>MAIZCITOS</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_maizcitos', -1)" type="button">-</button><span id="top_maizcitos" data-name="Maizcitos">0</span><button onclick="updateOptQty('top_maizcitos', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_maizcitos', -1)">-</button><span id="top_maizcitos" data-name="Maizcitos">0</span><button onclick="updateOptQty('top_maizcitos', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>PICO DE GALLO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_pico', -1)" type="button">-</button><span id="top_pico" data-name="Pico de Gallo">0</span><button onclick="updateOptQty('top_pico', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_pico', -1)">-</button><span id="top_pico" data-name="Pico de Gallo">0</span><button onclick="updateOptQty('top_pico', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>DORITOX</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_doritox', -1)" type="button">-</button><span id="top_doritox" data-name="Doritox">0</span><button onclick="updateOptQty('top_doritox', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_doritox', -1)">-</button><span id="top_doritox" data-name="Doritox">0</span><button onclick="updateOptQty('top_doritox', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CEBOLLA CRISPY</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_cebolla', -1)" type="button">-</button><span id="top_cebolla" data-name="Cebolla Crispy">0</span><button onclick="updateOptQty('top_cebolla', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_cebolla', -1)">-</button><span id="top_cebolla" data-name="Cebolla Crispy">0</span><button onclick="updateOptQty('top_cebolla', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>QUESO MOZZARELLA</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_queso', -1)" type="button">-</button><span id="top_queso" data-name="Queso Mozzarella">0</span><button onclick="updateOptQty('top_queso', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_queso', -1)">-</button><span id="top_queso" data-name="Queso Mozzarella">0</span><button onclick="updateOptQty('top_queso', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>SOUR CREAM</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_sour', -1)" type="button">-</button><span id="top_sour" data-name="Sour Cream">0</span><button onclick="updateOptQty('top_sour', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_sour', -1)">-</button><span id="top_sour" data-name="Sour Cream">0</span><button onclick="updateOptQty('top_sour', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>PEPINO AL CILANTRO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_pepino', -1)" type="button">-</button><span id="top_pepino" data-name="Pepino al Cilantro">0</span><button onclick="updateOptQty('top_pepino', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_pepino', -1)">-</button><span id="top_pepino" data-name="Pepino al Cilantro">0</span><button onclick="updateOptQty('top_pepino', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>JALAPEÑOS</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_jalapenos', -1)" type="button">-</button><span id="top_jalapenos" data-name="Jalapeños">0</span><button onclick="updateOptQty('top_jalapenos', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_jalapenos', -1)">-</button><span id="top_jalapenos" data-name="Jalapeños">0</span><button onclick="updateOptQty('top_jalapenos', 1)">+</button></div>
         </div>
 
         <!-- SALSA BASE -->
         <div class="section-title">SALSA BASE <span>(Opcional)</span></div>
         <div class="opt-box">
           <span>SALSA BBQ</span>
-          <div class="qty-counter"><button onclick="updateOptQty('salsa_bbq', -1)" type="button">-</button><span id="salsa_bbq" data-name="Salsa BBQ">0</span><button onclick="updateOptQty('salsa_bbq', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('salsa_bbq', -1)">-</button><span id="salsa_bbq" data-name="Salsa BBQ">0</span><button onclick="updateOptQty('salsa_bbq', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>SALSA TATEMADA</span>
-          <div class="qty-counter"><button onclick="updateOptQty('salsa_tatemada', -1)" type="button">-</button><span id="salsa_tatemada" data-name="Salsa Tatemada">0</span><button onclick="updateOptQty('salsa_tatemada', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('salsa_tatemada', -1)">-</button><span id="salsa_tatemada" data-name="Salsa Tatemada">0</span><button onclick="updateOptQty('salsa_tatemada', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>SALSA DE AJO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('salsa_ajo', -1)" type="button">-</button><span id="salsa_ajo" data-name="Salsa de Ajo">0</span><button onclick="updateOptQty('salsa_ajo', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('salsa_ajo', -1)">-</button><span id="salsa_ajo" data-name="Salsa de Ajo">0</span><button onclick="updateOptQty('salsa_ajo', 1)">+</button></div>
         </div>
 
         <!-- ADICIÓN DE PROTEÍNA -->
         <div class="section-title">ADICIÓN DE PROTEÍNA <span>(Opcional)</span></div>
         <div class="opt-box">
           <span>CARNE DESMECHADA</span> <span class="price-add">$ 8.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_carne', -1)" type="button">-</button><span id="add_carne" data-name="Add. Carne Desmechada">0</span><button onclick="updateOptQty('add_carne', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('add_carne', -1)">-</button><span id="add_carne" data-name="Add. Carne Desmechada">0</span><button onclick="updateOptQty('add_carne', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CERDO PULLED PORK</span> <span class="price-add">$ 8.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_cerdo', -1)" type="button">-</button><span id="add_cerdo" data-name="Add. Cerdo Pulled Pork">0</span><button onclick="updateOptQty('add_cerdo', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('add_cerdo', -1)">-</button><span id="add_cerdo" data-name="Add. Cerdo Pulled Pork">0</span><button onclick="updateOptQty('add_cerdo', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>COSTILLA BBQ</span> <span class="price-add">$ 8.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_costilla', -1)" type="button">-</button><span id="add_costilla" data-name="Add. Costilla BBQ">0</span><button onclick="updateOptQty('add_costilla', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('add_costilla', -1)">-</button><span id="add_costilla" data-name="Add. Costilla BBQ">0</span><button onclick="updateOptQty('add_costilla', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>TENDERS DE POLLO</span> <span class="price-add">$ 8.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_tenders', -1)" type="button">-</button><span id="add_tenders" data-name="Add. Tenders de Pollo">0</span><button onclick="updateOptQty('add_tenders', 1)" type="button">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('add_tenders', -1)">-</button><span id="add_tenders" data-name="Add. Tenders de Pollo">0</span><button onclick="updateOptQty('add_tenders', 1)">+</button></div>
         </div>
       </div>
 
@@ -1186,13 +990,16 @@
   </div>
 
   <script>
+    // ESTADO GLOBAL DEL CARRITO Y MODAL
     let cart = [];
     let currentProduct = null;
 
+    // LÍMITES Y REGLAS DE NEGOCIO
     const MAX_BASES_TOTAL = 3;
     const MAX_BASE_POR_ITEM = 1;
     const EXTRA_PROTEIN_PRICE = 3000;
 
+    // Mapeo de grupos para validación
     const basesList = ['base_arroz', 'base_lechugas', 'base_dia'];
     const proteinsList = ['prot_carne', 'prot_cerdo', 'prot_tenders', 'prot_costilla', 'prot_chorizo'];
     const toppingsList = ['top_chicharron', 'top_chorizo', 'top_madurito', 'top_guacamole', 'top_maizcitos', 'top_pico', 'top_doritox', 'top_cebolla', 'top_sour', 'top_pepino', 'top_jalapenos', 'top_queso'];
@@ -1232,6 +1039,7 @@
       const span = document.getElementById(id);
       let currentVal = parseInt(span.innerText);
 
+      // Reglas para BASES
       if (basesList.includes(id)) {
         let currentBasesTotal = basesList.reduce((sum, baseId) => sum + parseInt(document.getElementById(baseId).innerText), 0);
         if (change > 0) {
@@ -1240,6 +1048,7 @@
         }
       }
 
+      // Prevenir valores negativos
       if (currentVal + change < 0) return;
 
       span.innerText = currentVal + change;
@@ -1333,7 +1142,7 @@
             <td>$ ${item.price.toLocaleString('es-CO')}</td>
             <td>${item.qty}</td>
             <td><strong>$ ${itemTotal.toLocaleString('es-CO')}</strong></td>
-            <td><button style="background:none; border:none; color:red; cursor:pointer;" onclick="removeItem(${index})" type="button">❌</button></td>
+            <td><button style="background:none; border:none; color:red; cursor:pointer;" onclick="removeItem(${index})">❌</button></td>
           </tr>
         `;
       });
@@ -1358,7 +1167,7 @@
       const whatsapp = document.getElementById('whatsapp').value;
       const direccion = document.getElementById('direccion').value;
       const barrio = document.getElementById('barrio').value;
-      const referencia = document.getElementById('referencia ->') || document.getElementById('referencia').value;
+      const referencia = document.getElementById('referencia').value;
       const pago = document.getElementById('pago').value;
       const observaciones = document.getElementById('observaciones').value;
 
