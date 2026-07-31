@@ -96,7 +96,7 @@
 
     /* HERO SECTION */
     .hero {
-      padding: 15px 15px 0;
+      padding: 20px 20px 0;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -113,7 +113,7 @@
 
     .hero-text {
       color: var(--white);
-      padding: 28px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -134,7 +134,7 @@
     .hero-info {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 12px;
     }
 
     .info-box {
@@ -142,7 +142,7 @@
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 12px;
-      padding: 10px;
+      padding: 12px;
     }
 
     .info-box strong {
@@ -177,23 +177,23 @@
 
     .container {
       width: min(1200px, 100%);
-      margin: 20px auto 0;
-      padding: 0 15px;
+      margin: 25px auto 0;
+      padding: 0 20px;
     }
 
     /* CATALOGO Y MÁRGENES */
     .shop-layout {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 20px;
+      grid-template-columns: 240px 1fr;
+      gap: 25px;
       margin-top: 15px;
       align-items: start;
     }
 
     .categories-sidebar {
       background: #f4f4f6;
-      border-radius: 12px;
-      padding: 15px;
+      border-radius: 14px;
+      padding: 18px;
       position: sticky;
       top: 75px;
     }
@@ -228,27 +228,29 @@
     .products-list {
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      min-width: 0; /* Evita desbordamientos de grid en responsive */
+      gap: 18px;
+      min-width: 0;
     }
 
+    /* TARJETA DE PRODUCTO ESTILO HORIZONTAL LIMPIO */
     .product-card {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 15px;
+      grid-template-columns: 180px 1fr;
+      gap: 20px;
       align-items: center;
       background: var(--white);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 14px;
+      padding: 14px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.04);
     }
 
     .product-img {
-      height: 140px;
-      border-radius: 8px;
+      height: 120px;
+      width: 100%;
+      border-radius: 10px;
       overflow: hidden;
       background: #222;
-      width: 100%;
     }
 
     .product-info {
@@ -256,19 +258,20 @@
       flex-direction: column;
       justify-content: center;
       min-width: 0;
+      padding-right: 5px;
     }
 
     .product-info h4 {
-      font-size: 15px;
+      font-size: 14px;
       color: #777;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       font-weight: 700;
     }
 
     .product-info h3 {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       color: #222;
       word-break: break-word;
     }
@@ -277,9 +280,9 @@
       background: var(--dark-btn);
       color: var(--white);
       border: none;
-      padding: 10px 20px;
+      padding: 9px 18px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       border-radius: 6px;
       cursor: pointer;
       text-transform: uppercase;
@@ -604,7 +607,7 @@
     }
 
     /* =========================================
-       MEDIA QUERIES ULTRA RESPONSIVE (MÓVIL)
+       MEDIA QUERIES MÓVIL (MÁRGENES Y IMÁGENES PROTEGIDAS)
        ========================================= */
     @media (max-width: 768px) {
       body {
@@ -612,11 +615,11 @@
       }
 
       .container {
-        padding: 0 10px;
+        padding: 0 12px; /* Márgenes laterales seguros en celulares */
       }
 
       .hero {
-        padding: 10px 10px 0;
+        padding: 12px 12px 0;
       }
 
       .topbar {
@@ -625,7 +628,7 @@
       }
 
       .nav-item {
-        padding: 12px 10px;
+        padding: 12px 8px;
         font-size: 12px;
         flex: 1;
         justify-content: center;
@@ -636,15 +639,15 @@
       }
       
       .hero-text {
-        padding: 20px 15px;
+        padding: 20px 16px;
       }
 
       .hero-text h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
       }
 
       .hero-text p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
 
       .hero-info {
@@ -653,7 +656,7 @@
 
       .hero-image {
         min-height: 180px;
-        max-height: 220px;
+        max-height: 200px;
       }
 
       /* CATÁLOGO EN MÓVIL */
@@ -671,12 +674,12 @@
         flex-direction: row;
         overflow-x: auto;
         padding-bottom: 6px;
-        gap: 10px;
+        gap: 8px;
         -webkit-overflow-scrolling: touch;
       }
 
       .categories-list::-webkit-scrollbar {
-        height: 4px;
+        height: 3px;
       }
 
       .categories-list::-webkit-scrollbar-thumb {
@@ -693,21 +696,23 @@
         font-size: 11px;
       }
 
-      /* PRODUCTOS / IMÁGENES PROTEGIDAS */
+      /* TARJETAS DE PRODUCTOS EN MÓVIL: Apiladas para evitar desbordes de imagen ancha */
       .product-card { 
         grid-template-columns: 1fr; 
         gap: 12px;
         padding: 12px;
+        border-radius: 12px;
       }
 
       .product-img {
-        height: 170px;
+        height: 150px; /* Altura controlada para que luzca cuadrada/equilibrada y no gigante */
+        width: 100%;
         border-radius: 8px;
       }
 
       .product-info h3 {
-        font-size: 17px;
-        margin-bottom: 10px;
+        font-size: 16px;
+        margin-bottom: 8px;
       }
 
       .btn-buy {
@@ -1181,16 +1186,13 @@
   </div>
 
   <script>
-    // ESTADO GLOBAL DEL CARRITO Y MODAL
     let cart = [];
     let currentProduct = null;
 
-    // LÍMITES Y REGLAS DE NEGOCIO
     const MAX_BASES_TOTAL = 3;
     const MAX_BASE_POR_ITEM = 1;
     const EXTRA_PROTEIN_PRICE = 3000;
 
-    // Mapeo de grupos para validación
     const basesList = ['base_arroz', 'base_lechugas', 'base_dia'];
     const proteinsList = ['prot_carne', 'prot_cerdo', 'prot_tenders', 'prot_costilla', 'prot_chorizo'];
     const toppingsList = ['top_chicharron', 'top_chorizo', 'top_madurito', 'top_guacamole', 'top_maizcitos', 'top_pico', 'top_doritox', 'top_cebolla', 'top_sour', 'top_pepino', 'top_jalapenos', 'top_queso'];
@@ -1230,7 +1232,6 @@
       const span = document.getElementById(id);
       let currentVal = parseInt(span.innerText);
 
-      // Reglas para BASES
       if (basesList.includes(id)) {
         let currentBasesTotal = basesList.reduce((sum, baseId) => sum + parseInt(document.getElementById(baseId).innerText), 0);
         if (change > 0) {
@@ -1239,7 +1240,6 @@
         }
       }
 
-      // Prevenir valores negativos
       if (currentVal + change < 0) return;
 
       span.innerText = currentVal + change;
@@ -1358,7 +1358,7 @@
       const whatsapp = document.getElementById('whatsapp').value;
       const direccion = document.getElementById('direccion').value;
       const barrio = document.getElementById('barrio').value;
-      const referencia = document.getElementById('referencia').value;
+      const referencia = document.getElementById('referencia ->') || document.getElementById('referencia').value;
       const pago = document.getElementById('pago').value;
       const observaciones = document.getElementById('observaciones').value;
 
