@@ -1058,7 +1058,7 @@
         <div class="opt-box" id="box_top_pico" onclick="toggleTop('pico', 'Pico de Gallo', 0)"><span>PICO DE GALLO</span></div>
         <div class="opt-box" id="box_top_doritox" onclick="toggleTop('doritox', 'Doritox', 0)"><span>DORITOX</span></div>
         <div class="opt-box" id="box_top_cebolla" onclick="toggleTop('cebolla', 'Cebolla Crispy', 0)"><span>CEBOLLA CRISPY</span></div>
-        <div class="opt-box" id="box_top_queso" onclick="toggleTop('queso', 'Queso Mozzarella', 3000)"><span>QUESO MOZZARELLA</span> <span class="price-add">+ $ 3.000</span></div>
+        <div class="opt-box" id="box_top_queso" onclick="toggleTop('queso', 'Queso Mozzarella', 0)"><span>QUESO MOZZARELLA</span></div>
         <div class="opt-box" id="box_top_sour" onclick="toggleTop('sour', 'Sour Cream', 0)"><span>SOUR CREAM</span></div>
         <div class="opt-box" id="box_top_pepino" onclick="toggleTop('pepino', 'Pepino al Cilantro', 0)"><span>PEPINO AL CILANTRO</span></div>
         <div class="opt-box" id="box_top_jalapenos" onclick="toggleTop('jalapenos', 'Jalapeños', 0)"><span>JALAPEÑOS</span></div>
@@ -1259,7 +1259,7 @@
       document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
       document.querySelectorAll('.opt-box').forEach(el => el.classList.remove('selected-blue'));
 
-      // Mostrar u ocultar personalizaciones según el tipo (por ahora bowl y otros usan el modal completo, o simplificado)
+      // Mostrar u ocultar personalizaciones según el tipo
       document.getElementById('productModal').classList.add('active');
       calculateModalTotal();
     }
@@ -1341,7 +1341,7 @@
           alert('Solo puedes seleccionar un máximo de 7 toppings.');
           return;
         }
-        let topPrice = (key === 'queso') ? 3000 : 0;
+        let topPrice = 0; // Sin costo adicional
         selectedTops[key] = { displayName, price: topPrice };
         box.classList.add('selected-blue');
       }
@@ -1418,7 +1418,7 @@
       let totalAddProtQty = Object.values(addProtQuantities).reduce((a, b) => a + b, 0);
       total += totalAddProtQty * 8000;
 
-      // Costo de toppings incluidos (Queso Mozzarella +$3.000)
+      // Costo de toppings incluidos
       for (let k in selectedTops) {
         total += selectedTops[k].price;
       }
