@@ -742,7 +742,7 @@
             <div class="category-section-title">Sandwichs</div>
             <div class="category-grid">
               <div class="product-card">
-                <div class="product-img"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80" alt="Sandwich"></div>
+                <div class="product-img"><img src="imgsd.jpg.jpeg" alt="Sandwich"></div>
                 <div class="product-info">
                   <h4>$ 18.000</h4>
                   <h3>Sandwich Especial de la Casa</h3>
@@ -757,7 +757,7 @@
             <div class="category-section-title">Nachos</div>
             <div class="category-grid">
               <div class="product-card">
-                <div class="product-img"><img src="https://images.unsplash.com/photo-1582234372572-cedce334ade6?auto=format&fit=crop&w=600&q=80" alt="Nachos"></div>
+                <div class="product-img"><img src="nachos3.jpg.jpeg" alt="Nachos"></div>
                 <div class="product-info">
                   <h4>$ 19.000</h4>
                   <h3>Nachos con Queso y Carne</h3>
@@ -847,11 +847,11 @@
             <div class="category-section-title">Bebidas</div>
             <div class="category-grid">
               <div class="product-card">
-                <div class="product-img"><img src="https://images.unsplash.com/photo-1437418747299-859703517283?auto=format&fit=crop&w=600&q=80" alt="Bebidas"></div>
+                <div class="product-img"><img src="cocacola2.png" alt="Bebidas"></div>
                 <div class="product-info">
-                  <h4>$ 5.000</h4>
-                  <h3>Gaseosa / Agua / Hatsu</h3>
-                  <button class="btn-buy" onclick="openProductModal('Gaseosa / Agua / Hatsu', 5000, 'simple')">¡COMPRAR!</button>
+                  <h4>$ 4.500</h4>
+                  <h3>Gaseosa</h3>
+                  <button class="btn-buy" onclick="openProductModal('Gaseosa', 4500, 'simple')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -1724,18 +1724,7 @@
       renderCart();
     }
 
-    // ====== FUNCIÓN CORREGIDA: envío del pedido por WhatsApp ======
-    // Antes se armaba el texto concatenando "%0A" a mano dentro del template
-    // string y se insertaba SIN codificar en la URL. Eso hace que caracteres
-    // como tildes, ñ, espacios, "/", ":" etc. rompan la URL en muchos
-    // navegadores/webviews (sobre todo en móvil): WhatsApp abre el chat
-    // correcto, pero el mensaje llega vacío o incompleto porque la URL
-    // quedó mal formada.
-    //
-    // La corrección: se arma el mensaje completo como texto plano normal
-    // (con saltos de línea reales "\n"), recolectando TODOS los datos del
-    // carrito y del cliente, y al final se codifica el mensaje UNA sola vez
-    // con encodeURIComponent() antes de insertarlo en la URL de wa.me.
+    
     function sendOrderToWhatsApp(e) {
       e.preventDefault();
 
