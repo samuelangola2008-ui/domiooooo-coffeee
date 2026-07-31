@@ -307,6 +307,19 @@
       border-radius: 16px;
       padding: 24px;
       box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #666;
     }
 
     .modal-content h2 {
@@ -591,9 +604,9 @@
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <div class="nav-item" onclick="showSection('catalog', this)">Categorías ▾</div>
-    <div class="nav-item" onclick="showSection('catalog', this)">Información ▾</div>
-    <div class="nav-item active" id="cartNavBtn" onclick="showSection('cart', this)">
+    <div class="nav-item active" onclick="showSection('catalog')">Categorías ▾</div>
+    <div class="nav-item" onclick="showSection('catalog')">Información ▾</div>
+    <div class="nav-item" id="cartNavBtn" onclick="showSection('cart')">
       🛍️ Canasta <span class="cart-badge" id="cartBadgeCount">0</span>
     </div>
     <div class="nav-item" onclick="window.open('https://wa.me/573246044424')">Contáctenos</div>
@@ -614,7 +627,7 @@
           <div class="info-box">
             <strong>🕒 Horario</strong>
             <span>10:00 am - 4:30 pm</span>
-            <div id="storeStatusBadge" class="status-badge">Cargando...</div>
+            <div id="storeStatusBadge" class="status-badge status-open">Abierto</div>
           </div>
         </div>
       </div>
@@ -827,10 +840,11 @@
   <!-- MODAL DE CONFIGURACIÓN -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
       <h2 id="modalProductName">Configuración</h2>
       <div class="modal-price-tag">Precio Base: <span id="modalBasePrice">$ 0</span></div>
 
-      <!-- OPCIONES PERSONALIZABLES PARA COMIDA (BOWLS / BURRITOS) -->
+      <!-- OPCIONES PERSONALIZABLES PARA COMIDA -->
       <div id="foodCustomOptions">
         <!-- BASES -->
         <div class="section-title">BASES DE BOWL / BURRITO <span>(Opcional)</span></div>
@@ -847,76 +861,74 @@
           <div class="qty-counter"><button onclick="updateOptQty('base_ppl', -1)">-</button><span id="base_ppl" data-price="0" data-name="PPL">0</span><button onclick="updateOptQty('base_ppl', 1)">+</button></div>
         </div>
 
-        <!-- PROTEINA BASE -->
-        <div class="section-title">PROTEÍNA <mark><span>(Opcional 1)</mark></span></div>
+        <!-- PROTEINA BASE (MÁXIMO 1) -->
+        <div class="section-title">PROTEÍNA <span>(Opcional 1)</span></div>
         <div class="opt-box">
           <span>CARNE DESMECHADA</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_carne', -1)">-</button><span id="prot_carne" data-price="2000" data-name="Carne Desmechada">0</span><button onclick="updateOptQty('prot_carne', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_carne', -1)">-</button><span id="prot_carne" data-group="proteina_base" data-price="2000" data-name="Carne Desmechada">0</span><button onclick="updateOptQty('prot_carne', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CERDO PULLED PORK</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_cerdo', -1)">-</button><span id="prot_cerdo" data-price="2000" data-name="Cerdo Pulled Pork">0</span><button onclick="updateOptQty('prot_cerdo', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_cerdo', -1)">-</button><span id="prot_cerdo" data-group="proteina_base" data-price="2000" data-name="Cerdo Pulled Pork">0</span><button onclick="updateOptQty('prot_cerdo', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>TENDERS DE PECHUGA</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_tenders', -1)">-</button><span id="prot_tenders" data-price="2000" data-name="Tenders de Pechuga">0</span><button onclick="updateOptQty('prot_tenders', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_tenders', -1)">-</button><span id="prot_tenders" data-group="proteina_base" data-price="2000" data-name="Tenders de Pechuga">0</span><button onclick="updateOptQty('prot_tenders', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>COSTILLA BBQ</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('prot_costilla', -1)">-</button><span id="prot_costilla" data-price="2000" data-name="Costilla BBQ">0</span><button onclick="updateOptQty('prot_costilla', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('prot_costilla', -1)">-</button><span id="prot_costilla" data-group="proteina_base" data-price="2000" data-name="Costilla BBQ">0</span><button onclick="updateOptQty('prot_costilla', 1)">+</button></div>
         </div>
 
-        <!-- TOPPINGS BASE -->
-        <div class="section-title">TOPPINGS <mark><strong> <span>(Opcional 7)</strong></mark></span></div>
+        <!-- TOPPINGS BASE (LÍMITE MÁXIMO 7) -->
+        <div class="section-title">TOPPINGS <span>(Máximo 7)</span></div>
         <div class="opt-box">
-           
-          
           <span>CHICHARRÓN</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_chicharron', -1)">-</button><span id="top_chicharron" data-price="2000" data-name="Chicharrón">0</span><button onclick="updateOptQty('top_chicharron', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_chicharron', -1)">-</button><span id="top_chicharron" data-group="topping_base" data-price="2000" data-name="Chicharrón">0</span><button onclick="updateOptQty('top_chicharron', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CHORIZO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_chorizo', -1)">-</button><span id="top_chorizo" data-price="2000" data-name="Chorizo">0</span><button onclick="updateOptQty('top_chorizo', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_chorizo', -1)">-</button><span id="top_chorizo" data-group="topping_base" data-price="2000" data-name="Chorizo">0</span><button onclick="updateOptQty('top_chorizo', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>MADURITO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_madurito', -1)">-</button><span id="top_madurito" data-price="2000" data-name="Madurito">0</span><button onclick="updateOptQty('top_madurito', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_madurito', -1)">-</button><span id="top_madurito" data-group="topping_base" data-price="2000" data-name="Madurito">0</span><button onclick="updateOptQty('top_madurito', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>GUACAMOLE</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_guacamole', -1)">-</button><span id="top_guacamole" data-price="2000" data-name="Guacamole">0</span><button onclick="updateOptQty('top_guacamole', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_guacamole', -1)">-</button><span id="top_guacamole" data-group="topping_base" data-price="2000" data-name="Guacamole">0</span><button onclick="updateOptQty('top_guacamole', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>MAIZCITOS</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_maizcitos', -1)">-</button><span id="top_maizcitos" data-price="2000" data-name="Maizcitos">0</span><button onclick="updateOptQty('top_maizcitos', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_maizcitos', -1)">-</button><span id="top_maizcitos" data-group="topping_base" data-price="2000" data-name="Maizcitos">0</span><button onclick="updateOptQty('top_maizcitos', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>PICO DE GALLO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_pico', -1)">-</button><span id="top_pico" data-price="2000" data-name="Pico de Gallo">0</span><button onclick="updateOptQty('top_pico', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_pico', -1)">-</button><span id="top_pico" data-group="topping_base" data-price="2000" data-name="Pico de Gallo">0</span><button onclick="updateOptQty('top_pico', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>DORITOX</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_doritox', -1)">-</button><span id="top_doritox" data-price="2000" data-name="Doritox">0</span><button onclick="updateOptQty('top_doritox', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_doritox', -1)">-</button><span id="top_doritox" data-group="topping_base" data-price="2000" data-name="Doritox">0</span><button onclick="updateOptQty('top_doritox', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>CEBOLLA CRISPY</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_cebolla', -1)">-</button><span id="top_cebolla" data-price="2000" data-name="Cebolla Crispy">0</span><button onclick="updateOptQty('top_cebolla', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_cebolla', -1)">-</button><span id="top_cebolla" data-group="topping_base" data-price="2000" data-name="Cebolla Crispy">0</span><button onclick="updateOptQty('top_cebolla', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>QUESO MOZARELLA</span> <span class="price-add">$ 3.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_queso', -1)">-</button><span id="top_queso" data-price="3000" data-name="Queso Mozarella">0</span><button onclick="updateOptQty('top_queso', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_queso', -1)">-</button><span id="top_queso" data-group="topping_base" data-price="3000" data-name="Queso Mozarella">0</span><button onclick="updateOptQty('top_queso', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>SOUR CREEM</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_sour', -1)">-</button><span id="top_sour" data-price="2000" data-name="Sour Creem">0</span><button onclick="updateOptQty('top_sour', 1)">+</button></div>
+          <span>SOUR CREAM</span> <span class="price-add">$ 2.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('top_sour', -1)">-</button><span id="top_sour" data-group="topping_base" data-price="2000" data-name="Sour Cream">0</span><button onclick="updateOptQty('top_sour', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>PEPINO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_pepino', -1)">-</button><span id="top_pepino" data-price="2000" data-name="Pepino">0</span><button onclick="updateOptQty('top_pepino', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_pepino', -1)">-</button><span id="top_pepino" data-group="topping_base" data-price="2000" data-name="Pepino">0</span><button onclick="updateOptQty('top_pepino', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>JALAPEÑOS</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('top_jalapenos', -1)">-</button><span id="top_jalapenos" data-price="2000" data-name="Jalapeños">0</span><button onclick="updateOptQty('top_jalapenos', 1)">+</button></div>
+          <div class="qty-counter"><button onclick="updateOptQty('top_jalapenos', -1)">-</button><span id="top_jalapenos" data-group="topping_base" data-price="2000" data-name="Jalapeños">0</span><button onclick="updateOptQty('top_jalapenos', 1)">+</button></div>
         </div>
 
         <!-- SALSA BASE -->
@@ -968,12 +980,12 @@
           <div class="qty-counter"><button onclick="updateOptQty('add_madurito', -1)">-</button><span id="add_madurito" data-price="2000" data-name="Add. Madurito">0</span><button onclick="updateOptQty('add_madurito', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>MAIZCITOS</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_maizcitos', -1)">-</button><span id="add_maizcitos" data-price="2000" data-name="Add. Maizcitos">0</span><button onclick="updateOptQty('add_maizcitos', 1)">+</button></div>
+          <span>GUACAMOLE</span> <span class="price-add">$ 3.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_guacamole', -1)">-</button><span id="add_guacamole" data-price="3000" data-name="Add. Guacamole">0</span><button onclick="updateOptQty('add_guacamole', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>GUACAMOLE</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_guacamole', -1)">-</button><span id="add_guacamole" data-price="2000" data-name="Add. Guacamole">0</span><button onclick="updateOptQty('add_guacamole', 1)">+</button></div>
+          <span>MAIZCITOS</span> <span class="price-add">$ 2.000</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_maizcitos', -1)">-</button><span id="add_maizcitos" data-price="2000" data-name="Add. Maizcitos">0</span><button onclick="updateOptQty('add_maizcitos', 1)">+</button></div>
         </div>
         <div class="opt-box">
           <span>PICO DE GALLO</span> <span class="price-add">$ 2.000</span>
@@ -984,173 +996,69 @@
           <div class="qty-counter"><button onclick="updateOptQty('add_doritox', -1)">-</button><span id="add_doritox" data-price="2000" data-name="Add. Doritox">0</span><button onclick="updateOptQty('add_doritox', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>SOUR CREEM</span> <span class="price-add">$ 3.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_sour', -1)">-</button><span id="add_sour" data-price="3000" data-name="Add. Sour Creem">0</span><button onclick="updateOptQty('add_sour', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
           <span>CEBOLLA CRISPY</span> <span class="price-add">$ 2.000</span>
           <div class="qty-counter"><button onclick="updateOptQty('add_cebolla', -1)">-</button><span id="add_cebolla" data-price="2000" data-name="Add. Cebolla Crispy">0</span><button onclick="updateOptQty('add_cebolla', 1)">+</button></div>
         </div>
-        <div class="opt-box">
-          <span>QUESO MOZARELLA</span> <span class="price-add">$ 3.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_queso', -1)">-</button><span id="add_queso" data-price="3000" data-name="Add. Queso Mozarella">0</span><button onclick="updateOptQty('add_queso', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>PEPINO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_pepino', -1)">-</button><span id="add_pepino" data-price="2000" data-name="Add. Pepino">0</span><button onclick="updateOptQty('add_pepino', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>JALAPEÑOS</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_jalapenos', -1)">-</button><span id="add_jalapenos" data-price="2000" data-name="Add. Jalapeños">0</span><button onclick="updateOptQty('add_jalapenos', 1)">+</button></div>
-        </div>
 
-        <!-- ADICION SALSA -->
-        <div class="section-title">ADICIÓN SALSA <span>(Opcional)</span></div>
+        <!-- ADICIÓN DE SALSA -->
+        <div class="section-title">ADICIÓN DE SALSA <span>(Opcional)</span></div>
         <div class="opt-box">
-          <span>SALSA TATEMADA</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_salsa_tatemada', -1)">-</button><span id="add_salsa_tatemada" data-price="2000" data-name="Add. Salsa Tatemada">0</span><button onclick="updateOptQty('add_salsa_tatemada', 1)">+</button></div>
+          <span>SALSA BBQ</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_salsa_bbq', -1)">-</button><span id="add_salsa_bbq" data-price="1500" data-name="Add. Salsa BBQ">0</span><button onclick="updateOptQty('add_salsa_bbq', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>SALSA DE AJO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_salsa_ajo', -1)">-</button><span id="add_salsa_ajo" data-price="2000" data-name="Add. Salsa de Ajo">0</span><button onclick="updateOptQty('add_salsa_ajo', 1)">+</button></div>
+          <span>SALSA TATEMADA</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_salsa_tatemada', -1)">-</button><span id="add_salsa_tatemada" data-price="1500" data-name="Add. Salsa Tatemada">0</span><button onclick="updateOptQty('add_salsa_tatemada', 1)">+</button></div>
         </div>
         <div class="opt-box">
-          <span>SALSA BBQ</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_salsa_bbq', -1)">-</button><span id="add_salsa_bbq" data-price="2000" data-name="Add. Salsa BBQ">0</span><button onclick="updateOptQty('add_salsa_bbq', 1)">+</button></div>
+          <span>SALSA DE AJO</span> <span class="price-add">$ 1.500</span>
+          <div class="qty-counter"><button onclick="updateOptQty('add_salsa_ajo', -1)">-</button><span id="add_salsa_ajo" data-price="1500" data-name="Add. Salsa de Ajo">0</span><button onclick="updateOptQty('add_salsa_ajo', 1)">+</button></div>
         </div>
       </div>
 
-      <!-- OPCIONES PERSONALIZABLES PARA CAFÉ -->
-      <div id="coffeeCustomOptions" style="display:none;">
-        <div class="section-title">TIPO DE PREPARACIÓN</div>
-        <div class="opt-box">
-          <span>CALIENTE</span>
-          <div class="qty-counter"><button onclick="updateOptQty('cafe_caliente', -1)">-</button><span id="cafe_caliente" data-price="0" data-name="Café Caliente">1</span><button onclick="updateOptQty('cafe_caliente', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>FRÍO / CON HIELO</span>
-          <div class="qty-counter"><button onclick="updateOptQty('cafe_frio', -1)">-</button><span id="cafe_frio" data-price="0" data-name="Café Frío">0</span><button onclick="updateOptQty('cafe_frio', 1)">+</button></div>
-        </div>
-
-        <div class="section-title">VARIEDAD</div>
-        <div class="opt-box">
-          <span>ESPRESSO</span> <span class="price-add">$ 0</span>
-          <div class="qty-counter"><button onclick="updateOptQty('cafe_espresso', -1)">-</button><span id="cafe_espresso" data-price="0" data-name="Espresso">0</span><button onclick="updateOptQty('cafe_espresso', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>AMERICANO</span> <span class="price-add">$ 0</span>
-          <div class="qty-counter"><button onclick="updateOptQty('cafe_americano', -1)">-</button><span id="cafe_americano" data-price="0" data-name="Americano">0</span><button onclick="updateOptQty('cafe_americano', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>CAPUCHINO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('cafe_capuchino', -1)">-</button><span id="cafe_capuchino" data-price="2000" data-name="Capuchino">0</span><button onclick="updateOptQty('cafe_capuchino', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>LATTE</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('cafe_latte', -1)">-</button><span id="cafe_latte" data-price="2000" data-name="Latte">0</span><button onclick="updateOptQty('cafe_latte', 1)">+</button></div>
-        </div>
-
-        <div class="section-title">ADICIONALES DE CAFÉ</div>
-        <div class="opt-box">
-          <span>LECHE ENTERA</span> <span class="price-add">$ 1.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_leche', -1)">-</button><span id="add_leche" data-price="1000" data-name="Add. Leche Entera">0</span><button onclick="updateOptQty('add_leche', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>LECHE DESLACTOSADA</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_deslactosada', -1)">-</button><span id="add_deslactosada" data-price="2000" data-name="Add. Leche Deslactosada">0</span><button onclick="updateOptQty('add_deslactosada', 1)">+</button></div>
-        </div>
-        <div class="opt-box">
-          <span>SIROPE DE VAINILLA / CARAMELO</span> <span class="price-add">$ 2.000</span>
-          <div class="qty-counter"><button onclick="updateOptQty('add_sirope', -1)">-</button><span id="add_sirope" data-price="2000" data-name="Add. Sirope">0</span><button onclick="updateOptQty('add_sirope', 1)">+</button></div>
-        </div>
-      </div>
-
-      <textarea id="modalComment" class="modal-comments" placeholder="Comentarios / Especificaciones del producto..."></textarea>
-
-      <!-- SECCIÓN INFERIOR CON CANTIDAD Y BOTÓN DE AGREGAR -->
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-weight: bold;">Cantidad:</span>
-          <div class="qty-counter">
-            <button onclick="updateItemMainQty(-1)">-</button>
-            <span id="itemMainQty">1</span>
-            <button onclick="updateItemMainQty(1)">+</button>
-          </div>
-        </div>
-        <div class="item-total-price">Total: <span id="modalCalculatedTotal">$ 0</span></div>
-      </div>
+      <textarea id="modalComments" class="modal-comments" placeholder="¿Alguna instrucción especial? Ej: Sin cebolla, extra salsa..."></textarea>
 
       <div class="modal-footer-action">
-        <button class="btn-add-cart" style="background:#888;" onclick="closeProductModal()">CANCELAR</button>
-        <button class="btn-add-cart" onclick="confirmAddToCart()">Agregar A La Canasta 🛍️</button>
+        <div class="item-total-price">Total: <span id="modalTotalPrice">$ 0</span></div>
+        <button class="btn-add-cart" onclick="addCurrentProductToCart()">Agregar al Carrito 🛍️</button>
       </div>
     </div>
   </div>
 
   <script>
+    // ESTADO DE LA APLICACIÓN
     let cart = [];
     let currentProduct = {
       name: '',
       basePrice: 0,
-      type: 'food',
-      quantity: 1
+      type: ''
     };
 
-    // VERIFICACIÓN DEL HORARIO DE ATENCIÓN (10:00 AM A 4:30 PM)
-    function checkStoreStatus() {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const currentTimeInMinutes = hours * 60 + minutes;
+    // NAVEGACIÓN DE SECCIONES
+    function showSection(sectionId) {
+      document.getElementById('catalogSection').style.display = sectionId === 'catalog' ? 'block' : 'none';
+      document.getElementById('cartSection').classList.toggle('active', sectionId === 'cart');
+      document.getElementById('checkoutSection').classList.toggle('active', sectionId === 'checkout');
 
-      const openTime = 10 * 60; // 10:00 AM (600 mins)
-      const closeTime = 16 * 60 + 30; // 4:30 PM (990 mins)
-
-      const badge = document.getElementById('storeStatusBadge');
-      if (currentTimeInMinutes >= openTime && currentTimeInMinutes < closeTime) {
-        badge.innerText = '• ABIERTO AHORA';
-        badge.className = 'status-badge status-open';
-      } else {
-        badge.innerText = '• CERRADO';
-        badge.className = 'status-badge status-closed';
+      if (sectionId === 'cart') {
+        renderCart();
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function formatMoney(amount) {
-      return '$ ' + amount.toLocaleString('es-CO');
-    }
-
-    function showSection(section, el) {
-      document.getElementById('catalogSection').style.display = section === 'catalog' ? 'block' : 'none';
-      document.getElementById('cartSection').classList.toggle('active', section === 'cart');
-      document.getElementById('checkoutSection').classList.toggle('active', section === 'checkout');
-
-      if (el) {
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-        el.classList.add('active');
-      }
-    }
-
-    function openProductModal(name, basePrice, type) {
-      currentProduct = { name, basePrice, type, quantity: 1 };
+    // ABRIR MODAL Y REINICIAR CONTADORES
+    function openProductModal(name, price, type) {
+      currentProduct = { name, basePrice: price, type };
       document.getElementById('modalProductName').innerText = name;
-      document.getElementById('modalBasePrice').innerText = formatMoney(basePrice);
-      document.getElementById('itemMainQty').innerText = 1;
-      document.getElementById('modalComment').value = '';
+      document.getElementById('modalBasePrice').innerText = formatCurrency(price);
+      document.getElementById('modalComments').value = '';
 
-      // Resetear contadores de opciones
-      document.querySelectorAll('.opt-box span[id]').forEach(span => {
-        span.innerText = '0';
-      });
+      // Ocultar o mostrar opciones de comida
+      document.getElementById('foodCustomOptions').style.display = (type === 'food') ? 'block' : 'none';
 
-      if (type === 'coffee') {
-        document.getElementById('cafe_caliente').innerText = '1';
-        document.getElementById('foodCustomOptions').style.display = 'none';
-        document.getElementById('coffeeCustomOptions').style.display = 'block';
-      } else {
-        document.getElementById('foodCustomOptions').style.display = 'block';
-        document.getElementById('coffeeCustomOptions').style.display = 'none';
-      }
+      // Resetear todos los contadores
+      const counters = document.querySelectorAll('.qty-counter span');
+      counters.forEach(span => span.innerText = '0');
 
       calculateModalTotal();
       document.getElementById('productModal').classList.add('active');
@@ -1160,107 +1068,169 @@
       document.getElementById('productModal').classList.remove('active');
     }
 
-    // Permite incrementar infinitamente sin tope máximo por grupo
+    // CONTROL DE CANTIDADES CON VALIDACIONES (LÍMITES)
     function updateOptQty(id, delta) {
       const el = document.getElementById(id);
       let currentVal = parseInt(el.innerText) || 0;
-      let newVal = Math.max(0, currentVal + delta);
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) return;
+
+      const group = el.getAttribute('data-group');
+
+      // Validar Proteína Base (Máximo 1)
+      if (group === 'proteina_base' && delta > 0) {
+        let currentProteins = 0;
+        document.querySelectorAll('span[data-group="proteina_base"]').forEach(span => {
+          currentProteins += parseInt(span.innerText) || 0;
+        });
+        if (currentProteins >= 1) {
+          alert('Solo puedes elegir máximo 1 proteína base.');
+          return;
+        }
+      }
+
+      // Validar Toppings Base (Máximo 7)
+      if (group === 'topping_base' && delta > 0) {
+        let currentToppings = 0;
+        document.querySelectorAll('span[data-group="topping_base"]').forEach(span => {
+          currentToppings += parseInt(span.innerText) || 0;
+        });
+        if (currentToppings >= 7) {
+          alert('Has alcanzado el límite máximo de 7 toppings base.');
+          return;
+        }
+      }
+
       el.innerText = newVal;
       calculateModalTotal();
     }
 
-    function updateItemMainQty(delta) {
-      currentProduct.quantity = Math.max(1, currentProduct.quantity + delta);
-      document.getElementById('itemMainQty').innerText = currentProduct.quantity;
-      calculateModalTotal();
-    }
-
+    // CALCULAR TOTAL DEL PRODUCTO EN MODAL
     function calculateModalTotal() {
-      let extraPrice = 0;
-      document.querySelectorAll('.modal-content span[data-price]').forEach(span => {
-        const qty = parseInt(span.innerText) || 0;
-        const price = parseInt(span.getAttribute('data-price')) || 0;
-        extraPrice += qty * price;
-      });
+      let total = currentProduct.basePrice;
 
-      const totalPerItem = currentProduct.basePrice + extraPrice;
-      const grandTotal = totalPerItem * currentProduct.quantity;
-      document.getElementById('modalCalculatedTotal').innerText = formatMoney(grandTotal);
-      return grandTotal;
-    }
-
-    function confirmAddToCart() {
-      let optionsSelected = [];
-      let extraPriceTotal = 0;
-
-      document.querySelectorAll('.modal-content span[data-price]').forEach(span => {
-        const qty = parseInt(span.innerText) || 0;
-        if (qty > 0) {
-          const name = span.getAttribute('data-name');
+      if (currentProduct.type === 'food') {
+        const counters = document.querySelectorAll('#foodCustomOptions .qty-counter span');
+        counters.forEach(span => {
+          const qty = parseInt(span.innerText) || 0;
           const price = parseInt(span.getAttribute('data-price')) || 0;
-          optionsSelected.push(`${qty}x ${name}`);
-          extraPriceTotal += price * qty;
-        }
-      });
-
-      const comment = document.getElementById('modalComment').value.trim();
-      if (comment) {
-        optionsSelected.push(`Nota: ${comment}`);
+          total += qty * price;
+        });
       }
 
-      const unitPrice = currentProduct.basePrice + extraPriceTotal;
-
-      cart.push({
-        id: Date.now(),
-        name: currentProduct.name,
-        details: optionsSelected.join(', ') || 'Sin especificaciones',
-        unitPrice: unitPrice,
-        quantity: currentProduct.quantity,
-        total: unitPrice * currentProduct.quantity
-      });
-
-      updateCartUI();
-      closeProductModal();
-      showSection('cart', document.getElementById('cartNavBtn'));
+      document.getElementById('modalTotalPrice').innerText = formatCurrency(total);
+      return total;
     }
 
-    function updateCartUI() {
+    // AGREGAR AL CARRITO
+    function addCurrentProductToCart() {
+      let optionsSelected = [];
+      let extraPrice = 0;
+
+      if (currentProduct.type === 'food') {
+        const counters = document.querySelectorAll('#foodCustomOptions .qty-counter span');
+        counters.forEach(span => {
+          const qty = parseInt(span.innerText) || 0;
+          if (qty > 0) {
+            const name = span.getAttribute('data-name');
+            const price = parseInt(span.getAttribute('data-price')) || 0;
+            optionsSelected.push(`${qty}x ${name}`);
+            extraPrice += qty * price;
+          }
+        });
+      }
+
+      const comments = document.getElementById('modalComments').value.trim();
+
+      const item = {
+        id: Date.now(),
+        name: currentProduct.name,
+        unitPrice: currentProduct.basePrice + extraPrice,
+        qty: 1,
+        details: optionsSelected.join(', '),
+        comments: comments
+      };
+
+      cart.push(item);
+      updateCartBadge();
+      closeProductModal();
+      alert('¡Producto agregado al carrito!');
+    }
+
+    // ACTUALIZAR BADGE DEL CARRITO
+    function updateCartBadge() {
+      const count = cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('cartBadgeCount').innerText = count;
+    }
+
+    // RENDERIZAR CARRITO
+    function renderCart() {
       const tbody = document.getElementById('cartTableBody');
       tbody.innerHTML = '';
 
-      let subtotal = 0;
-      let totalItems = 0;
+      if (cart.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">Tu carrito está vacío.</td></tr>';
+        document.getElementById('cartSubtotal').innerText = formatCurrency(0);
+        return;
+      }
 
-      cart.forEach(item => {
-        subtotal += item.total;
-        totalItems += item.quantity;
+      let subtotal = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.unitPrice * item.qty;
+        subtotal += itemTotal;
+
+        let detailsHTML = item.details ? `<div><strong>Opciones:</strong> ${item.details}</div>` : '';
+        if (item.comments) detailsHTML += `<div><em>Nota: ${item.comments}</em></div>`;
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong>${item.name}</strong></td>
-          <td style="font-size:12px; color:#555;">${item.details}</td>
-          <td>${formatMoney(item.unitPrice)}</td>
-          <td>${item.quantity}</td>
-          <td><strong>${formatMoney(item.total)}</strong></td>
-          <td><button style="background:none; border:none; color:red; cursor:pointer; font-weight:bold;" onclick="removeFromCart(${item.id})">❌</button></td>
+          <td style="text-align: left; font-size: 12px;">${detailsHTML || 'Sin personalizaciones'}</td>
+          <td>${formatCurrency(item.unitPrice)}</td>
+          <td>
+            <div class="qty-counter" style="justify-content: center;">
+              <button onclick="changeCartQty(${index}, -1)">-</button>
+              <span>${item.qty}</span>
+              <button onclick="changeCartQty(${index}, 1)">+</button>
+            </div>
+          </td>
+          <td><strong>${formatCurrency(itemTotal)}</strong></td>
+          <td><button onclick="removeCartItem(${index})" style="background:none; border:none; color:red; cursor:pointer; font-size:16px;">🗑️</button></td>
         `;
         tbody.appendChild(tr);
       });
 
-      document.getElementById('cartBadgeCount').innerText = totalItems;
-      document.getElementById('cartSubtotal').innerText = formatMoney(subtotal);
+      document.getElementById('cartSubtotal').innerText = formatCurrency(subtotal);
     }
 
-    function removeFromCart(id) {
-      cart = cart.filter(item => item.id !== id);
-      updateCartUI();
+    function changeCartQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartBadge();
+      renderCart();
     }
 
-    function sendOrderToWhatsApp(e) {
-      e.preventDefault();
+    function removeCartItem(index) {
+      cart.splice(index, 1);
+      updateCartBadge();
+      renderCart();
+    }
+
+    // FORMATO MONEDA
+    function formatCurrency(amount) {
+      return '$ ' + amount.toLocaleString('es-CO');
+    }
+
+    // ENVIAR A WHATSAPP
+    function sendOrderToWhatsApp(event) {
+      event.preventDefault();
 
       if (cart.length === 0) {
-        alert('Tu canasta está vacía.');
+        alert('Tu carrito está vacío. Agrega productos antes de confirmar.');
         return;
       }
 
@@ -1273,31 +1243,30 @@
       const observaciones = document.getElementById('observaciones').value;
 
       let msg = `*NUEVO PEDIDO - DOMINIO & COFFEE*\n\n`;
-      msg += `*👤 Cliente:* ${nombre}\n`;
-      msg += `*📱 Teléfono:* ${whatsapp}\n`;
-      msg += `*📍 Dirección:* ${direccion} (${barrio})\n`;
-      if (referencia) msg += `*🏡 Ref:* ${referencia}\n`;
-      msg += `*💳 Pago:* ${pago}\n`;
-      if (observaciones) msg += `*📝 Notas:* ${observaciones}\n`;
+      msg += `*Cliente:* ${nombre}\n`;
+      msg += `*Teléfono:* ${whatsapp}\n`;
+      msg += `*Dirección:* ${direccion} (${barrio})\n`;
+      if (referencia) msg += `*Ref:* ${referencia}\n`;
+      msg += `*Método de pago:* ${pago}\n`;
+      if (observaciones) msg += `*Notas:* ${observaciones}\n`;
 
-      msg += `\n*🛒 DETALLE DEL PEDIDO:*\n`;
+      msg += `\n*DETALLE DEL PEDIDO:*\n`;
 
-      let subtotal = 0;
-      cart.forEach((item, index) => {
-        subtotal += item.total;
-        msg += `\n*${index + 1}. ${item.name}* x${item.quantity}\n`;
-        msg += `   _${item.details}_\n`;
-        msg += `   Subtotal: ${formatMoney(item.total)}\n`;
+      let totalOrder = 0;
+      cart.forEach(item => {
+        const itemTotal = item.unitPrice * item.qty;
+        totalOrder += itemTotal;
+        msg += `• ${item.qty}x *${item.name}* - ${formatCurrency(itemTotal)}\n`;
+        if (item.details) msg += `   _Op: ${item.details}_\n`;
+        if (item.comments) msg += `   _Nota: ${item.comments}_\n`;
       });
 
-      msg += `\n*💰 TOTAL A PAGAR: ${formatMoney(subtotal)}*`;
+      msg += `\n*TOTAL A PAGAR:* ${formatCurrency(totalOrder)}`;
 
-      const encodedMsg = encodeURIComponent(msg);
-      window.open(`https://wa.me/573246044424?text=${encodedMsg}`, '_blank');
+      const phone = '573246044424';
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
     }
-
-    // Inicializar estado del negocio al cargar
-    checkStoreStatus();
   </script>
 </body>
 </html>
