@@ -1525,13 +1525,27 @@
       renderCart();
     }
 
+    // ====== FUNCIÓN CORREGIDA: envío del pedido por WhatsApp ======
+    // Antes se armaba el texto concatenando "%0A" a mano dentro del template
+    // string y se insertaba SIN codificar en la URL. Eso hace que caracteres
+    // como tildes, ñ, espacios, "/", ":" etc. rompan la URL en muchos
+    // navegadores/webviews (sobre todo en móvil): WhatsApp abre el chat
+    // correcto, pero el mensaje llega vacío o incompleto porque la URL
+    // quedó mal formada.
+    //
+    // La corrección: se arma el mensaje completo como texto plano normal
+    // (con saltos de línea reales "\n"), recolectando TODOS los datos del
+    // carrito y del cliente, y al final se codifica el mensaje UNA sola vez
+    // con encodeURIComponent() antes de insertarlo en la URL de wa.me.
     function sendOrderToWhatsApp(e) {
       e.preventDefault();
+
       if (cart.length === 0) {
         alert('Tu canasta está vacía.');
         return;
       }
 
+      // Datos del cliente
       let nombre = document.getElementById('nombre').value;
       let whatsapp = document.getElementById('whatsapp').value;
       let direccion = document.getElementById('direccion').value;
@@ -1540,24 +1554,43 @@
       let pago = document.getElementById('pago').value;
       let observaciones = document.getElementById('observaciones').value;
 
-      let text = `*¡Nuevo Pedido - Dominio & Coffee!*%0A%0A`;
-      text += `*Cliente:* ${nombre}%0A`;
-      text += `*WhatsApp:* ${whatsapp}%0A`;
-      text += `*Dirección:* ${direccion} (${barrio})%0A`;
-      if (referencia) text += `*Referencia:* ${referencia}%0A`;
-      text += `*Forma de pago:* ${pago}%0A`;
-      if (observaciones) text += `*Notas:* ${observaciones}%0A%0A`;
-      text += `*--- PEDIDO ---*%0A`;
+      // Construcción del mensaje como texto plano (saltos de línea reales)
+      let lines = [];
+      lines.push('*¡Nuevo Pedido - Dominio & Coffee!*');
+      lines.push('');
+      lines.push(`*Nombre:* ${nombre}`);
+      lines.push(`*Teléfono:* ${whatsapp}`);
+      lines.push(`*Dirección:* ${direccion}`);
+      lines.push(`*Barrio:* ${barrio}`);
+      if (referencia) lines.push(`*Referencia:* ${referencia}`);
+      lines.push(`*Método de pago:* ${pago}`);
+      if (observaciones) lines.push(`*Observaciones:* ${observaciones}`);
+      lines.push('');
+      lines.push('*--- DETALLE DEL PEDIDO ---*');
 
-      let total = 0;
+      let subtotal = 0;
       cart.forEach((item, i) => {
-        text += `${i + 1}. *${item.name}* - $${item.price.toLocaleString()}%0A   _Detalles:_ ${item.details}%0A`;
-        total += item.price;
+        let itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        lines.push('');
+        lines.push(`${i + 1}. *${item.name}*`);
+        lines.push(`   Configuración: ${item.details}`);
+        lines.push(`   Cantidad: ${item.quantity}`);
+        lines.push(`   Precio unit.: $${item.price.toLocaleString()}`);
+        lines.push(`   Subtotal: $${itemTotal.toLocaleString()}`);
       });
 
-      text += `%0A*Total a Pagar: $${total.toLocaleString()}*`;
+      lines.push('');
+      lines.push(`*Subtotal: $${subtotal.toLocaleString()}*`);
+      lines.push(`*Total a pagar: $${subtotal.toLocaleString()}*`);
 
-      window.open(`https://wa.me/573246044424?text=${text}`, '_blank');
+      let mensaje = lines.join('\n');
+
+      // Codificamos TODO el mensaje de una sola vez
+      let url = `https://wa.me/573246044424?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, '_blank');
     }
   </script>
 </body>
