@@ -746,7 +746,7 @@
                 <div class="product-info">
                   <h4>$ 18.000</h4>
                   <h3>Sandwich Especial de la Casa</h3>
-                  <button class="btn-buy" onclick="openProductModal('Sandwich Especial de la Casa', 18000, 'simple')">¡COMPRAR!</button>
+                  <button class="btn-buy" onclick="openProductModal('Sandwich Especial de la Casa', 18000, 'sandwich')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -1197,6 +1197,78 @@
 
       </div>
 
+      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE SANDWICH -->
+      <div id="sandwichCustomizationContainer" style="display:none;">
+
+        <!-- PROTEÍNA DE SANDWICH (Opcional, máximo 1) -->
+        <div class="section-title">PROTEÍNA DE SANDWICH <span>(Opcional • Máximo 1)</span></div>
+        <div class="opt-box" id="box_sw_prot_carne" onclick="selectSandwichProtein('carne', 'Carne Desmechada', 2000)">
+          <span>CARNE DESMECHADA</span> <span class="price-add">+ $ 2.000</span>
+        </div>
+        <div class="opt-box" id="box_sw_prot_costilla" onclick="selectSandwichProtein('costilla', 'Costilla BBQ', 2000)">
+          <span>COSTILLA BBQ</span> <span class="price-add">+ $ 2.000</span>
+        </div>
+        <div class="opt-box" id="box_sw_prot_cerdo" onclick="selectSandwichProtein('cerdo', 'Cerdo Pulled Pork', 0)">
+          <span>CERDO PULLED PORK</span>
+        </div>
+        <div class="opt-box" id="box_sw_prot_tenders" onclick="selectSandwichProtein('tenders', 'Tenders de Pollo', 0)">
+          <span>TENDERS DE POLLO</span>
+        </div>
+
+        <!-- TOPPINGS DE SANDWICH (Opcional, máximo 3 en total) -->
+        <div class="section-title">TOPPINGS DE SANDWICH <span id="swToppingsCounterText">(Opcional • Máximo 3)</span></div>
+        <div class="opt-box" id="box_sw_top_lechuga">
+          <span>LECHUGA MIX</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('lechuga', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_lechuga">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('lechuga', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_sw_top_tomate">
+          <span>TOMATE</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('tomate', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_tomate">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('tomate', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_sw_top_cebolla">
+          <span>CEBOLLA CRISPY</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('cebolla', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_cebolla">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('cebolla', 1)">+</button>
+          </div>
+        </div>
+
+        <!-- SALSA DE SANDWICH (Opcional, máximo 1) -->
+        <div class="section-title">SALSA DE SANDWICH <span>(Opcional • Máximo 1)</span></div>
+        <div class="opt-box" id="box_sw_salsa_bbq" onclick="selectSandwichSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
+        <div class="opt-box" id="box_sw_salsa_ajo" onclick="selectSandwichSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
+        <div class="opt-box" id="box_sw_salsa_tatemada" onclick="selectSandwichSalsa('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
+
+        <!-- COMENTARIOS -->
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="sandwichComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
+
+        <!-- CANTIDAD DEL PRODUCTO -->
+        <div class="section-title" style="display:flex; align-items:center; justify-content:space-between;">
+          <span>CANTIDAD</span>
+          <div class="qty-controls" style="margin-left:0;">
+            <button type="button" class="qty-btn" onclick="changeSandwichProductQty(-1)">-</button>
+            <span class="qty-value" id="sandwichProductQty">1</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichProductQty(1)">+</button>
+          </div>
+        </div>
+
+        <!-- CATEGORÍA -->
+        <div style="margin-top:12px; font-size:13px; color:#666;">
+          Categoría: <strong id="sandwichCategoryLabel">SANDWICHS</strong>
+        </div>
+
+      </div>
+
       <!-- ACCIONES DENTRO DEL MODAL -->
       <div class="modal-footer-action">
         <div class="item-total-price">Total: <span id="modalTotalPrice">$ 0</span></div>
@@ -1217,6 +1289,12 @@
     let addTopQuantities = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
     let selectedSalsaBase = null;
     let addSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
+
+    // Variables de configuración del Sandwich
+    let sandwichSelectedProtein = null;
+    let sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0 };
+    let sandwichSelectedSalsa = null;
+    let sandwichProductQty = 1;
 
     function showSection(sectionID) {
       document.getElementById('catalogSection').style.display = 'none';
@@ -1246,7 +1324,7 @@
       document.getElementById('modalProductName').innerText = name;
       document.getElementById('modalBasePrice').innerText = '$ ' + price.toLocaleString();
       
-      // Resetear selecciones
+      // Resetear selecciones del Bowl
       baseQuantities = { arroz: 0, lechugas: 0, dia: 0 };
       selectedProtein = null;
       addProtQuantities = { carne: 0, cerdo: 0, costilla: 0, tenders: 0 };
@@ -1255,11 +1333,27 @@
       selectedSalsaBase = null;
       addSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
 
+      // Resetear selecciones del Sandwich
+      sandwichSelectedProtein = null;
+      sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0 };
+      sandwichSelectedSalsa = null;
+      sandwichProductQty = 1;
+      document.getElementById('sandwichComentarios').value = '';
+
       // Actualizar UI del modal
       document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
       document.querySelectorAll('.opt-box').forEach(el => el.classList.remove('selected-blue'));
+      document.getElementById('sandwichProductQty').innerText = '1';
 
       // Mostrar u ocultar personalizaciones según el tipo
+      if (type === 'sandwich') {
+        document.getElementById('bowlCustomizationContainer').style.display = 'none';
+        document.getElementById('sandwichCustomizationContainer').style.display = 'block';
+      } else {
+        document.getElementById('bowlCustomizationContainer').style.display = 'block';
+        document.getElementById('sandwichCustomizationContainer').style.display = 'none';
+      }
+
       document.getElementById('productModal').classList.add('active');
       calculateModalTotal();
     }
@@ -1408,8 +1502,80 @@
       calculateModalTotal();
     }
 
+    // 8. Lógica de Proteína del Sandwich (Selección única, opcional)
+    function selectSandwichProtein(key, displayName, price) {
+      if (sandwichSelectedProtein && sandwichSelectedProtein.key === key) {
+        sandwichSelectedProtein = null;
+        document.getElementById('box_sw_prot_' + key).classList.remove('selected-blue');
+      } else {
+        if (sandwichSelectedProtein) {
+          document.getElementById('box_sw_prot_' + sandwichSelectedProtein.key).classList.remove('selected-blue');
+        }
+        sandwichSelectedProtein = { key, displayName, price };
+        document.getElementById('box_sw_prot_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
+    // 9. Lógica de Toppings del Sandwich (Máximo 3 en total, sin costo adicional)
+    function changeSandwichToppingQty(key, delta) {
+      let currentVal = sandwichToppingQuantities[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) newVal = 0;
+
+      let totalOthers = Object.keys(sandwichToppingQuantities).reduce((sum, k) => k === key ? sum : sum + sandwichToppingQuantities[k], 0);
+
+      if (totalOthers + newVal > 3) {
+        alert('Solo puedes seleccionar un máximo de 3 toppings.');
+        return;
+      }
+
+      sandwichToppingQuantities[key] = newVal;
+      document.getElementById('qty_sw_top_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_sw_top_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
+    // 10. Lógica de Salsa del Sandwich (Selección única, opcional)
+    function selectSandwichSalsa(key, displayName) {
+      if (sandwichSelectedSalsa && sandwichSelectedSalsa.key === key) {
+        sandwichSelectedSalsa = null;
+        document.getElementById('box_sw_salsa_' + key).classList.remove('selected-blue');
+      } else {
+        if (sandwichSelectedSalsa) {
+          document.getElementById('box_sw_salsa_' + sandwichSelectedSalsa.key).classList.remove('selected-blue');
+        }
+        sandwichSelectedSalsa = { key, displayName };
+        document.getElementById('box_sw_salsa_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
+    // 11. Lógica de Cantidad del producto Sandwich (mínimo 1)
+    function changeSandwichProductQty(delta) {
+      let newVal = sandwichProductQty + delta;
+      if (newVal < 1) newVal = 1;
+      sandwichProductQty = newVal;
+      document.getElementById('sandwichProductQty').innerText = newVal;
+      calculateModalTotal();
+    }
+
     // Cálculo dinámico del precio total en el modal
     function calculateModalTotal() {
+      // Cálculo específico para Sandwich
+      if (currentProduct.type === 'sandwich') {
+        let swTotal = currentProduct.basePrice;
+        if (sandwichSelectedProtein) swTotal += sandwichSelectedProtein.price;
+        swTotal = swTotal * sandwichProductQty;
+        document.getElementById('modalTotalPrice').innerText = '$ ' + swTotal.toLocaleString();
+        return swTotal;
+      }
+
       let total = currentProduct.basePrice;
 
       if (selectedProtein) total += selectedProtein.price;
@@ -1439,6 +1605,39 @@
 
     // Agregar producto al carrito
     function addToCart() {
+      // Rama específica para Sandwich
+      if (currentProduct.type === 'sandwich') {
+        let unitPrice = currentProduct.basePrice + (sandwichSelectedProtein ? sandwichSelectedProtein.price : 0);
+        let details = [];
+
+        if (sandwichSelectedProtein) details.push(`Proteína: ${sandwichSelectedProtein.displayName}`);
+
+        let toppingNames = { lechuga: 'Lechuga Mix', tomate: 'Tomate', cebolla: 'Cebolla Crispy' };
+        let toppingParts = [];
+        for (let k in sandwichToppingQuantities) {
+          if (sandwichToppingQuantities[k] > 0) toppingParts.push(`${toppingNames[k]} x${sandwichToppingQuantities[k]}`);
+        }
+        if (toppingParts.length > 0) details.push(`Toppings: ${toppingParts.join(', ')}`);
+
+        if (sandwichSelectedSalsa) details.push(`Salsa: ${sandwichSelectedSalsa.displayName}`);
+
+        let comentarios = document.getElementById('sandwichComentarios').value.trim();
+        if (comentarios) details.push(`Comentarios: ${comentarios}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: unitPrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: sandwichProductQty
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
+      // Lógica original del Bowl (sin cambios)
       let finalPrice = calculateModalTotal();
       let details = [];
 
