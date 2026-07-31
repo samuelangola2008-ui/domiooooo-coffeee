@@ -195,6 +195,8 @@
       border-radius: 12px;
       padding: 20px;
       height: fit-content;
+      position: sticky;
+      top: 80px;
     }
 
     .categories-sidebar h3 {
@@ -227,12 +229,28 @@
     .products-list {
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 30px;
+    }
+
+    .category-section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      border-bottom: 2px solid var(--red-accent);
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .category-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     .product-card {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 240px 1fr;
       gap: 20px;
       align-items: center;
       background: var(--white);
@@ -242,7 +260,7 @@
     }
 
     .product-img {
-      height: 160px;
+      height: 150px;
       border-radius: 8px;
       overflow: hidden;
       background: #222;
@@ -256,9 +274,9 @@
     }
 
     .product-info h3 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       color: #222;
     }
 
@@ -606,6 +624,7 @@
       .shop-layout { grid-template-columns: 1fr; }
       .product-card { grid-template-columns: 1fr; }
       .grid-form { grid-template-columns: 1fr; }
+      .categories-sidebar { position: static; }
     }
   </style>
 </head>
@@ -655,44 +674,204 @@
         <aside class="categories-sidebar">
           <h3>Categorías</h3>
           <ul class="categories-list">
-            <li>ELIGE TU SABOR FAVORITO</li>
-            <li>BOWL</li>
-            <li>BURRITO + SODA</li>
-            <li>CAFÉ</li>
+            <li onclick="scrollToCategory('cat-bowl')">BOWL</li>
+            <li onclick="scrollToCategory('cat-burrito')">BURRITO</li>
+            <li onclick="scrollToCategory('cat-burrito-soda')">BURRITO + SODA</li>
+            <li onclick="scrollToCategory('cat-sandwichs')">SANDWICHS</li>
+            <li onclick="scrollToCategory('cat-nachos')">NACHOS</li>
+            <li onclick="scrollToCategory('cat-nachos-soda')">NACHOS + SODA</li>
+            <li onclick="scrollToCategory('cat-totopos')">TOTOPOS WED</li>
+            <li onclick="scrollToCategory('cat-torta')">PORCION DE TORTA</li>
+            <li onclick="scrollToCategory('cat-cafe')">CAFÉ</li>
+            <li onclick="scrollToCategory('cat-malteada')">MALTEADA</li>
+            <li onclick="scrollToCategory('cat-bebidas')">BEBIDAS</li>
+            <li onclick="scrollToCategory('cat-soda')">SODA ITALIANA</li>
           </ul>
         </aside>
 
-        <!-- PRODUCTOS -->
+        <!-- PRODUCTOS AGRUPADOS POR CATEGORÍA -->
         <div class="products-list">
+
           <!-- BOWL -->
-          <div class="product-card">
-            <div class="product-img"><img src="boulwd.jpg.jpeg" alt="Bowl"></div>
-            <div class="product-info">
-              <h4>$ 21.000</h4>
-              <h3>Bowl</h3>
-              <button class="btn-buy" onclick="openProductModal('Bowl', 21000, 'bowl')">¡COMPRAR!</button>
+          <div id="cat-bowl">
+            <div class="category-section-title">Bowl</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="boulwd.jpg.jpeg" alt="Bowl"></div>
+                <div class="product-info">
+                  <h4>$ 21.000</h4>
+                  <h3>Bowl Tradicional</h3>
+                  <button class="btn-buy" onclick="openProductModal('Bowl Tradicional', 21000, 'bowl')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BURRITO -->
+          <div id="cat-burrito">
+            <div class="category-section-title">Burrito</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="burrito.jpg.jpeg" alt="Burrito"></div>
+                <div class="product-info">
+                  <h4>$ 22.000</h4>
+                  <h3>Burrito Clásico</h3>
+                  <button class="btn-buy" onclick="openProductModal('Burrito Clásico', 22000, 'food')">¡COMPRAR!</button>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- BURRITO + SODA -->
-          <div class="product-card">
-            <div class="product-img"><img src="burrito.jpg.jpeg" alt="Burrito + Soda"></div>
-            <div class="product-info">
-              <h4>$ 25.000</h4>
-              <h3>Burrito + Soda</h3>
-              <button class="btn-buy" onclick="openProductModal('Burrito + Soda', 25000, 'burrito')">¡COMPRAR!</button>
+          <div id="cat-burrito-soda">
+            <div class="category-section-title">Burrito + Soda</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="burrito.jpg.jpeg" alt="Burrito + Soda"></div>
+                <div class="product-info">
+                  <h4>$ 25.000</h4>
+                  <h3>Burrito + Soda Italiana</h3>
+                  <button class="btn-buy" onclick="openProductModal('Burrito + Soda Italiana', 25000, 'food')">¡COMPRAR!</button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- CAFÉ DE LA CASA -->
-          <div class="product-card">
-            <div class="product-img"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Café"></div>
-            <div class="product-info">
-              <h4>$ 6.000</h4>
-              <h3>Café de la Casa</h3>
-              <button class="btn-buy" onclick="openProductModal('Café de la Casa', 6000, 'coffee')">¡COMPRAR!</button>
+          <!-- SANDWICHS -->
+          <div id="cat-sandwichs">
+            <div class="category-section-title">Sandwichs</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80" alt="Sandwich"></div>
+                <div class="product-info">
+                  <h4>$ 18.000</h4>
+                  <h3>Sandwich Especial de la Casa</h3>
+                  <button class="btn-buy" onclick="openProductModal('Sandwich Especial de la Casa', 18000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- NACHOS -->
+          <div id="cat-nachos">
+            <div class="category-section-title">Nachos</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1582234372572-cedce334ade6?auto=format&fit=crop&w=600&q=80" alt="Nachos"></div>
+                <div class="product-info">
+                  <h4>$ 19.000</h4>
+                  <h3>Nachos con Queso y Carne</h3>
+                  <button class="btn-buy" onclick="openProductModal('Nachos con Queso y Carne', 19000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NACHOS + SODA -->
+          <div id="cat-nachos-soda">
+            <div class="category-section-title">Nachos + Soda</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1582234372572-cedce334ade6?auto=format&fit=crop&w=600&q=80" alt="Nachos + Soda"></div>
+                <div class="product-info">
+                  <h4>$ 23.000</h4>
+                  <h3>Combo Nachos + Soda</h3>
+                  <button class="btn-buy" onclick="openProductModal('Combo Nachos + Soda', 23000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TOTOPOS WED -->
+          <div id="cat-totopos">
+            <div class="category-section-title">Totopos Wed</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80" alt="Totopos"></div>
+                <div class="product-info">
+                  <h4>$ 12.000</h4>
+                  <h3>Porción de Totopos Wed</h3>
+                  <button class="btn-buy" onclick="openProductModal('Porción de Totopos Wed', 12000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PORCION DE TORTA -->
+          <div id="cat-torta">
+            <div class="category-section-title">Porción de Torta</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Torta"></div>
+                <div class="product-info">
+                  <h4>$ 9.000</h4>
+                  <h3>Porción de Torta Casera</h3>
+                  <button class="btn-buy" onclick="openProductModal('Porción de Torta Casera', 9000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CAFÉ -->
+          <div id="cat-cafe">
+            <div class="category-section-title">Café</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Café"></div>
+                <div class="product-info">
+                  <h4>$ 6.000</h4>
+                  <h3>Café de la Casa</h3>
+                  <button class="btn-buy" onclick="openProductModal('Café de la Casa', 6000, 'coffee')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MALTEADA -->
+          <div id="cat-malteada">
+            <div class="category-section-title">Malteada</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Malteada"></div>
+                <div class="product-info">
+                  <h4>$ 14.000</h4>
+                  <h3>Malteada Cremosa</h3>
+                  <button class="btn-buy" onclick="openProductModal('Malteada Cremosa', 14000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BEBIDAS -->
+          <div id="cat-bebidas">
+            <div class="category-section-title">Bebidas</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1437418747299-859703517283?auto=format&fit=crop&w=600&q=80" alt="Bebidas"></div>
+                <div class="product-info">
+                  <h4>$ 5.000</h4>
+                  <h3>Gaseosa / Agua / Hatsu</h3>
+                  <button class="btn-buy" onclick="openProductModal('Gaseosa / Agua / Hatsu', 5000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SODA ITALIANA -->
+          <div id="cat-soda">
+            <div class="category-section-title">Soda Italiana</div>
+            <div class="category-grid">
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Soda Italiana"></div>
+                <div class="product-info">
+                  <h4>$ 9.000</h4>
+                  <h3>Soda Italiana Refrescante</h3>
+                  <button class="btn-buy" onclick="openProductModal('Soda Italiana Refrescante', 9000, 'simple')">¡COMPRAR!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -779,7 +958,7 @@
 
   </main>
 
-  <!-- MODAL DE CONFIGURACIÓN DEL BOWL / BURRITO -->
+  <!-- MODAL DE CONFIGURACIÓN DEL BOWL -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
       <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
@@ -790,7 +969,7 @@
       <div id="bowlCustomizationContainer">
         
         <!-- BASES (Máx 3 porciones en total, 0 a 2 por ingrediente) -->
-        <div class="section-title">BASES DE BOWL <span>(Máx 3 porciones en total)</span></div>
+        <div class="section-title">BASES DE BOWL / BURRITO <span>(Máx 3 porciones en total)</span></div>
         <div class="opt-box" id="box_base_arroz">
           <span>ARROZ AL CILANTRO</span>
           <div class="qty-controls">
@@ -834,10 +1013,10 @@
           <span>CHORIZO DE CERDO</span>
         </div>
 
-        <!-- ADICIÓN DE PROTEÍNA DEL BOWL -->
-        <div class="section-title">ADICIÓN DE PROTEÍNA DEL BOWL <span>(Opcional • Máximo 2 proteínas extra • $8.000 c/u)</span></div>
+        <!-- ADICIÓN DE PROTEÍNA -->
+        <div class="section-title">ADICIÓN DE PROTEÍNA <span>(Opcional • Máximo 1 unidad por opción)</span></div>
         <div class="opt-box" id="box_addprot_carne">
-          <span>CARNE DESMECHADA</span> <span class="price-add">+ $ 8.000</span>
+          <span>CARNE DESMECHADA</span> <span class="price-add">$ 8.000</span>
           <div class="qty-controls">
             <button type="button" class="qty-btn" onclick="changeAddProtQty('carne', -1)">-</button>
             <span class="qty-value" id="qty_addprot_carne">0</span>
@@ -845,7 +1024,7 @@
           </div>
         </div>
         <div class="opt-box" id="box_addprot_cerdo">
-          <span>CERDO PULLED PORK</span> <span class="price-add">+ $ 8.000</span>
+          <span>CERDO PULLED PORK</span> <span class="price-add">$ 8.000</span>
           <div class="qty-controls">
             <button type="button" class="qty-btn" onclick="changeAddProtQty('cerdo', -1)">-</button>
             <span class="qty-value" id="qty_addprot_cerdo">0</span>
@@ -853,7 +1032,7 @@
           </div>
         </div>
         <div class="opt-box" id="box_addprot_costilla">
-          <span>COSTILLA BBQ</span> <span class="price-add">+ $ 8.000</span>
+          <span>COSTILLA BBQ</span> <span class="price-add">$ 8.000</span>
           <div class="qty-controls">
             <button type="button" class="qty-btn" onclick="changeAddProtQty('costilla', -1)">-</button>
             <span class="qty-value" id="qty_addprot_costilla">0</span>
@@ -861,7 +1040,7 @@
           </div>
         </div>
         <div class="opt-box" id="box_addprot_tenders">
-          <span>TENDERS DE POLLO</span> <span class="price-add">+ $ 8.000</span>
+          <span>TENDERS DE POLLO</span> <span class="price-add">$ 8.000</span>
           <div class="qty-controls">
             <button type="button" class="qty-btn" onclick="changeAddProtQty('tenders', -1)">-</button>
             <span class="qty-value" id="qty_addprot_tenders">0</span>
@@ -884,8 +1063,8 @@
         <div class="opt-box" id="box_top_pepino" onclick="toggleTop('pepino', 'Pepino al Cilantro', 0)"><span>PEPINO AL CILANTRO</span></div>
         <div class="opt-box" id="box_top_jalapenos" onclick="toggleTop('jalapenos', 'Jalapeños', 0)"><span>JALAPEÑOS</span></div>
 
-        <!-- ADICIÓN DE TOPPINGS DE BOWL (Máximo 12 unidades en total) -->
-        <div class="section-title">ADICIÓN DE TOPPINGS <span id="addTopCounterText">(Opcional • Máximo 12 unidades)</span></div>
+        <!-- ADICIÓN DE TOPPINGS DE BOWL (Máximo 1 unidad por cada topping, no pasar de 1) -->
+        <div class="section-title">ADICIÓN DE TOPPINGS DE BOWL <span id="addTopCounterText">(Opcional • Máximo 1 unidad por topping)</span></div>
         <div class="opt-box" id="box_add_chicharron">
           <span>CHICHARRÓN</span> <span class="price-add">+ $ 3.000</span>
           <div class="qty-controls">
@@ -989,16 +1168,8 @@
         <div class="opt-box" id="box_salsabase_tatemada" onclick="selectSalsaBase('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
         <div class="opt-box" id="box_salsabase_ajo" onclick="selectSalsaBase('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
 
-        <!-- ADICIÓN DE SALSA (Máx 3 unidades en total) -->
-        <div class="section-title">ADICIÓN DE SALSA <span id="addSalsaCounterText">(Opcional • Máximo 3 unidades)</span></div>
-        <div class="opt-box" id="box_addsalsa_bbq">
-          <span>SALSA BBQ</span> <span class="price-add">+ $ 1.500</span>
-          <div class="qty-controls">
-            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', -1)">-</button>
-            <span class="qty-value" id="qty_addsalsa_bbq">0</span>
-            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', 1)">+</button>
-          </div>
-        </div>
+        <!-- ADICIÓN DE SALSA DEL BOWL (Máx 1 unidad por cada salsa) -->
+        <div class="section-title">ADICIÓN DE SALSA BOWL <span id="addSalsaCounterText">(Opcional • Máximo 1 unidad por salsa)</span></div>
         <div class="opt-box" id="box_addsalsa_tatemada">
           <span>SALSA TATEMADA</span> <span class="price-add">+ $ 1.500</span>
           <div class="qty-controls">
@@ -1015,317 +1186,347 @@
             <button type="button" class="qty-btn" onclick="changeAddSalsaQty('ajo', 1)">+</button>
           </div>
         </div>
+        <div class="opt-box" id="box_addsalsa_bbq">
+          <span>SALSA BBQ</span> <span class="price-add">+ $ 1.500</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', -1)">-</button>
+            <span class="qty-value" id="qty_addsalsa_bbq">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', 1)">+</button>
+          </div>
+        </div>
+
       </div>
 
-      <!-- FOOTER ACCIÓN MODAL -->
+      <!-- ACCIONES DENTRO DEL MODAL -->
       <div class="modal-footer-action">
-        <div class="item-total-price" id="modalTotalPrice">$ 0</div>
-        <button class="btn-add-cart" onclick="addCustomProductToCart()">Agregar a la Canasta</button>
+        <div class="item-total-price">Total: <span id="modalTotalPrice">$ 0</span></div>
+        <button class="btn-add-cart" onclick="addToCart()">Agregar a la canasta</button>
       </div>
     </div>
   </div>
 
   <script>
     let cart = [];
-    let currentProduct = { name: '', basePrice: 0, type: '' };
+    let currentProduct = null;
 
-    // Estado de personalización compartido para Bowl y Burrito
-    let configState = {
-      bases: { arroz: 0, lechugas: 0, dia: 0 },
-      protein: { key: '', name: '', price: 0 },
-      addProtein: { carne: 0, cerdo: 0, costilla: 0, tenders: 0 },
-      toppings: [],
-      addTop: { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 },
-      salsaBase: { key: '', name: '' },
-      addSalsa: { bbq: 0, tatemada: 0, ajo: 0 }
-    };
+    // Variables de configuración del Bowl
+    let baseQuantities = { arroz: 0, lechugas: 0, dia: 0 };
+    let selectedProtein = null;
+    let addProtQuantities = { carne: 0, cerdo: 0, costilla: 0, tenders: 0 };
+    let selectedTops = {}; // hasta 7
+    let addTopQuantities = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
+    let selectedSalsaBase = null;
+    let addSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
 
-    function showSection(sectionId) {
-      document.getElementById('catalogSection').style.display = (sectionId === 'catalog') ? 'block' : 'none';
-      document.getElementById('cartSection').classList.toggle('active', sectionId === 'cart');
-      document.getElementById('checkoutSection').classList.toggle('active', sectionId === 'checkout');
+    function showSection(sectionID) {
+      document.getElementById('catalogSection').style.display = 'none';
+      document.getElementById('cartSection').classList.remove('active');
+      document.getElementById('checkoutSection').classList.remove('active');
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if(sectionID === 'catalog') {
+        document.getElementById('catalogSection').style.display = 'block';
+      } else if(sectionID === 'cart') {
+        document.getElementById('cartSection').classList.add('active');
+        renderCart();
+      } else if(sectionID === 'checkout') {
+        document.getElementById('checkoutSection').classList.add('active');
+      }
+      window.scrollTo(0, 0);
     }
 
-    function openProductModal(name, basePrice, type) {
-      currentProduct = { name, basePrice, type };
+    function scrollToCategory(catId) {
+      const el = document.getElementById(catId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function openProductModal(name, price, type) {
+      currentProduct = { name, basePrice: price, type };
       document.getElementById('modalProductName').innerText = name;
-      document.getElementById('modalBasePrice').innerText = '$ ' + basePrice.toLocaleString();
+      document.getElementById('modalBasePrice').innerText = '$ ' + price.toLocaleString();
+      
+      // Resetear selecciones
+      baseQuantities = { arroz: 0, lechugas: 0, dia: 0 };
+      selectedProtein = null;
+      addProtQuantities = { carne: 0, cerdo: 0, costilla: 0, tenders: 0 };
+      selectedTops = {};
+      addTopQuantities = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
+      selectedSalsaBase = null;
+      addSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
 
-      // Resetear estado
-      configState.bases = { arroz: 0, lechugas: 0, dia: 0 };
-      configState.protein = { key: '', name: '', price: 0 };
-      configState.addProtein = { carne: 0, cerdo: 0, costilla: 0, tenders: 0 };
-      configState.toppings = [];
-      configState.addTop = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
-      configState.salsaBase = { key: '', name: '' };
-      configState.addSalsa = { bbq: 0, tatemada: 0, ajo: 0 };
+      // Actualizar UI del modal
+      document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
+      document.querySelectorAll('.opt-box').forEach(el => el.classList.remove('selected-blue'));
 
-      updateModalUI();
+      // Mostrar u ocultar personalizaciones según el tipo (por ahora bowl y otros usan el modal completo, o simplificado)
       document.getElementById('productModal').classList.add('active');
+      calculateModalTotal();
     }
 
     function closeProductModal() {
       document.getElementById('productModal').classList.remove('active');
     }
 
+    // 1. Lógica de Bases (Máximo 3 porciones en total, 0-2 por ítem)
     function changeBaseQty(key, delta) {
-      let totalBases = Object.values(configState.bases).reduce((a, b) => a + b, 0);
-      let currentVal = configState.bases[key];
+      let currentVal = baseQuantities[key];
       let newVal = currentVal + delta;
 
-      if (newVal < 0 || newVal > 2) return;
-      if (delta > 0 && totalBases >= 3) return;
+      if (newVal < 0) newVal = 0;
+      if (newVal > 2) newVal = 2;
 
-      configState.bases[key] = newVal;
-      updateModalUI();
+      let totalOthers = Object.keys(baseQuantities).reduce((sum, k) => k === key ? sum : sum + baseQuantities[k], 0);
+      
+      if (totalOthers + newVal > 3) {
+        alert('Solo puedes seleccionar un máximo de 3 porciones.');
+        return;
+      }
+
+      baseQuantities[key] = newVal;
+      document.getElementById('qty_base_' + key).innerText = newVal;
+      
+      const box = document.getElementById('box_base_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
     }
 
-    function selectProtein(key, name, price) {
-      configState.protein = { key, name, price };
-      updateModalUI();
-    }
-
-    function changeAddProtQty(key, delta) {
-      let totalAddProt = Object.values(configState.addProtein).reduce((a, b) => a + b, 0);
-      let currentVal = configState.addProtein[key];
-      let newVal = currentVal + delta;
-
-      if (newVal < 0) return;
-      if (delta > 0 && totalAddProt >= 2) return;
-
-      configState.addProtein[key] = newVal;
-      updateModalUI();
-    }
-
-    function toggleTop(key, name, price) {
-      let index = configState.toppings.findIndex(t => t.key === key);
-      if (index > -1) {
-        configState.toppings.splice(index, 1);
+    // 2. Lógica de Proteínas (Una única opción obligatoria)
+    function selectProtein(key, displayName, price) {
+      if (selectedProtein && selectedProtein.key === key) {
+        selectedProtein = null;
+        document.getElementById('box_prot_' + key).classList.remove('selected-blue');
       } else {
-        if (configState.toppings.length >= 7) return;
-        configState.toppings.push({ key, name, price });
+        if (selectedProtein) {
+          document.getElementById('box_prot_' + selectedProtein.key).classList.remove('selected-blue');
+        }
+        selectedProtein = { key, displayName, price };
+        document.getElementById('box_prot_' + key).classList.add('selected-blue');
       }
-      updateModalUI();
+      calculateModalTotal();
     }
 
+    // 3. Lógica de Adición de Proteína (Máximo 1)
+    function changeAddProtQty(key, delta) {
+      let currentVal = addProtQuantities[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) newVal = 0;
+      if (newVal > 1) {
+        alert('Solo puedes agregar un máximo de 1 unidad de esta proteína.');
+        return;
+      }
+
+      addProtQuantities[key] = newVal;
+      document.getElementById('qty_addprot_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_addprot_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
+    // 4. Lógica de Toppings (Máximo 7 incluidos)
+    function toggleTop(key, displayName, price) {
+      const box = document.getElementById('box_top_' + key);
+      if (selectedTops[key]) {
+        delete selectedTops[key];
+        box.classList.remove('selected-blue');
+      } else {
+        const currentCount = Object.keys(selectedTops).length;
+        if (currentCount >= 7) {
+          alert('Solo puedes seleccionar un máximo de 7 toppings.');
+          return;
+        }
+        let topPrice = (key === 'queso') ? 3000 : 0;
+        selectedTops[key] = { displayName, price: topPrice };
+        box.classList.add('selected-blue');
+      }
+      
+      let count = Object.keys(selectedTops).length;
+      document.getElementById('toppingsCounterText').innerText = `(${count} / 7)`;
+      calculateModalTotal();
+    }
+
+    // 5. Lógica de Adición de Toppings (Máximo 1 unidad por cada topping, no pasar de 1)
     function changeAddTopQty(key, delta) {
-      let totalAddTop = Object.values(configState.addTop).reduce((a, b) => a + b, 0);
-      let currentVal = configState.addTop[key];
+      let currentVal = addTopQuantities[key];
       let newVal = currentVal + delta;
 
-      if (newVal < 0) return;
-      if (delta > 0 && totalAddTop >= 12) return;
+      if (newVal < 0) newVal = 0;
+      if (newVal > 1) {
+        alert('No se puede pasar de 1 al adicionar topping.');
+        return;
+      }
 
-      configState.addTop[key] = newVal;
-      updateModalUI();
+      addTopQuantities[key] = newVal;
+      document.getElementById('qty_add_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_add_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
     }
 
-    function selectSalsaBase(key, name) {
-      configState.salsaBase = { key, name };
-      updateModalUI();
+    // 6. Lógica de Salsa Base (Escoge 1)
+    function selectSalsaBase(key, displayName) {
+      if (selectedSalsaBase && selectedSalsaBase.key === key) {
+        selectedSalsaBase = null;
+        document.getElementById('box_salsabase_' + key).classList.remove('selected-blue');
+      } else {
+        if (selectedSalsaBase) {
+          document.getElementById('box_salsabase_' + selectedSalsaBase.key).classList.remove('selected-blue');
+        }
+        selectedSalsaBase = { key, displayName };
+        document.getElementById('box_salsabase_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
     }
 
+    // 7. Lógica de Adición de Salsas (Máximo 1 por cada salsa)
     function changeAddSalsaQty(key, delta) {
-      let totalAddSalsa = Object.values(configState.addSalsa).reduce((a, b) => a + b, 0);
-      let currentVal = configState.addSalsa[key];
+      let currentVal = addSalsaQuantities[key];
       let newVal = currentVal + delta;
 
-      if (newVal < 0) return;
-      if (delta > 0 && totalAddSalsa >= 3) return;
+      if (newVal < 0) newVal = 0;
+      if (newVal > 1) {
+        alert('Solo puedes agregar un máximo de 1 unidad de esta salsa.');
+        return;
+      }
 
-      configState.addSalsa[key] = newVal;
-      updateModalUI();
+      addSalsaQuantities[key] = newVal;
+      document.getElementById('qty_addsalsa_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_addsalsa_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
     }
 
-    function updateModalUI() {
-      // Bases
-      for (let k in configState.bases) {
-        document.getElementById('qty_base_' + k).innerText = configState.bases[k];
-        document.getElementById('box_base_' + k).classList.toggle('selected-blue', configState.bases[k] > 0);
+    // Cálculo dinámico del precio total en el modal
+    function calculateModalTotal() {
+      let total = currentProduct.basePrice;
+
+      if (selectedProtein) total += selectedProtein.price;
+
+      // Costo de adición de proteína ($8.000 c/u)
+      let totalAddProtQty = Object.values(addProtQuantities).reduce((a, b) => a + b, 0);
+      total += totalAddProtQty * 8000;
+
+      // Costo de toppings incluidos (Queso Mozzarella +$3.000)
+      for (let k in selectedTops) {
+        total += selectedTops[k].price;
       }
 
-      // Protein
-      ['carne', 'cerdo', 'tenders', 'costilla', 'chorizo_cerdo'].forEach(k => {
-        let el = document.getElementById('box_prot_' + k);
-        if (el) el.classList.toggle('selected-blue', configState.protein.key === k);
-      });
-
-      // Add Protein
-      for (let k in configState.addProtein) {
-        document.getElementById('qty_addprot_' + k).innerText = configState.addProtein[k];
-        document.getElementById('box_addprot_' + k).classList.toggle('selected-blue', configState.addProtein[k] > 0);
+      // Costo de adición de toppings
+      let addPrices = { chicharron: 3000, chorizo: 3000, maduro: 1500, maicitos: 1500, guacamole: 1500, pico: 1500, doritox: 1500, sour: 3000, cebolla: 1500, queso: 2000, pepino: 1500, jalapenos: 1500 };
+      for (let k in addTopQuantities) {
+        total += addTopQuantities[k] * addPrices[k];
       }
 
-      // Toppings
-      let topKeys = ['chicharron', 'chorizo', 'madurito', 'guacamole', 'maizcitos', 'pico', 'doritox', 'cebolla', 'queso', 'sour', 'pepino', 'jalapenos'];
-      topKeys.forEach(k => {
-        let isSelected = configState.toppings.some(t => t.key === k);
-        let el = document.getElementById('box_top_' + k);
-        if (el) el.classList.toggle('selected-blue', isSelected);
-      });
-      document.getElementById('toppingsCounterText').innerText = `(${configState.toppings.length} / 7)`;
-
-      // Add Toppings
-      let addTopPrices = { chicharron: 3000, chorizo: 3000, maduro: 1500, maicitos: 1500, guacamole: 1500, pico: 1500, doritox: 1500, sour: 3000, cebolla: 1500, queso: 2000, pepino: 1500, jalapenos: 1500 };
-      for (let k in configState.addTop) {
-        document.getElementById('qty_add_' + k).innerText = configState.addTop[k];
-        document.getElementById('box_add_' + k).classList.toggle('selected-blue', configState.addTop[k] > 0);
-      }
-      let totalAddTopCount = Object.values(configState.addTop).reduce((a, b) => a + b, 0);
-      document.getElementById('addTopCounterText').innerText = `(Opcional • Máximo 12 unidades) [${totalAddTopCount}/12]`;
-
-      // Salsa Base
-      ['bbq', 'tatemada', 'ajo'].forEach(k => {
-        let el = document.getElementById('box_salsabase_' + k);
-        if (el) el.classList.toggle('selected-blue', configState.salsaBase.key === k);
-      });
-
-      // Add Salsa
-      for (let k in configState.addSalsa) {
-        document.getElementById('qty_addsalsa_' + k).innerText = configState.addSalsa[k];
-        document.getElementById('box_addsalsa_' + k).classList.toggle('selected-blue', configState.addSalsa[k] > 0);
-      }
-      let totalAddSalsaCount = Object.values(configState.addSalsa).reduce((a, b) => a + b, 0);
-      document.getElementById('addSalsaCounterText').innerText = `(Opcional • Máximo 3 unidades) [${totalAddSalsaCount}/3]`;
-
-      // Calcular Precio Total del Item
-      let total = currentProduct.basePrice + configState.protein.price;
-      
-      configState.toppings.forEach(t => total += t.price);
-      
-      let addProtPrices = { carne: 8000, cerdo: 8000, costilla: 8000, tenders: 8000 };
-      for (let k in configState.addProtein) {
-        total += configState.addProtein[k] * addProtPrices[k];
-      }
-
-      for (let k in configState.addTop) {
-        total += configState.addTop[k] * addTopPrices[k];
-      }
-
-      for (let k in configState.addSalsa) {
-        total += configState.addSalsa[k] * 1500;
-      }
+      // Costo de adición de salsas (+$1.500 c/u)
+      let totalSalsasQty = Object.values(addSalsaQuantities).reduce((a, b) => a + b, 0);
+      total += totalSalsasQty * 1500;
 
       document.getElementById('modalTotalPrice').innerText = '$ ' + total.toLocaleString();
+      return total;
     }
 
-    function addCustomProductToCart() {
-      if (!configState.protein.key) {
-        alert('Por favor selecciona una proteína obligatoria.');
-        return;
-      }
-      if (!configState.salsaBase.key) {
-        alert('Por favor selecciona una salsa base.');
-        return;
-      }
-
+    // Agregar producto al carrito
+    function addToCart() {
+      let finalPrice = calculateModalTotal();
       let details = [];
-      let baseNames = { arroz: 'Arroz al Cilantro', lechugas: 'Lechugas Mix', dia: 'Base del Día' };
-      let bParts = [];
-      for(let k in configState.bases) {
-        if(configState.bases[k] > 0) bParts.push(`${configState.bases[k]}x ${baseNames[k]}`);
-      }
-      if(bParts.length > 0) details.append ? null : details.push('Bases: ' + bParts.join(', '));
 
-      details.push('Proteína: ' + configState.protein.name);
+      // Bases
+      let baseParts = [];
+      if (baseQuantities.arroz > 0) baseParts.push(`Arroz al Cilantro x${baseQuantities.arroz}`);
+      if (baseQuantities.lechugas > 0) baseParts.push(`Lechugas Mix x${baseQuantities.lechugas}`);
+      if (baseQuantities.dia > 0) baseParts.push(`Base del Día x${baseQuantities.dia}`);
+      if (baseParts.length > 0) details.push(`Bases: ${baseParts.join(', ')}`);
 
+      // Proteína
+      if (selectedProtein) details.push(`Proteína: ${selectedProtein.displayName}`);
+
+      // Adición de Proteína
       let addProtNames = { carne: 'Carne Desmechada', cerdo: 'Cerdo Pulled Pork', costilla: 'Costilla BBQ', tenders: 'Tenders de Pollo' };
-      let apParts = [];
-      for(let k in configState.addProtein) {
-        if(configState.addProtein[k] > 0) apParts.push(`${configState.addProtein[k]}x ${addProtNames[k]}`);
+      let addProtParts = [];
+      for (let k in addProtQuantities) {
+        if (addProtQuantities[k] > 0) addProtParts.push(`${addProtNames[k]} x${addProtQuantities[k]}`);
       }
-      if(apParts.length > 0) details.push('Adición Proteína: ' + apParts.join(', '));
+      if (addProtParts.length > 0) details.push(`Adición Proteína: ${addProtParts.join(', ')}`);
 
-      if(configState.toppings.length > 0) {
-        details.push('Toppings: ' + configState.toppings.map(t => t.name).join(', '));
+      // Toppings incluidos
+      let topNames = Object.values(selectedTops).map(t => t.displayName);
+      if (topNames.length > 0) details.push(`Toppings: ${topNames.join(', ')}`);
+
+      // Adición de toppings
+      let addTopParts = [];
+      for (let k in addTopQuantities) {
+        if (addTopQuantities[k] > 0) addTopParts.push(`${k} x${addTopQuantities[k]}`);
       }
+      if (addTopParts.length > 0) details.push(`Adición Toppings: ${addTopParts.join(', ')}`);
 
-      let addTopNames = { chicharron: 'Chicharrón', chorizo: 'Chorizo', maduro: 'Madurito', maicitos: 'Maizcitos', guacamole: 'Guacamole', pico: 'Pico de Gallo', doritox: 'Doritox', sour: 'Sour Cream', cebolla: 'Cebolla Crispy', queso: 'Queso Mozzarella', pepino: 'Pepino al Cilantro', jalapenos: 'Jalapeños' };
-      let atParts = [];
-      for(let k in configState.addTop) {
-        if(configState.addTop[k] > 0) atParts.push(`${configState.addTop[k]}x ${addTopNames[k]}`);
+      // Salsa Base
+      if (selectedSalsaBase) details.push(`Salsa Base: ${selectedSalsaBase.displayName}`);
+
+      // Adición de Salsas
+      let addSalsaParts = [];
+      for (let k in addSalsaQuantities) {
+        if (addSalsaQuantities[k] > 0) addSalsaParts.push(`${k} x${addSalsaQuantities[k]}`);
       }
-      if(atParts.length > 0) details.push('Adición Toppings: ' + atParts.join(', '));
-
-      details.push('Salsa Base: ' + configState.salsaBase.name);
-
-      let addSalsaNames = { bbq: 'Salsa BBQ', tatemada: 'Salsa Tatemada', ajo: 'Salsa de Ajo' };
-      let asParts = [];
-      for(let k in configState.addSalsa) {
-        if(configState.addSalsa[k] > 0) asParts.push(`${configState.addSalsa[k]}x ${addSalsaNames[k]}`);
-      }
-      if(asParts.length > 0) details.push('Adición Salsa: ' + asParts.join(', '));
-
-      let unitPrice = currentProduct.basePrice + configState.protein.price;
-      let addProtPrices = { carne: 8000, cerdo: 8000, costilla: 8000, tenders: 8000 };
-      for (let k in configState.addProtein) unitPrice += configState.addProtein[k] * addProtPrices[k];
-      let addTopPrices = { chicharron: 3000, chorizo: 3000, maduro: 1500, maicitos: 1500, guacamole: 1500, pico: 1500, doritox: 1500, sour: 3000, cebolla: 1500, queso: 2000, pepino: 1500, jalapenos: 1500 };
-      for (let k in configState.addTop) unitPrice += configState.addTop[k] * addTopPrices[k];
-      configState.toppings.forEach(t => unitPrice += t.price);
-      for (let k in configState.addSalsa) unitPrice += configState.addSalsa[k] * 1500;
+      if (addSalsaParts.length > 0) details.push(`Adición Salsas: ${addSalsaParts.join(', ')}`);
 
       cart.push({
         name: currentProduct.name,
-        details: details.join(' | '),
-        unitPrice: unitPrice,
-        qty: 1
+        price: finalPrice,
+        details: details.join(' | ') || 'Estándar',
+        quantity: 1
       });
 
+      updateCartBadge();
       closeProductModal();
-      updateCartUI();
       showSection('cart');
     }
 
-    function updateCartUI() {
-      let tbody = document.getElementById('cartTableBody');
+    function updateCartBadge() {
+      document.getElementById('cartBadgeCount').innerText = cart.length;
+    }
+
+    function renderCart() {
+      const tbody = document.getElementById('cartTableBody');
       tbody.innerHTML = '';
       let subtotal = 0;
-      let totalCount = 0;
 
       cart.forEach((item, index) => {
-        let itemTotal = item.unitPrice * item.qty;
-        subtotal += itemTotal;
-        totalCount += item.qty;
-
+        subtotal += item.price * item.quantity;
         tbody.innerHTML += `
           <tr>
             <td><strong>${item.name}</strong></td>
-            <td style="font-size:12px; text-align:left; max-width:250px;">${item.details}</td>
-            <td>$ ${item.unitPrice.toLocaleString()}</td>
-            <td>
-              <div class="qty-controls" style="justify-content:center;">
-                <button type="button" class="qty-btn" onclick="changeCartQty(${index}, -1)">-</button>
-                <span class="qty-value">${item.qty}</span>
-                <button type="button" class="qty-btn" onclick="changeCartQty(${index}, 1)">+</button>
-              </div>
-            </td>
-            <td><strong>$ ${itemTotal.toLocaleString()}</strong></td>
-            <td><button type="button" onclick="removeFromCart(${index})" style="background:none; border:none; color:var(--red); font-weight:bold; cursor:pointer;">❌</button></td>
+            <td style="font-size: 12px; text-align: left; color: #555;">${item.details}</td>
+            <td>$ ${item.price.toLocaleString()}</td>
+            <td>${item.quantity}</td>
+            <td>$ ${(item.price * item.quantity).toLocaleString()}</td>
+            <td><button onclick="removeFromCart(${index})" style="background:var(--red); color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer;">X</button></td>
           </tr>
         `;
       });
 
       document.getElementById('cartSubtotal').innerText = '$ ' + subtotal.toLocaleString();
-      document.getElementById('cartBadgeCount').innerText = totalCount;
-    }
-
-    function changeCartQty(index, delta) {
-      cart[index].qty += delta;
-      if (cart[index].qty <= 0) {
-        cart.splice(index, 1);
-      }
-      updateCartUI();
     }
 
     function removeFromCart(index) {
       cart.splice(index, 1);
-      updateCartUI();
+      updateCartBadge();
+      renderCart();
     }
 
-    function sendOrderToWhatsApp(event) {
-      event.preventDefault();
+    function sendOrderToWhatsApp(e) {
+      e.preventDefault();
       if (cart.length === 0) {
         alert('Tu canasta está vacía.');
         return;
@@ -1339,27 +1540,24 @@
       let pago = document.getElementById('pago').value;
       let observaciones = document.getElementById('observaciones').value;
 
-      let text = `*¡Hola! Nuevo Pedido - Dominio & Coffee*%0A%0A`;
+      let text = `*¡Nuevo Pedido - Dominio & Coffee!*%0A%0A`;
       text += `*Cliente:* ${nombre}%0A`;
       text += `*WhatsApp:* ${whatsapp}%0A`;
       text += `*Dirección:* ${direccion} (${barrio})%0A`;
       if (referencia) text += `*Referencia:* ${referencia}%0A`;
-      text += `*Forma de Pago:* ${pago}%0A`;
+      text += `*Forma de pago:* ${pago}%0A`;
       if (observaciones) text += `*Notas:* ${observaciones}%0A%0A`;
-      text += `*--- DETALLE DE LA ORDEN ---*%0A`;
+      text += `*--- PEDIDO ---*%0A`;
 
-      let subtotal = 0;
+      let total = 0;
       cart.forEach((item, i) => {
-        let itemTotal = item.unitPrice * item.qty;
-        subtotal += itemTotal;
-        text += `${i+1}. *${item.name}* (x${item.qty}) - $ ${itemTotal.toLocaleString()}%0A`;
-        text   += `   _Detalles: ${item.details}_%0A`;
+        text += `${i + 1}. *${item.name}* - $${item.price.toLocaleString()}%0A   _Detalles:_ ${item.details}%0A`;
+        total += item.price;
       });
 
-      text += `%0A*Subtotal Total: $ ${subtotal.toLocaleString()}*`;
+      text += `%0A*Total a Pagar: $${total.toLocaleString()}*`;
 
-      let url = `https://wa.me/573246044424?text=${text}`;
-      window.open(url, '_blank');
+      window.open(`https://wa.me/573246044424?text=${text}`, '_blank');
     }
   </script>
 </body>
