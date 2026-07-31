@@ -438,14 +438,19 @@
       display: block;
     }
 
-    .cart-table {
+    .table-responsive {
       width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 25px;
+      overflow-x: auto;
       background: var(--white);
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       border-radius: 8px;
-      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px; /* Asegura que la tabla no se colapse en móviles */
     }
 
     .cart-table th {
@@ -581,11 +586,132 @@
       background: #e66e00;
     }
 
+    /* =========================================
+       MEDIA QUERIES PARA CELULARES (RESPONSIVE)
+       ========================================= */
     @media (max-width: 768px) {
-      .hero-overlay { grid-template-columns: 1fr; }
-      .shop-layout { grid-template-columns: 1fr; }
-      .product-card { grid-template-columns: 1fr; }
-      .grid-form { grid-template-columns: 1fr; }
+      /* TOPBAR */
+      .topbar {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 5px;
+      }
+      .nav-item {
+        flex: 1 1 45%; /* Divide los botones en 2 columnas */
+        justify-content: center;
+        text-align: center;
+        font-size: 13px;
+        padding: 12px 10px;
+      }
+
+      /* HERO */
+      .hero-overlay { 
+        grid-template-columns: 1fr; 
+      }
+      .hero-text {
+        padding: 24px 20px;
+      }
+      .hero-text h2 {
+        font-size: 1.8rem;
+      }
+      .hero-info {
+        grid-template-columns: 1fr; /* Apila la información */
+      }
+
+      /* CATÁLOGO Y MENÚ LATERAL */
+      .shop-layout { 
+        grid-template-columns: 1fr; 
+        gap: 20px;
+      }
+      
+      .categories-sidebar {
+        padding: 15px;
+      }
+      .categories-sidebar h3 {
+        margin-bottom: 10px;
+      }
+      /* Convierte la lista de categorías en deslizable horizontal en móvil */
+      .categories-list {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        gap: 15px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .categories-list li {
+        white-space: nowrap;
+        background: var(--white);
+        padding: 8px 12px;
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        font-size: 12px;
+      }
+
+      /* PRODUCTOS */
+      .product-card { 
+        grid-template-columns: 1fr; 
+        gap: 15px;
+        padding: 15px;
+      }
+      .product-img {
+        height: 200px; /* Más alto en móvil para que luzca mejor */
+      }
+      .product-info h3 {
+        font-size: 20px;
+      }
+      .btn-buy {
+        width: 100%;
+        padding: 12px;
+      }
+
+      /* FORMULARIO */
+      .grid-form { 
+        grid-template-columns: 1fr; 
+      }
+
+      /* CARRITO */
+      .cart-summary {
+        align-items: stretch; /* Botones ocupan todo el ancho */
+      }
+      .btn-action-cart {
+        width: 100%;
+      }
+      .subtotal-text {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      /* MODAL */
+      .modal-content {
+        width: 95%;
+        padding: 20px 15px;
+      }
+      .opt-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px;
+      }
+      .opt-box .price-add {
+        margin-left: 0;
+        align-self: flex-start;
+      }
+      .qty-counter {
+        align-self: flex-end;
+      }
+      .modal-footer-action {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+      }
+      .item-total-price {
+        text-align: center;
+      }
+      .btn-add-cart {
+        justify-content: center;
+        padding: 14px;
+      }
     }
   </style>
 </head>
@@ -593,12 +719,12 @@
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <div class="nav-item active" onclick="showSection('catalog')">Categorías ▾</div>
-    <div class="nav-item" onclick="showSection('catalog')">Información ▾</div>
+    <div class="nav-item active" onclick="showSection('catalog')">Menú</div>
+    <div class="nav-item" onclick="showSection('catalog')">Info</div>
     <div class="nav-item" id="cartNavBtn" onclick="showSection('cart')">
       🛍️ Canasta <span class="cart-badge" id="cartBadgeCount">0</span>
     </div>
-    <div class="nav-item" onclick="window.open('https://wa.me/573246044424')">Contáctenos</div>
+    <div class="nav-item" onclick="window.open('https://wa.me/573246044424')">Contacto</div>
   </header>
 
   <!-- HERO BANNER -->
@@ -768,21 +894,23 @@
 
     <!-- SECCIÓN 2: CANASTA -->
     <section id="cartSection" class="cart-section">
-      <table class="cart-table">
-        <thead>
-          <tr>
-            <th>PRODUCTO</th>
-            <th>DETALLES</th>
-            <th>PRECIO UNIT.</th>
-            <th>CANTIDAD</th>
-            <th>TOTAL</th>
-            <th>ELIMINAR</th>
-          </tr>
-        </thead>
-        <tbody id="cartTableBody">
-          <!-- Dinámico por JS -->
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>PRODUCTO</th>
+              <th>DETALLES</th>
+              <th>PRECIO UNIT.</th>
+              <th>CANTIDAD</th>
+              <th>TOTAL</th>
+              <th>ELIMINAR</th>
+            </tr>
+          </thead>
+          <tbody id="cartTableBody">
+            <!-- Dinámico por JS -->
+          </tbody>
+        </table>
+      </div>
 
       <div class="cart-summary">
         <div class="subtotal-text">Subtotal: <span id="cartSubtotal">$ 0</span></div>
