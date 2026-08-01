@@ -679,7 +679,6 @@
             <li onclick="scrollToCategory('cat-burrito-soda')">BURRITO + SODA</li>
             <li onclick="scrollToCategory('cat-sandwichs')">SANDWICHS</li>
             <li onclick="scrollToCategory('cat-nachos')">NACHOS</li>
-            <li onclick="scrollToCategory('cat-nachos-soda')">NACHOS + SODA</li>
             <li onclick="scrollToCategory('cat-totopos')">TOTOPOS WED</li>
             <li onclick="scrollToCategory('cat-torta')">PORCION DE TORTA</li>
             <li onclick="scrollToCategory('cat-cafe')">CAFÉ</li>
@@ -767,21 +766,6 @@
             </div>
           </div>
 
-          <!-- NACHOS + SODA -->
-          <div id="cat-nachos-soda">
-            <div class="category-section-title">Nachos + Soda</div>
-            <div class="category-grid">
-              <div class="product-card">
-                <div class="product-img"><img src="https://images.unsplash.com/photo-1582234372572-cedce334ade6?auto=format&fit=crop&w=600&q=80" alt="Nachos + Soda"></div>
-                <div class="product-info">
-                  <h4>$ 23.000</h4>
-                  <h3>Combo Nachos + Soda</h3>
-                  <button class="btn-buy" onclick="openProductModal('Combo Nachos + Soda', 23000, 'simple')">¡COMPRAR!</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- TOTOPOS WED -->
           <div id="cat-totopos">
             <div class="category-section-title">Totopos Wed</div>
@@ -789,9 +773,9 @@
               <div class="product-card">
                 <div class="product-img"><img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80" alt="Totopos"></div>
                 <div class="product-info">
-                  <h4>$ 12.000</h4>
-                  <h3>Porción de Totopos Wed</h3>
-                  <button class="btn-buy" onclick="openProductModal('Porción de Totopos Wed', 12000, 'simple')">¡COMPRAR!</button>
+                  <h4>$ 11.000</h4>
+                  <h3>Totopos Wed</h3>
+                  <button class="btn-buy" onclick="openProductModal('Totopos Wed', 11000, 'totopos')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -799,14 +783,14 @@
 
           <!-- PORCION DE TORTA -->
           <div id="cat-torta">
-            <div class="category-section-title">Porción de Torta</div>
+            <div class="category-section-title">Porción De Torta</div>
             <div class="category-grid">
               <div class="product-card">
                 <div class="product-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Torta"></div>
                 <div class="product-info">
-                  <h4>$ 9.000</h4>
-                  <h3>Porción de Torta Casera</h3>
-                  <button class="btn-buy" onclick="openProductModal('Porción de Torta Casera', 9000, 'simple')">¡COMPRAR!</button>
+                  <h4>$ 8.000</h4>
+                  <h3>Porción De Torta</h3>
+                  <button class="btn-buy" onclick="openProductModal('Porción De Torta', 8000, 'torta')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -834,9 +818,9 @@
               <div class="product-card">
                 <div class="product-img"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Malteada"></div>
                 <div class="product-info">
-                  <h4>$ 14.000</h4>
-                  <h3>Malteada Cremosa</h3>
-                  <button class="btn-buy" onclick="openProductModal('Malteada Cremosa', 14000, 'simple')">¡COMPRAR!</button>
+                  <h4>$ 10.000</h4>
+                  <h3>Malteada</h3>
+                  <button class="btn-buy" onclick="openProductModal('Malteada', 10000, 'malteada')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -958,7 +942,7 @@
 
   </main>
 
-  <!-- MODAL DE CONFIGURACIÓN DEL BOWL -->
+  <!-- MODAL DE CONFIGURACIÓN -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
       <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
@@ -1269,6 +1253,144 @@
 
       </div>
 
+      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE TOTOPOS WED -->
+      <div id="totoposCustomizationContainer" style="display:none;">
+
+        <div class="section-title">SALSA TOTOPOS <span id="totoposCounterText">(Opcional) Máximo 2</span></div>
+        <div class="opt-box" id="box_totopos_guacamole">
+          <span>GUACAMOLE</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('guacamole', -1)">-</button>
+            <span class="qty-value" id="qty_totopos_guacamole">0</span>
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('guacamole', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_totopos_jalapenos">
+          <span>JALAPEÑOS</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('jalapenos', -1)">-</button>
+            <span class="qty-value" id="qty_totopos_jalapenos">0</span>
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('jalapenos', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_totopos_picodegallo">
+          <span>PICO DE GALLO</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('picodegallo', -1)">-</button>
+            <span class="qty-value" id="qty_totopos_picodegallo">0</span>
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('picodegallo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_totopos_bbq">
+          <span>SALSA BBQ</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('bbq', -1)">-</button>
+            <span class="qty-value" id="qty_totopos_bbq">0</span>
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('bbq', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_totopos_ajo">
+          <span>SALSA DE AJO</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('ajo', -1)">-</button>
+            <span class="qty-value" id="qty_totopos_ajo">0</span>
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('ajo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_totopos_tatemada">
+          <span>SALSA TATEMADA</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('tatemada', -1)">-</button>
+            <span class="qty-value" id="qty_totopos_tatemada">0</span>
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('tatemada', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_totopos_sourcream">
+          <span>SOUR CREEM</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('sourcream', -1)">-</button>
+            <span class="qty-value" id="qty_totopos_sourcream">0</span>
+            <button type="button" class="qty-btn" onclick="changeTotoposQty('sourcream', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="totoposComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
+      </div>
+
+      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE MALTEADA -->
+      <div id="malteadaCustomizationContainer" style="display:none;">
+
+        <div class="section-title">ELIGE TU SABOR FAVORITO <span>(Opcional)</span></div>
+        <div class="opt-box" id="box_malteada_cafe">
+          <span>MALTEADA DE CAFE</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('cafe', -1)">-</button>
+            <span class="qty-value" id="qty_malteada_cafe">0</span>
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('cafe', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_malteada_frutosrojos">
+          <span>MALTEADA DE FRUTOS ROJOS</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('frutosrojos', -1)">-</button>
+            <span class="qty-value" id="qty_malteada_frutosrojos">0</span>
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('frutosrojos', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_malteada_lulo">
+          <span>MALTEADA DE LULO</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('lulo', -1)">-</button>
+            <span class="qty-value" id="qty_malteada_lulo">0</span>
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('lulo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_malteada_maracuya">
+          <span>MALTEADA DE MARACUYA</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('maracuya', -1)">-</button>
+            <span class="qty-value" id="qty_malteada_maracuya">0</span>
+            <button type="button" class="qty-btn" onclick="changeMalteadaQty('maracuya', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="malteadaComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
+      </div>
+
+      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE PORCIÓN DE TORTA -->
+      <div id="tortaCustomizationContainer" style="display:none;">
+
+        <div class="section-title">ELIGE TU TORTA FAVORITA <span>(Opcional) Máximo 1</span></div>
+        <div class="opt-box" id="box_torta_cheesecake" onclick="selectTortaOption('cakeA','cheesecake','Cheesecake')"><span>CHEESECAKE</span></div>
+        <div class="opt-box" id="box_torta_flan" onclick="selectTortaOption('cakeA','flan','Flan De Caramelo')"><span>FLAN DE CARAMELO</span></div>
+        <div class="opt-box" id="box_torta_tulada" onclick="selectTortaOption('cakeA','tulada','Torta De Tulada')"><span>TORTA DE TULADA</span></div>
+        <div class="opt-box" id="box_torta_maracuya" onclick="selectTortaOption('cakeA','maracuya','Torta De Maracuya')"><span>TORTA DE MARACUYA</span></div>
+        <div class="opt-box" id="box_torta_redvelvet" onclick="selectTortaOption('cakeA','redvelvet','Torta De Red Velvet')"><span>TORTA DE RED VELVET</span></div>
+        <div class="opt-box" id="box_torta_frutosrojos" onclick="selectTortaOption('cakeA','frutosrojos','Torta De Frutos Rojos')"><span>TORTA DE FRUTOS ROJOS</span></div>
+
+        <div class="section-title">TOPPING PARA TU TORTA <span>(Opcional) Máximo 1</span></div>
+        <div class="opt-box" id="box_torta_galletablanca" onclick="selectTortaOption('toppingA','galletablanca','Galleta Triturada Blanca')"><span>GALLETA TRITURADA BLANCA</span></div>
+
+        <div class="section-title">ELIGE TU TORTA FAVORITA <span>(Opcional) Máximo 1</span></div>
+        <div class="opt-box" id="box_torta_selvanegra" onclick="selectTortaOption('cakeB','selvanegra','Torta De Selva Negra')"><span>TORTA DE SELVA NEGRA</span></div>
+
+        <div class="section-title">TOPPING PARA TU TORTA <span>(Opcional) Máximo 1</span></div>
+        <div class="opt-box" id="box_torta_galletaoreo" onclick="selectTortaOption('toppingB','galletaoreo','Galleta Triturada Oreo')"><span>GALLETA TRITURADA OREO</span></div>
+
+        <div class="section-title">SALSA PARA TU TORTA <span>(Opcional) Máximo 1</span></div>
+        <div class="opt-box" id="box_torta_chocolate" onclick="selectTortaOption('salsa','chocolate','Salsa De Chocolate')"><span>SALSA DE CHOCOLATE</span></div>
+        <div class="opt-box" id="box_torta_maracuyasalsa" onclick="selectTortaOption('salsa','maracuyasalsa','Salsa De Maracuya')"><span>SALSA DE MARACUYA</span></div>
+        <div class="opt-box" id="box_torta_frutosrojossalsa" onclick="selectTortaOption('salsa','frutosrojossalsa','Salsa De Frutos Rojos')"><span>SALSA DE FRUTOS ROJOS</span></div>
+        <div class="opt-box" id="box_torta_lulo" onclick="selectTortaOption('salsa','lulo','Salsa De Lulo')"><span>SALSA DE LULO</span></div>
+        <div class="opt-box" id="box_torta_miel" onclick="selectTortaOption('salsa','miel','Miel')"><span>MIEL</span></div>
+        <div class="opt-box" id="box_torta_lechera" onclick="selectTortaOption('salsa','lechera','Lechera')"><span>LECHERA</span></div>
+
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="tortaComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
+      </div>
+
       <!-- ACCIONES DENTRO DEL MODAL -->
       <div class="modal-footer-action">
         <div class="item-total-price">Total: <span id="modalTotalPrice">$ 0</span></div>
@@ -1295,6 +1417,15 @@
     let sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0 };
     let sandwichSelectedSalsa = null;
     let sandwichProductQty = 1;
+
+    // Variables de configuración de Totopos Wed
+    let totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, bbq: 0, ajo: 0, tatemada: 0, sourcream: 0 };
+
+    // Variables de configuración de Malteada
+    let malteadaQuantities = { cafe: 0, frutosrojos: 0, lulo: 0, maracuya: 0 };
+
+    // Variables de configuración de Porción de Torta
+    let tortaSelections = { cakeA: null, toppingA: null, cakeB: null, toppingB: null, salsa: null };
 
     function showSection(sectionID) {
       document.getElementById('catalogSection').style.display = 'none';
@@ -1340,18 +1471,40 @@
       sandwichProductQty = 1;
       document.getElementById('sandwichComentarios').value = '';
 
+      // Resetear selecciones de Totopos Wed
+      totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, bbq: 0, ajo: 0, tatemada: 0, sourcream: 0 };
+      document.getElementById('totoposComentarios').value = '';
+
+      // Resetear selecciones de Malteada
+      malteadaQuantities = { cafe: 0, frutosrojos: 0, lulo: 0, maracuya: 0 };
+      document.getElementById('malteadaComentarios').value = '';
+
+      // Resetear selecciones de Porción de Torta
+      tortaSelections = { cakeA: null, toppingA: null, cakeB: null, toppingB: null, salsa: null };
+      document.getElementById('tortaComentarios').value = '';
+
       // Actualizar UI del modal
       document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
       document.querySelectorAll('.opt-box').forEach(el => el.classList.remove('selected-blue'));
       document.getElementById('sandwichProductQty').innerText = '1';
 
       // Mostrar u ocultar personalizaciones según el tipo
+      document.getElementById('bowlCustomizationContainer').style.display = 'none';
+      document.getElementById('sandwichCustomizationContainer').style.display = 'none';
+      document.getElementById('totoposCustomizationContainer').style.display = 'none';
+      document.getElementById('malteadaCustomizationContainer').style.display = 'none';
+      document.getElementById('tortaCustomizationContainer').style.display = 'none';
+
       if (type === 'sandwich') {
-        document.getElementById('bowlCustomizationContainer').style.display = 'none';
         document.getElementById('sandwichCustomizationContainer').style.display = 'block';
+      } else if (type === 'totopos') {
+        document.getElementById('totoposCustomizationContainer').style.display = 'block';
+      } else if (type === 'malteada') {
+        document.getElementById('malteadaCustomizationContainer').style.display = 'block';
+      } else if (type === 'torta') {
+        document.getElementById('tortaCustomizationContainer').style.display = 'block';
       } else {
         document.getElementById('bowlCustomizationContainer').style.display = 'block';
-        document.getElementById('sandwichCustomizationContainer').style.display = 'none';
       }
 
       document.getElementById('productModal').classList.add('active');
@@ -1565,8 +1718,84 @@
       calculateModalTotal();
     }
 
+    // 12. Lógica de Salsa de Totopos Wed (Máximo 2 en total)
+    function changeTotoposQty(key, delta) {
+      let currentVal = totoposQuantities[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) newVal = 0;
+
+      let totalOthers = Object.keys(totoposQuantities).reduce((sum, k) => k === key ? sum : sum + totoposQuantities[k], 0);
+
+      if (totalOthers + newVal > 2) {
+        alert('Solo puedes seleccionar un máximo de 2 salsas en total.');
+        return;
+      }
+
+      totoposQuantities[key] = newVal;
+      document.getElementById('qty_totopos_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_totopos_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
+    // 13. Lógica de Sabores de Malteada (sin límite, define la cantidad total del producto)
+    function changeMalteadaQty(key, delta) {
+      let newVal = malteadaQuantities[key] + delta;
+      if (newVal < 0) newVal = 0;
+
+      malteadaQuantities[key] = newVal;
+      document.getElementById('qty_malteada_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_malteada_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
+    // 14. Lógica de Porción de Torta (selección única por grupo)
+    function selectTortaOption(group, key, displayName) {
+      const prev = tortaSelections[group];
+      if (prev && prev.key === key) {
+        tortaSelections[group] = null;
+        document.getElementById('box_torta_' + key).classList.remove('selected-blue');
+      } else {
+        if (prev) {
+          document.getElementById('box_torta_' + prev.key).classList.remove('selected-blue');
+        }
+        tortaSelections[group] = { key, displayName };
+        document.getElementById('box_torta_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
     // Cálculo dinámico del precio total en el modal
     function calculateModalTotal() {
+      // Cálculo específico para Totopos Wed (precio fijo, sin adiciones de costo)
+      if (currentProduct.type === 'totopos') {
+        document.getElementById('modalTotalPrice').innerText = '$ ' + currentProduct.basePrice.toLocaleString();
+        return currentProduct.basePrice;
+      }
+
+      // Cálculo específico para Malteada (precio base x cantidad total de sabores elegidos)
+      if (currentProduct.type === 'malteada') {
+        let totalQty = Object.values(malteadaQuantities).reduce((a, b) => a + b, 0);
+        if (totalQty === 0) totalQty = 1;
+        let malteadaTotal = currentProduct.basePrice * totalQty;
+        document.getElementById('modalTotalPrice').innerText = '$ ' + malteadaTotal.toLocaleString();
+        return malteadaTotal;
+      }
+
+      // Cálculo específico para Porción de Torta (precio fijo, sin adiciones de costo)
+      if (currentProduct.type === 'torta') {
+        document.getElementById('modalTotalPrice').innerText = '$ ' + currentProduct.basePrice.toLocaleString();
+        return currentProduct.basePrice;
+      }
+
       // Cálculo específico para Sandwich
       if (currentProduct.type === 'sandwich') {
         let swTotal = currentProduct.basePrice;
@@ -1605,6 +1834,84 @@
 
     // Agregar producto al carrito
     function addToCart() {
+      // Rama específica para Totopos Wed
+      if (currentProduct.type === 'totopos') {
+        let salsaNames = { guacamole: 'Guacamole', jalapenos: 'Jalapeños', picodegallo: 'Pico De Gallo', bbq: 'Salsa BBQ', ajo: 'Salsa De Ajo', tatemada: 'Salsa Tatemada', sourcream: 'Sour Creem' };
+        let details = [];
+        let parts = [];
+        for (let k in totoposQuantities) {
+          if (totoposQuantities[k] > 0) parts.push(`${salsaNames[k]} x${totoposQuantities[k]}`);
+        }
+        if (parts.length > 0) details.push(`Salsas: ${parts.join(', ')}`);
+
+        let comentarios = document.getElementById('totoposComentarios').value.trim();
+        if (comentarios) details.push(`Comentarios: ${comentarios}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: currentProduct.basePrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: 1
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
+      // Rama específica para Malteada
+      if (currentProduct.type === 'malteada') {
+        let flavorNames = { cafe: 'Malteada De Café', frutosrojos: 'Malteada De Frutos Rojos', lulo: 'Malteada De Lulo', maracuya: 'Malteada De Maracuyá' };
+        let parts = [];
+        let totalQty = 0;
+        for (let k in malteadaQuantities) {
+          if (malteadaQuantities[k] > 0) {
+            parts.push(`${flavorNames[k]} x${malteadaQuantities[k]}`);
+            totalQty += malteadaQuantities[k];
+          }
+        }
+        if (totalQty === 0) totalQty = 1;
+
+        let details = parts.length > 0 ? [`Sabor: ${parts.join(', ')}`] : [];
+        let comentarios = document.getElementById('malteadaComentarios').value.trim();
+        if (comentarios) details.push(`Comentarios: ${comentarios}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: currentProduct.basePrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: totalQty
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
+      // Rama específica para Porción de Torta
+      if (currentProduct.type === 'torta') {
+        let details = [];
+        for (let g in tortaSelections) {
+          if (tortaSelections[g]) details.push(tortaSelections[g].displayName);
+        }
+        let comentarios = document.getElementById('tortaComentarios').value.trim();
+        if (comentarios) details.push(`Comentarios: ${comentarios}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: currentProduct.basePrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: 1
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
       // Rama específica para Sandwich
       if (currentProduct.type === 'sandwich') {
         let unitPrice = currentProduct.basePrice + (sandwichSelectedProtein ? sandwichSelectedProtein.price : 0);
