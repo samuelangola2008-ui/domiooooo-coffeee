@@ -655,7 +655,7 @@
           <div class="info-box">
             <strong>🕒 Horario</strong>
             <span>10:00 am - 4:30 pm</span>
-            <div id="storeStatusBadge" class="status-badge status-closed">Cerrado</div>
+            <div id="storeStatusBadge" class="status-badge status-closed">Verificando...</div>
           </div>
         </div>
       </div>
@@ -888,7 +888,7 @@
     <!-- SECCIÓN 3: REGISTRO DE PEDIDO -->
     <section id="checkoutSection" class="checkout-section">
       <h2>Datos para la entrega</h2>
-      <div class="form-alert-notice">
+      <div class="form-alert-notice" id="checkoutAlertNotice">
         ⚠️ Nota: Actualmente el indicador está en modo <strong>Cerrado</strong>, pero puedes enviar tu pedido con total normalidad a través de WhatsApp.
       </div>
 
@@ -1426,6 +1426,40 @@
 
     // Variables de configuración de Porción de Torta
     let tortaSelections = { cakeA: null, toppingA: null, cakeB: null, toppingB: null, salsa: null };
+
+    // Configuración del horario de atención (formato 24h)
+    const STORE_OPEN_HOUR = 10;   // 10:00 am
+    const STORE_OPEN_MIN = 0;
+    const STORE_CLOSE_HOUR = 16;  // 4:30 pm
+    const STORE_CLOSE_MIN = 30;
+
+    function updateStoreStatus() {
+      const now = new Date();
+      const nowMinutes = now.getHours() * 60 + now.getMinutes();
+      const openMinutes = STORE_OPEN_HOUR * 60 + STORE_OPEN_MIN;
+      const closeMinutes = STORE_CLOSE_HOUR * 60 + STORE_CLOSE_MIN;
+
+      const isOpen = nowMinutes >= openMinutes && nowMinutes < closeMinutes;
+
+      const badge = document.getElementById('storeStatusBadge');
+      const alertNotice = document.getElementById('checkoutAlertNotice');
+
+      if (isOpen) {
+        badge.classList.remove('status-closed');
+        badge.classList.add('status-open');
+        badge.innerText = 'Abierto';
+        if (alertNotice) {
+          alertNotice.innerHTML = '✅ ¡Estamos <strong>abiertos</strong>! Tu pedido se preparará de inmediato tras confirmarlo por WhatsApp.';
+        }
+      } else {
+        badge.classList.remove('status-open');
+        badge.classList.add('status-closed');
+        badge.innerText = 'Cerrado';
+        if (alertNotice) {
+          alertNotice.innerHTML = '⚠️ Nota: Actualmente el indicador está en modo <strong>Cerrado</strong>, pero puedes enviar tu pedido con total normalidad a través de WhatsApp.';
+        }
+      }
+    }
 
     function showSection(sectionID) {
       document.getElementById('catalogSection').style.display = 'none';
@@ -2049,7 +2083,7 @@
       let pago = document.getElementById('pago').value;
       let observaciones = document.getElementById('observaciones').value;
 
-      // Construcción del mensaje como texto plano (saltos de línea reales)
+      
       let lines = [];
       lines.push('*¡Nuevo Pedido - Dominio & Coffee!*');
       lines.push('');
@@ -2082,11 +2116,15 @@
 
       let mensaje = lines.join('\n');
 
-      // Codificamos TODO el mensaje de una sola vez
+      
       let url = `https://wa.me/573246044424?text=${encodeURIComponent(mensaje)}`;
 
       window.open(url, '_blank');
     }
+
+    
+    updateStoreStatus();
+    setInterval(updateStoreStatus, 60000);
   </script>
 </body>
 </html>
