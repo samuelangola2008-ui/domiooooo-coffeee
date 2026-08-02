@@ -755,9 +755,9 @@
               <div class="product-card">
                 <div class="product-img"><img src="imgsd.jpg.jpeg" alt="Sandwich"></div>
                 <div class="product-info">
-                  <h4>$ 18.000</h4>
+                  <h4>$ 26.000</h4>
                   <h3>Sandwich Especial de la Casa</h3>
-                  <button class="btn-buy" onclick="openProductModal('Sandwich Especial de la Casa', 18000, 'sandwich')">¡COMPRAR!</button>
+                  <button class="btn-buy" onclick="openProductModal('Sandwich Especial de la Casa', 26000, 'sandwich')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -770,9 +770,9 @@
               <div class="product-card">
                 <div class="product-img"><img src="nachos3.jpg.jpeg" alt="Nachos"></div>
                 <div class="product-info">
-                  <h4>$ 19.000</h4>
+                  <h4>$ 27.000</h4>
                   <h3>Nachos con Queso y Carne</h3>
-                  <button class="btn-buy" onclick="openProductModal('Nachos con Queso y Carne', 19000, 'nachos')">¡COMPRAR!</button>
+                  <button class="btn-buy" onclick="openProductModal('Nachos con Queso y Carne', 27000, 'nachos')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -785,9 +785,9 @@
               <div class="product-card">
                 <div class="product-img"><img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80" alt="Totopos"></div>
                 <div class="product-info">
-                  <h4>$ 11.000</h4>
+                  <h4>$ 9.000</h4>
                   <h3>Totopos Wed</h3>
-                  <button class="btn-buy" onclick="openProductModal('Totopos Wed', 11000, 'totopos')">¡COMPRAR!</button>
+                  <button class="btn-buy" onclick="openProductModal('Totopos Wed', 9000, 'totopos')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -848,6 +848,14 @@
                   <h4>$ 5.500</h4>
                   <h3>Coca Cola 400 Ml</h3>
                   <button class="btn-buy" onclick="openProductModal('Coca Cola 400 Ml', 5500, 'simple', 'BEBIDAS')">¡COMPRAR!</button>
+                </div>
+              </div>
+              <div class="product-card">
+                <div class="product-img"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=600&q=80" alt="Soda Italiana"></div>
+                <div class="product-info">
+                  <h4>$ 6.500</h4>
+                  <h3>Soda Italiana</h3>
+                  <button class="btn-buy" onclick="openProductModal('Soda Italiana', 6500, 'sodaitaliana')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -1222,12 +1230,59 @@
             <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('cebolla', 1)">+</button>
           </div>
         </div>
+        <div class="opt-box" id="box_sw_top_cebollaencurtida">
+          <span>CEBOLLA ENCURTIDA</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('cebollaencurtida', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_cebollaencurtida">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('cebollaencurtida', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_sw_top_jalapeno">
+          <span>JALAPEÑO</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('jalapeno', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_jalapeno">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('jalapeno', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_sw_top_chicharron">
+          <span>CHICHARRÓN</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('chicharron', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_chicharron">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('chicharron', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_sw_top_doritox">
+          <span>DORITOX</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('doritox', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_doritox">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('doritox', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_sw_top_maizcito">
+          <span>MAIZCITO</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('maizcito', -1)">-</button>
+            <span class="qty-value" id="qty_sw_top_maizcito">0</span>
+            <button type="button" class="qty-btn" onclick="changeSandwichToppingQty('maizcito', 1)">+</button>
+          </div>
+        </div>
 
         <!-- SALSA DE SANDWICH (Opcional, máximo 1) -->
         <div class="section-title">SALSA DE SANDWICH <span>(Opcional • Máximo 1)</span></div>
-        <div class="opt-box" id="box_sw_salsa_bbq" onclick="selectSandwichSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
-        <div class="opt-box" id="box_sw_salsa_ajo" onclick="selectSandwichSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
         <div class="opt-box" id="box_sw_salsa_tatemada" onclick="selectSandwichSalsa('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
+        <div class="opt-box" id="box_sw_salsa_ajo" onclick="selectSandwichSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
+        <div class="opt-box" id="box_sw_salsa_bbq" onclick="selectSandwichSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
+
+        <!-- COMBO CON SODA ITALIANA -->
+        <div class="section-title">COMBO <span>(Opcional)</span></div>
+        <div class="opt-box" id="box_sw_combo_soda" onclick="toggleSandwichComboSoda()">
+          <span>AGREGAR SODA ITALIANA (COMBO)</span> <span class="price-add">+ $ 1.000</span>
+        </div>
+        <div style="font-size:12px; color:#777; margin: -4px 0 10px;">Nota: los sándwichs vienen acompañados con totopos.</div>
 
         <!-- COMENTARIOS -->
         <div class="section-title">COMENTARIOS</div>
@@ -1309,6 +1364,12 @@
             <span class="qty-value" id="qty_totopos_sourcream">0</span>
             <button type="button" class="qty-btn" onclick="changeTotoposQty('sourcream', 1)">+</button>
           </div>
+        </div>
+
+        <!-- COMBO CON SODA ITALIANA -->
+        <div class="section-title">COMBO <span>(Opcional)</span></div>
+        <div class="opt-box" id="box_totopos_combo_soda" onclick="toggleTotoposComboSoda()">
+          <span>AGREGAR SODA ITALIANA (COMBO)</span> <span class="price-add">+ $ 1.000</span>
         </div>
 
         <div class="section-title">COMENTARIOS</div>
@@ -1438,8 +1499,37 @@
         <div class="opt-box" id="box_nachossalsa_ajo" onclick="selectNachosSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
         <div class="opt-box" id="box_nachossalsa_bbq" onclick="selectNachosSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
 
+        <!-- COMBO CON SODA ITALIANA -->
+        <div class="section-title">COMBO <span>(Opcional)</span></div>
+        <div class="opt-box" id="box_nachos_combo_soda" onclick="toggleNachosComboSoda()">
+          <span>AGREGAR SODA ITALIANA (COMBO)</span> <span class="price-add">+ $ 1.000</span>
+        </div>
+
         <div class="section-title">COMENTARIOS</div>
         <textarea id="nachosComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
+      </div>
+
+      <!-- CONTENEDOR ESPECÍFICO PARA SODA ITALIANA -->
+      <div id="sodaItalianaCustomizationContainer" style="display:none;">
+
+        <div class="section-title">ELIGE TU SABOR <span>(Selecciona 1)</span></div>
+        <div class="opt-box" id="box_sodait_frutosrojos" onclick="selectSodaItalianaFlavor('frutosrojos', 'Frutos Rojos')"><span>FRUTOS ROJOS</span></div>
+        <div class="opt-box" id="box_sodait_maracuya" onclick="selectSodaItalianaFlavor('maracuya', 'Maracuyá')"><span>MARACUYÁ</span></div>
+        <div class="opt-box" id="box_sodait_lulo" onclick="selectSodaItalianaFlavor('lulo', 'Lulo')"><span>LULO</span></div>
+        <div class="opt-box" id="box_sodait_panelalimon" onclick="selectSodaItalianaFlavor('panelalimon', 'Panela y Limón')"><span>PANELA Y LIMÓN</span></div>
+
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="sodaItalianaComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
+
+        <div class="section-title" style="display:flex; align-items:center; justify-content:space-between;">
+          <span>CANTIDAD</span>
+          <div class="qty-controls" style="margin-left:0;">
+            <button type="button" class="qty-btn" onclick="changeSodaItalianaQty(-1)">-</button>
+            <span class="qty-value" id="sodaItalianaQty">1</span>
+            <button type="button" class="qty-btn" onclick="changeSodaItalianaQty(1)">+</button>
+          </div>
+        </div>
+
       </div>
 
       <!-- CONTENEDOR ESPECÍFICO PARA PRODUCTOS SIMPLES (SOLO COMPRA) -->
@@ -1486,12 +1576,14 @@
 
     // Variables de configuración del Sandwich
     let sandwichSelectedProtein = null;
-    let sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0 };
+    let sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0, cebollaencurtida: 0, jalapeno: 0, chicharron: 0, doritox: 0, maizcito: 0 };
     let sandwichSelectedSalsa = null;
     let sandwichProductQty = 1;
+    let sandwichComboSoda = false;
 
     // Variables de configuración de Totopos Wed
     let totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, bbq: 0, ajo: 0, tatemada: 0, sourcream: 0 };
+    let totoposComboSoda = false;
 
     // Variables de configuración de Malteada
     let malteadaSelectedFlavor = null;
@@ -1505,6 +1597,11 @@
     let nachosSelectedProtein = null;
     let nachosSelectedTops = {};
     let nachosSelectedSalsa = null;
+    let nachosComboSoda = false;
+
+    // Variables de configuración de Soda Italiana
+    let sodaItalianaSelectedFlavor = null;
+    let sodaItalianaQty = 1;
 
     // Variables de configuración de Productos Simples
     let simpleProductQty = 1;
@@ -1583,13 +1680,15 @@
 
       // Resetear selecciones del Sandwich
       sandwichSelectedProtein = null;
-      sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0 };
+      sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0, cebollaencurtida: 0, jalapeno: 0, chicharron: 0, doritox: 0, maizcito: 0 };
       sandwichSelectedSalsa = null;
       sandwichProductQty = 1;
+      sandwichComboSoda = false;
       document.getElementById('sandwichComentarios').value = '';
 
       // Resetear selecciones de Totopos Wed
       totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, bbq: 0, ajo: 0, tatemada: 0, sourcream: 0 };
+      totoposComboSoda = false;
       document.getElementById('totoposComentarios').value = '';
 
       // Resetear selecciones de Malteada
@@ -1606,8 +1705,15 @@
       nachosSelectedProtein = null;
       nachosSelectedTops = {};
       nachosSelectedSalsa = null;
+      nachosComboSoda = false;
       document.getElementById('nachosComentarios').value = '';
       document.getElementById('nachosToppingsCounterText').innerText = '(0 / 7 elegidos)';
+
+      // Resetear selecciones de Soda Italiana
+      sodaItalianaSelectedFlavor = null;
+      sodaItalianaQty = 1;
+      document.getElementById('sodaItalianaComentarios').value = '';
+      document.getElementById('sodaItalianaQty').innerText = '1';
 
       // Resetear selecciones de Productos Simples
       simpleProductQty = 1;
@@ -1621,6 +1727,7 @@
       document.querySelectorAll('.opt-box').forEach(el => el.classList.remove('selected-blue'));
       document.getElementById('sandwichProductQty').innerText = '1';
       document.getElementById('simpleProductQty').innerText = '1';
+      document.getElementById('sodaItalianaQty').innerText = '1';
 
       // Mostrar u ocultar personalizaciones según el tipo
       document.getElementById('bowlCustomizationContainer').style.display = 'none';
@@ -1629,6 +1736,7 @@
       document.getElementById('malteadaCustomizationContainer').style.display = 'none';
       document.getElementById('tortaCustomizationContainer').style.display = 'none';
       document.getElementById('nachosCustomizationContainer').style.display = 'none';
+      document.getElementById('sodaItalianaCustomizationContainer').style.display = 'none';
       document.getElementById('simpleCustomizationContainer').style.display = 'none';
 
       if (type === 'sandwich') {
@@ -1641,6 +1749,8 @@
         document.getElementById('tortaCustomizationContainer').style.display = 'block';
       } else if (type === 'nachos') {
         document.getElementById('nachosCustomizationContainer').style.display = 'block';
+      } else if (type === 'sodaitaliana') {
+        document.getElementById('sodaItalianaCustomizationContainer').style.display = 'block';
       } else if (type === 'simple') {
         document.getElementById('simpleCustomizationContainer').style.display = 'block';
       } else {
@@ -1849,6 +1959,15 @@
       calculateModalTotal();
     }
 
+    // 10b. Lógica del Combo Sandwich + Soda
+    function toggleSandwichComboSoda() {
+      sandwichComboSoda = !sandwichComboSoda;
+      const box = document.getElementById('box_sw_combo_soda');
+      if (sandwichComboSoda) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+      calculateModalTotal();
+    }
+
     // 11. Lógica de Cantidad del producto Sandwich (mínimo 1)
     function changeSandwichProductQty(delta) {
       let newVal = sandwichProductQty + delta;
@@ -1879,6 +1998,15 @@
       if (newVal > 0) box.classList.add('selected-blue');
       else box.classList.remove('selected-blue');
 
+      calculateModalTotal();
+    }
+
+    // 12b. Lógica del Combo Totopos + Soda
+    function toggleTotoposComboSoda() {
+      totoposComboSoda = !totoposComboSoda;
+      const box = document.getElementById('box_totopos_combo_soda');
+      if (totoposComboSoda) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
       calculateModalTotal();
     }
 
@@ -2012,12 +2140,47 @@
       calculateModalTotal();
     }
 
+    // 18b. Lógica del Combo Nachos + Soda
+    function toggleNachosComboSoda() {
+      nachosComboSoda = !nachosComboSoda;
+      const box = document.getElementById('box_nachos_combo_soda');
+      if (nachosComboSoda) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+      calculateModalTotal();
+    }
+
+    // 19. Lógica de Sabor de Soda Italiana (Selección única, obligatoria)
+    function selectSodaItalianaFlavor(key, displayName) {
+      if (sodaItalianaSelectedFlavor && sodaItalianaSelectedFlavor.key === key) {
+        sodaItalianaSelectedFlavor = null;
+        document.getElementById('box_sodait_' + key).classList.remove('selected-blue');
+      } else {
+        if (sodaItalianaSelectedFlavor) {
+          document.getElementById('box_sodait_' + sodaItalianaSelectedFlavor.key).classList.remove('selected-blue');
+        }
+        sodaItalianaSelectedFlavor = { key, displayName };
+        document.getElementById('box_sodait_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
+    // 20. Lógica de Cantidad de Soda Italiana (mínimo 1)
+    function changeSodaItalianaQty(delta) {
+      let newVal = sodaItalianaQty + delta;
+      if (newVal < 1) newVal = 1;
+      sodaItalianaQty = newVal;
+      document.getElementById('sodaItalianaQty').innerText = newVal;
+      calculateModalTotal();
+    }
+
     // Cálculo dinámico del precio total en el modal
     function calculateModalTotal() {
-      // Cálculo específico para Totopos Wed (precio fijo, sin adiciones de costo)
+      // Cálculo específico para Totopos Wed (precio base + combo con soda)
       if (currentProduct.type === 'totopos') {
-        document.getElementById('modalTotalPrice').innerText = '$ ' + currentProduct.basePrice.toLocaleString();
-        return currentProduct.basePrice;
+        let totoposTotal = currentProduct.basePrice;
+        if (totoposComboSoda) totoposTotal += 1000;
+        document.getElementById('modalTotalPrice').innerText = '$ ' + totoposTotal.toLocaleString();
+        return totoposTotal;
       }
 
       // Cálculo específico para Malteada (precio base fijo, sin adiciones de costo)
@@ -2032,24 +2195,33 @@
         return currentProduct.basePrice;
       }
 
-      // Cálculo específico para Nachos (proteína + toppings con costo)
+      // Cálculo específico para Nachos (proteína + toppings con costo + combo soda)
       if (currentProduct.type === 'nachos') {
         let nachosTotal = currentProduct.basePrice;
         if (nachosSelectedProtein) nachosTotal += nachosSelectedProtein.price;
         for (let k in nachosSelectedTops) {
           nachosTotal += nachosSelectedTops[k].price;
         }
+        if (nachosComboSoda) nachosTotal += 1000;
         document.getElementById('modalTotalPrice').innerText = '$ ' + nachosTotal.toLocaleString();
         return nachosTotal;
       }
 
-      // Cálculo específico para Sandwich
+      // Cálculo específico para Sandwich (proteína + combo soda) x cantidad
       if (currentProduct.type === 'sandwich') {
         let swTotal = currentProduct.basePrice;
         if (sandwichSelectedProtein) swTotal += sandwichSelectedProtein.price;
+        if (sandwichComboSoda) swTotal += 1000;
         swTotal = swTotal * sandwichProductQty;
         document.getElementById('modalTotalPrice').innerText = '$ ' + swTotal.toLocaleString();
         return swTotal;
+      }
+
+      // Cálculo específico para Soda Italiana (precio base x cantidad)
+      if (currentProduct.type === 'sodaitaliana') {
+        let sodaTotal = currentProduct.basePrice * sodaItalianaQty;
+        document.getElementById('modalTotalPrice').innerText = '$ ' + sodaTotal.toLocaleString();
+        return sodaTotal;
       }
 
       // Cálculo específico para Productos Simples (precio base x cantidad)
@@ -2097,13 +2269,16 @@
           if (totoposQuantities[k] > 0) parts.push(`${salsaNames[k]} x${totoposQuantities[k]}`);
         }
         if (parts.length > 0) details.push(`Salsas: ${parts.join(', ')}`);
+        if (totoposComboSoda) details.push('Combo: + Soda Italiana');
 
         let comentarios = document.getElementById('totoposComentarios').value.trim();
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
+        let totoposPrice = currentProduct.basePrice + (totoposComboSoda ? 1000 : 0);
+
         cart.push({
           name: currentProduct.name,
-          price: currentProduct.basePrice,
+          price: totoposPrice,
           details: details.join(' | ') || 'Estándar',
           quantity: 1
         });
@@ -2171,6 +2346,7 @@
       if (currentProduct.type === 'nachos') {
         let unitPrice = currentProduct.basePrice;
         if (nachosSelectedProtein) unitPrice += nachosSelectedProtein.price;
+        if (nachosComboSoda) unitPrice += 1000;
         let details = [];
 
         if (nachosSelectedProtein) details.push(`Proteína: ${nachosSelectedProtein.displayName}`);
@@ -2182,6 +2358,7 @@
         if (topParts.length > 0) details.push(`Toppings: ${topParts.join(', ')}`);
 
         if (nachosSelectedSalsa) details.push(`Salsa: ${nachosSelectedSalsa.displayName}`);
+        if (nachosComboSoda) details.push('Combo: + Soda Italiana');
 
         let comentarios = document.getElementById('nachosComentarios').value.trim();
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
@@ -2201,12 +2378,12 @@
 
       // Rama específica para Sandwich
       if (currentProduct.type === 'sandwich') {
-        let unitPrice = currentProduct.basePrice + (sandwichSelectedProtein ? sandwichSelectedProtein.price : 0);
+        let unitPrice = currentProduct.basePrice + (sandwichSelectedProtein ? sandwichSelectedProtein.price : 0) + (sandwichComboSoda ? 1000 : 0);
         let details = [];
 
         if (sandwichSelectedProtein) details.push(`Proteína: ${sandwichSelectedProtein.displayName}`);
 
-        let toppingNames = { lechuga: 'Lechuga Mix', tomate: 'Tomate', cebolla: 'Cebolla Crispy' };
+        let toppingNames = { lechuga: 'Lechuga Mix', tomate: 'Tomate', cebolla: 'Cebolla Crispy', cebollaencurtida: 'Cebolla Encurtida', jalapeno: 'Jalapeño', chicharron: 'Chicharrón', doritox: 'Doritox', maizcito: 'Maizcito' };
         let toppingParts = [];
         for (let k in sandwichToppingQuantities) {
           if (sandwichToppingQuantities[k] > 0) toppingParts.push(`${toppingNames[k]} x${sandwichToppingQuantities[k]}`);
@@ -2214,6 +2391,7 @@
         if (toppingParts.length > 0) details.push(`Toppings: ${toppingParts.join(', ')}`);
 
         if (sandwichSelectedSalsa) details.push(`Salsa: ${sandwichSelectedSalsa.displayName}`);
+        if (sandwichComboSoda) details.push('Combo: + Soda Italiana');
 
         let comentarios = document.getElementById('sandwichComentarios').value.trim();
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
@@ -2223,6 +2401,27 @@
           price: unitPrice,
           details: details.join(' | ') || 'Estándar',
           quantity: sandwichProductQty
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
+      // Rama específica para Soda Italiana
+      if (currentProduct.type === 'sodaitaliana') {
+        let details = [];
+        if (sodaItalianaSelectedFlavor) details.push(`Sabor: ${sodaItalianaSelectedFlavor.displayName}`);
+
+        let comentarios = document.getElementById('sodaItalianaComentarios').value.trim();
+        if (comentarios) details.push(`Comentarios: ${comentarios}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: currentProduct.basePrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: sodaItalianaQty
         });
 
         updateCartBadge();
