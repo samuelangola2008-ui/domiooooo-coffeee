@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEGURIDAD: Content-Security-Policy para mitigar XSS y carga de recursos no autorizados -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer-when-downgrade">
   <title>Dominio & Coffee | E-commerce Domicilios</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -587,6 +591,18 @@
       margin-bottom: 20px;
     }
 
+    .form-error-notice {
+      background: #fdecea;
+      border: 1px solid #f5c6cb;
+      color: #b02a2a;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
     .grid-form {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -641,6 +657,11 @@
       background: #e66e00;
     }
 
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     @media (max-width: 768px) {
       .hero-overlay { grid-template-columns: 1fr; }
       .shop-layout { grid-template-columns: 1fr; }
@@ -659,7 +680,7 @@
     <div class="nav-item" id="cartNavBtn" onclick="showSection('cart')">
       🛍️ Canasta <span class="cart-badge" id="cartBadgeCount">0</span>
     </div>
-    <div class="nav-item" onclick="window.open('https://wa.me/573246044424')">Contáctenos</div>
+    <div class="nav-item" onclick="openExternalLink('https://wa.me/573246044424')">Contáctenos</div>
   </header>
 
   <!-- HERO BANNER -->
@@ -937,32 +958,33 @@
       <div class="form-alert-notice" id="checkoutAlertNotice">
         ⚠️ Nota: Actualmente el indicador está en modo <strong>Cerrado</strong>, pero puedes enviar tu pedido con total normalidad a través de WhatsApp.
       </div>
+      <div class="form-error-notice" id="checkoutErrorNotice"></div>
 
-      <form id="checkoutForm" onsubmit="sendOrderToWhatsApp(event)">
+      <form id="checkoutForm" onsubmit="sendOrderToWhatsApp(event)" novalidate>
         <div class="grid-form">
           <div class="field">
             <label for="nombre">Nombre de quien recibe *</label>
-            <input id="nombre" type="text" placeholder="Ej: Juan Pérez" required>
+            <input id="nombre" type="text" placeholder="Ej: Juan Pérez" maxlength="80" required>
           </div>
 
           <div class="field">
             <label for="whatsapp">WhatsApp *</label>
-            <input id="whatsapp" type="tel" placeholder="Ej: 300 123 4567" required>
+            <input id="whatsapp" type="tel" placeholder="Ej: 300 123 4567" maxlength="20" required>
           </div>
 
           <div class="field">
             <label for="direccion">Dirección completa *</label>
-            <input id="direccion" type="text" placeholder="Ej: Calle 13 # 5-23" required>
+            <input id="direccion" type="text" placeholder="Ej: Calle 13 # 5-23" maxlength="150" required>
           </div>
 
           <div class="field">
             <label for="barrio">Barrio *</label>
-            <input id="barrio" type="text" placeholder="Ej: San Nicolás" required>
+            <input id="barrio" type="text" placeholder="Ej: San Nicolás" maxlength="80" required>
           </div>
 
           <div class="field full">
             <label for="referencia">Punto de referencia</label>
-            <input id="referencia" type="text" placeholder="Ej: Frente a la iglesia">
+            <input id="referencia" type="text" placeholder="Ej: Frente a la iglesia" maxlength="150">
           </div>
 
           <div class="field">
@@ -978,11 +1000,11 @@
 
           <div class="field full">
             <label for="observaciones">Notas adicionales</label>
-            <textarea id="observaciones" rows="3" placeholder="Ej: Entregar en recepción."></textarea>
+            <textarea id="observaciones" rows="3" maxlength="300" placeholder="Ej: Entregar en recepción."></textarea>
           </div>
         </div>
 
-        <button type="submit" class="submit-btn">Confirmar y enviar pedido por WhatsApp</button>
+        <button type="submit" class="submit-btn" id="submitOrderBtn">Confirmar y enviar pedido por WhatsApp</button>
       </form>
     </section>
 
@@ -1259,7 +1281,7 @@
         </div>
 
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="bowlComentarios" rows="3" placeholder="Ej: sin lechuga, salsa aparte, punto de la carne, etc."></textarea>
+        <textarea id="bowlComentarios" rows="3" maxlength="250" placeholder="Ej: sin lechuga, salsa aparte, punto de la carne, etc."></textarea>
 
       </div>
 
@@ -1376,7 +1398,7 @@
 
         <!-- COMENTARIOS -->
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="sandwichComentarios" rows="3" placeholder="Ej: sin salsa, pan tostado, extra proteína, etc."></textarea>
+        <textarea id="sandwichComentarios" rows="3" maxlength="250" placeholder="Ej: sin salsa, pan tostado, extra proteína, etc."></textarea>
 
         <!-- CANTIDAD DEL PRODUCTO -->
         <div class="section-title" style="display:flex; align-items:center; justify-content:space-between;">
@@ -1464,7 +1486,7 @@
         </div>
 
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="totoposComentarios" rows="3" placeholder="Ej: salsas aparte, doble guacamole, poco picante, etc."></textarea>
+        <textarea id="totoposComentarios" rows="3" maxlength="250" placeholder="Ej: salsas aparte, doble guacamole, poco picante, etc."></textarea>
       </div>
 
       <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE MALTEADA -->
@@ -1516,7 +1538,7 @@
         <div class="opt-box" id="box_malteadasalsa_miel" onclick="selectMalteadaSalsa('miel', 'Miel')"><span>MIEL</span></div>
 
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="malteadaComentarios" rows="3" placeholder="Ej: menos hielo, sin chantilly, extra salsa, etc."></textarea>
+        <textarea id="malteadaComentarios" rows="3" maxlength="250" placeholder="Ej: menos hielo, sin chantilly, extra salsa, etc."></textarea>
       </div>
 
       <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE PORCIÓN DE TORTA -->
@@ -1548,7 +1570,7 @@
         <div class="opt-box" id="box_torta_lechera" onclick="selectTortaOption('salsa','lechera','Lechera')"><span>LECHERA</span></div>
 
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="tortaComentarios" rows="3" placeholder="Ej: porción pequeña, sin salsa, para regalo, etc."></textarea>
+        <textarea id="tortaComentarios" rows="3" maxlength="250" placeholder="Ej: porción pequeña, sin salsa, para regalo, etc."></textarea>
       </div>
 
       <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE NACHOS -->
@@ -1606,7 +1628,7 @@
         </div>
 
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="nachosComentarios" rows="3" placeholder="Ej: extra queso, sin jalapeños, salsa aparte, etc."></textarea>
+        <textarea id="nachosComentarios" rows="3" maxlength="250" placeholder="Ej: extra queso, sin jalapeños, salsa aparte, etc."></textarea>
       </div>
 
       <!-- CONTENEDOR ESPECÍFICO PARA SODA ITALIANA -->
@@ -1619,7 +1641,7 @@
         <div class="opt-box" id="box_sodait_panelalimon" onclick="selectSodaItalianaFlavor('panelalimon', 'Panela y Limón')"><span>PANELA Y LIMÓN</span></div>
 
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="sodaItalianaComentarios" rows="3" placeholder="Ej: sin hielo, poco dulce, etc."></textarea>
+        <textarea id="sodaItalianaComentarios" rows="3" maxlength="250" placeholder="Ej: sin hielo, poco dulce, etc."></textarea>
 
         <div class="section-title" style="display:flex; align-items:center; justify-content:space-between;">
           <span>CANTIDAD</span>
@@ -1636,7 +1658,7 @@
       <div id="simpleCustomizationContainer" style="display:none;">
 
         <div class="section-title">COMENTARIOS</div>
-        <textarea id="simpleComentarios" rows="3" placeholder="Ej: para llevar, sin azúcar, extra caliente, etc."></textarea>
+        <textarea id="simpleComentarios" rows="3" maxlength="250" placeholder="Ej: para llevar, sin azúcar, extra caliente, etc."></textarea>
 
         <div class="section-title" style="display:flex; align-items:center; justify-content:space-between;">
           <span>CANTIDAD</span>
@@ -1662,6 +1684,34 @@
   </div>
 
   <script>
+    'use strict';
+
+    /* =====================================================================
+       SEGURIDAD: utilidades de saneamiento
+       - escapeHtml(): evita XSS al insertar texto proveniente del usuario
+         (comentarios, nombre, dirección, etc.) dentro de innerHTML.
+       - clampText(): recorta longitud como defensa adicional en JS,
+         más allá del maxlength del HTML (que puede ser evadido por consola).
+    ===================================================================== */
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      const div = document.createElement('div');
+      div.textContent = String(str);
+      return div.innerHTML;
+    }
+
+    function clampText(str, maxLen) {
+      if (!str) return '';
+      return String(str).slice(0, maxLen);
+    }
+
+    // SEGURIDAD: abrir enlaces externos sin exponer `window.opener`
+    // (mitiga "reverse tabnabbing")
+    function openExternalLink(url) {
+      const win = window.open(url, '_blank', 'noopener,noreferrer');
+      if (win) win.opener = null;
+    }
+
     let cart = [];
     let currentProduct = null;
 
@@ -1724,6 +1774,11 @@
     // Variables de configuración de Productos Simples
     let simpleProductQty = 1;
     let simpleCategory = '';
+
+    // SEGURIDAD: límites de defensa en profundidad (evitan que alguien manipule
+    // la cantidad vía consola y genere pedidos absurdos/DoS visual en WhatsApp)
+    const MAX_ITEM_QTY = 20;
+    const MAX_CART_ITEMS = 50;
 
     // Configuración del horario de atención (formato 24h)
     const STORE_OPEN_HOUR = 10;   // 10:00 am
@@ -2171,10 +2226,11 @@
       }
     }
 
-    // 11. Lógica de Cantidad del producto Sandwich (mínimo 1)
+    // 11. Lógica de Cantidad del producto Sandwich (mínimo 1, máximo MAX_ITEM_QTY)
     function changeSandwichProductQty(delta) {
       let newVal = sandwichProductQty + delta;
       if (newVal < 1) newVal = 1;
+      if (newVal > MAX_ITEM_QTY) newVal = MAX_ITEM_QTY;
       sandwichProductQty = newVal;
       document.getElementById('sandwichProductQty').innerText = newVal;
       calculateModalTotal();
@@ -2308,10 +2364,11 @@
       calculateModalTotal();
     }
 
-    // 15. Lógica de Cantidad de Productos Simples (mínimo 1)
+    // 15. Lógica de Cantidad de Productos Simples (mínimo 1, máximo MAX_ITEM_QTY)
     function changeSimpleProductQty(delta) {
       let newVal = simpleProductQty + delta;
       if (newVal < 1) newVal = 1;
+      if (newVal > MAX_ITEM_QTY) newVal = MAX_ITEM_QTY;
       simpleProductQty = newVal;
       document.getElementById('simpleProductQty').innerText = newVal;
       calculateModalTotal();
@@ -2414,10 +2471,11 @@
       calculateModalTotal();
     }
 
-    // 20. Lógica de Cantidad de Soda Italiana (mínimo 1)
+    // 20. Lógica de Cantidad de Soda Italiana (mínimo 1, máximo MAX_ITEM_QTY)
     function changeSodaItalianaQty(delta) {
       let newVal = sodaItalianaQty + delta;
       if (newVal < 1) newVal = 1;
+      if (newVal > MAX_ITEM_QTY) newVal = MAX_ITEM_QTY;
       sodaItalianaQty = newVal;
       document.getElementById('sodaItalianaQty').innerText = newVal;
       calculateModalTotal();
@@ -2510,6 +2568,12 @@
 
     // Agregar producto al carrito
     function addToCart() {
+      // SEGURIDAD: evitar que la canasta crezca sin límite (protección básica anti-abuso)
+      if (cart.length >= MAX_CART_ITEMS) {
+        alert('Has alcanzado el máximo de productos por pedido. Finaliza tu orden o elimina algún ítem.');
+        return;
+      }
+
       // Rama específica para Totopos Wed
       if (currentProduct.type === 'totopos') {
         let salsaNames = { guacamole: 'Guacamole', jalapenos: 'Jalapeños', picodegallo: 'Pico De Gallo', ajo: 'Salsa De Ajo', tatemada: 'Salsa Tatemada', sourcream: 'Sour Cream' };
@@ -2524,7 +2588,7 @@
           details.push(`Combo: + Soda Italiana${flavorText}`);
         }
 
-        let comentarios = document.getElementById('totoposComentarios').value.trim();
+        let comentarios = clampText(document.getElementById('totoposComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
         let totoposPrice = currentProduct.basePrice + (totoposComboSoda ? 1000 : 0);
@@ -2557,7 +2621,7 @@
 
         if (malteadaSelectedSalsa) details.push(`Salsa: ${malteadaSelectedSalsa.displayName}`);
 
-        let comentarios = document.getElementById('malteadaComentarios').value.trim();
+        let comentarios = clampText(document.getElementById('malteadaComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
         cart.push({
@@ -2579,7 +2643,7 @@
         for (let g in tortaSelections) {
           if (tortaSelections[g]) details.push(tortaSelections[g].displayName);
         }
-        let comentarios = document.getElementById('tortaComentarios').value.trim();
+        let comentarios = clampText(document.getElementById('tortaComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
         cart.push({
@@ -2616,7 +2680,7 @@
           details.push(`Combo: + Soda Italiana${flavorText}`);
         }
 
-        let comentarios = document.getElementById('nachosComentarios').value.trim();
+        let comentarios = clampText(document.getElementById('nachosComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
         cart.push({
@@ -2652,7 +2716,7 @@
           details.push(`Combo: + Soda Italiana${flavorText}`);
         }
 
-        let comentarios = document.getElementById('sandwichComentarios').value.trim();
+        let comentarios = clampText(document.getElementById('sandwichComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
         cart.push({
@@ -2673,7 +2737,7 @@
         let details = [];
         if (sodaItalianaSelectedFlavor) details.push(`Sabor: ${sodaItalianaSelectedFlavor.displayName}`);
 
-        let comentarios = document.getElementById('sodaItalianaComentarios').value.trim();
+        let comentarios = clampText(document.getElementById('sodaItalianaComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
         cart.push({
@@ -2692,7 +2756,7 @@
       // Rama específica para Productos Simples (solo comentarios y cantidad)
       if (currentProduct.type === 'simple') {
         let details = [];
-        let comentarios = document.getElementById('simpleComentarios').value.trim();
+        let comentarios = clampText(document.getElementById('simpleComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
         cart.push({
@@ -2767,7 +2831,7 @@
       }
       if (addSalsaParts.length > 0) details.push(`Adición Salsas: ${addSalsaParts.join(', ')}`);
 
-      let comentariosBowl = document.getElementById('bowlComentarios').value.trim();
+      let comentariosBowl = clampText(document.getElementById('bowlComentarios').value.trim(), 250);
       if (comentariosBowl) details.push(`Comentarios: ${comentariosBowl}`);
 
       cart.push({
@@ -2786,6 +2850,8 @@
       document.getElementById('cartBadgeCount').innerText = cart.length;
     }
 
+    // SEGURIDAD: renderCart ahora construye el DOM con createElement/textContent
+    // en lugar de concatenar innerHTML con datos del usuario (fix de XSS).
     function renderCart() {
       const tbody = document.getElementById('cartTableBody');
       tbody.innerHTML = '';
@@ -2793,16 +2859,49 @@
 
       cart.forEach((item, index) => {
         subtotal += item.price * item.quantity;
-        tbody.innerHTML += `
-          <tr>
-            <td><strong>${item.name}</strong></td>
-            <td style="font-size: 12px; text-align: left; color: #555;">${item.details}</td>
-            <td>$ ${item.price.toLocaleString()}</td>
-            <td>${item.quantity}</td>
-            <td>$ ${(item.price * item.quantity).toLocaleString()}</td>
-            <td><button onclick="removeFromCart(${index})" style="background:var(--red); color:white; border:none; padding:6px 10px; border-radius:4px; cursor:pointer;">X</button></td>
-          </tr>
-        `;
+
+        const tr = document.createElement('tr');
+
+        const tdName = document.createElement('td');
+        const strong = document.createElement('strong');
+        strong.textContent = item.name; // seguro: textContent, no innerHTML
+        tdName.appendChild(strong);
+
+        const tdDetails = document.createElement('td');
+        tdDetails.style.fontSize = '12px';
+        tdDetails.style.textAlign = 'left';
+        tdDetails.style.color = '#555';
+        tdDetails.textContent = item.details; // seguro: textContent, no innerHTML
+
+        const tdPrice = document.createElement('td');
+        tdPrice.textContent = '$ ' + item.price.toLocaleString();
+
+        const tdQty = document.createElement('td');
+        tdQty.textContent = String(item.quantity);
+
+        const tdTotal = document.createElement('td');
+        tdTotal.textContent = '$ ' + (item.price * item.quantity).toLocaleString();
+
+        const tdRemove = document.createElement('td');
+        const btnRemove = document.createElement('button');
+        btnRemove.textContent = 'X';
+        btnRemove.style.background = 'var(--red)';
+        btnRemove.style.color = 'white';
+        btnRemove.style.border = 'none';
+        btnRemove.style.padding = '6px 10px';
+        btnRemove.style.borderRadius = '4px';
+        btnRemove.style.cursor = 'pointer';
+        btnRemove.addEventListener('click', () => removeFromCart(index));
+        tdRemove.appendChild(btnRemove);
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdDetails);
+        tr.appendChild(tdPrice);
+        tr.appendChild(tdQty);
+        tr.appendChild(tdTotal);
+        tr.appendChild(tdRemove);
+
+        tbody.appendChild(tr);
       });
 
       document.getElementById('cartSubtotal').innerText = '$ ' + subtotal.toLocaleString();
@@ -2814,25 +2913,61 @@
       renderCart();
     }
 
-    
+    // SEGURIDAD: validación básica de formato de teléfono colombiano
+    // (defensa en profundidad; no reemplaza validación en un backend real)
+    function isValidPhone(value) {
+      const digitsOnly = value.replace(/[\s\-\+\(\)]/g, '');
+      return /^\d{7,13}$/.test(digitsOnly);
+    }
+
+    function showCheckoutError(msg) {
+      const el = document.getElementById('checkoutErrorNotice');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function hideCheckoutError() {
+      const el = document.getElementById('checkoutErrorNotice');
+      el.style.display = 'none';
+      el.textContent = '';
+    }
+
     function sendOrderToWhatsApp(e) {
       e.preventDefault();
+      hideCheckoutError();
 
       if (cart.length === 0) {
-        alert('Tu canasta está vacía.');
+        showCheckoutError('Tu canasta está vacía.');
         return;
       }
 
-      // Datos del cliente
-      let nombre = document.getElementById('nombre').value;
-      let whatsapp = document.getElementById('whatsapp').value;
-      let direccion = document.getElementById('direccion').value;
-      let barrio = document.getElementById('barrio').value;
-      let referencia = document.getElementById('referencia').value;
+      // Datos del cliente (recortados como defensa adicional además del maxlength del HTML)
+      let nombre = clampText(document.getElementById('nombre').value.trim(), 80);
+      let whatsapp = clampText(document.getElementById('whatsapp').value.trim(), 20);
+      let direccion = clampText(document.getElementById('direccion').value.trim(), 150);
+      let barrio = clampText(document.getElementById('barrio').value.trim(), 80);
+      let referencia = clampText(document.getElementById('referencia').value.trim(), 150);
       let pago = document.getElementById('pago').value;
-      let observaciones = document.getElementById('observaciones').value;
+      let observaciones = clampText(document.getElementById('observaciones').value.trim(), 300);
 
-      
+      // SEGURIDAD: validación de campos obligatorios en el cliente
+      // (recordatorio: esto NO sustituye validación en servidor si en el futuro
+      // se procesa el pedido de forma automática)
+      if (!nombre || !whatsapp || !direccion || !barrio || !pago) {
+        showCheckoutError('Por favor completa todos los campos obligatorios (*).');
+        return;
+      }
+
+      if (!isValidPhone(whatsapp)) {
+        showCheckoutError('Por favor ingresa un número de WhatsApp válido.');
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitOrderBtn');
+      submitBtn.disabled = true;
+
+      // El mensaje de WhatsApp es texto plano (no HTML), por lo que no hay
+      // riesgo de XSS aquí; igualmente usamos los valores ya recortados arriba.
       let lines = [];
       lines.push('*¡Nuevo Pedido - Dominio & Coffee!*');
       lines.push('');
@@ -2865,10 +3000,14 @@
 
       let mensaje = lines.join('\n');
 
-      
+      // encodeURIComponent ya escapa el texto para uso seguro en la URL
       let url = `https://wa.me/573246044424?text=${encodeURIComponent(mensaje)}`;
 
-      window.open(url, '_blank');
+      // SEGURIDAD: noopener,noreferrer evita "reverse tabnabbing"
+      const win = window.open(url, '_blank', 'noopener,noreferrer');
+      if (win) win.opener = null;
+
+      submitBtn.disabled = false;
     }
 
     
