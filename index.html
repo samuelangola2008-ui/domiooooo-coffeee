@@ -61,6 +61,19 @@
       gap: 15px;
     }
 
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+
+    .brand-logo img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
     .nav-item {
       padding: 16px 20px;
       color: var(--white);
@@ -632,6 +645,9 @@
 
   <!-- TOPBAR -->
   <header class="topbar">
+    <div class="brand-logo">
+      <img src="logo.png" alt="Dominio Coffee">
+    </div>
     <div class="nav-item active" onclick="showSection('catalog')">Categorías ▾</div>
     <div class="nav-item" onclick="showSection('catalog')">Información ▾</div>
     <div class="nav-item" id="cartNavBtn" onclick="showSection('cart')">
@@ -684,7 +700,6 @@
             <li onclick="scrollToCategory('cat-cafe')">CAFÉ</li>
             <li onclick="scrollToCategory('cat-malteada')">MALTEADA</li>
             <li onclick="scrollToCategory('cat-bebidas')">BEBIDAS</li>
-            <li onclick="scrollToCategory('cat-soda')">SODA ITALIANA</li>
           </ul>
         </aside>
 
@@ -760,7 +775,7 @@
                 <div class="product-info">
                   <h4>$ 19.000</h4>
                   <h3>Nachos con Queso y Carne</h3>
-                  <button class="btn-buy" onclick="openProductModal('Nachos con Queso y Carne', 19000, 'simple')">¡COMPRAR!</button>
+                  <button class="btn-buy" onclick="openProductModal('Nachos con Queso y Carne', 19000, 'simple', 'NACHOS')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -831,26 +846,11 @@
             <div class="category-section-title">Bebidas</div>
             <div class="category-grid">
               <div class="product-card">
-                <div class="product-img"><img src="cocacola2.png" alt="Bebidas"></div>
+                <div class="product-img"><img src="cocacola2.png" alt="Coca Cola 400 Ml"></div>
                 <div class="product-info">
-                  <h4>$ 4.500</h4>
-                  <h3>Gaseosa</h3>
-                  <button class="btn-buy" onclick="openProductModal('Gaseosa', 4500, 'simple')">¡COMPRAR!</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- SODA ITALIANA -->
-          <div id="cat-soda">
-            <div class="category-section-title">Soda Italiana</div>
-            <div class="category-grid">
-              <div class="product-card">
-                <div class="product-img"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Soda Italiana"></div>
-                <div class="product-info">
-                  <h4>$ 9.000</h4>
-                  <h3>Soda Italiana Refrescante</h3>
-                  <button class="btn-buy" onclick="openProductModal('Soda Italiana Refrescante', 9000, 'simple')">¡COMPRAR!</button>
+                  <h4>$ 5.500</h4>
+                  <h3>Coca Cola 400 Ml</h3>
+                  <button class="btn-buy" onclick="openProductModal('Coca Cola 400 Ml', 5500, 'simple', 'BEBIDAS')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -1321,39 +1321,50 @@
       <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE MALTEADA -->
       <div id="malteadaCustomizationContainer" style="display:none;">
 
-        <div class="section-title">ELIGE TU SABOR FAVORITO <span>(Opcional)</span></div>
-        <div class="opt-box" id="box_malteada_cafe">
+        <div class="section-title">ELIGE TU SABOR FAVORITO <span>(Opcional) Máximo 1</span></div>
+        <div class="opt-box" id="box_malteada_cafe" onclick="selectMalteadaFlavor('cafe', 'Malteada De Café')">
           <span>MALTEADA DE CAFE</span>
-          <div class="qty-controls">
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('cafe', -1)">-</button>
-            <span class="qty-value" id="qty_malteada_cafe">0</span>
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('cafe', 1)">+</button>
-          </div>
         </div>
-        <div class="opt-box" id="box_malteada_frutosrojos">
+        <div class="opt-box" id="box_malteada_frutosrojos" onclick="selectMalteadaFlavor('frutosrojos', 'Malteada De Frutos Rojos')">
           <span>MALTEADA DE FRUTOS ROJOS</span>
-          <div class="qty-controls">
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('frutosrojos', -1)">-</button>
-            <span class="qty-value" id="qty_malteada_frutosrojos">0</span>
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('frutosrojos', 1)">+</button>
-          </div>
         </div>
-        <div class="opt-box" id="box_malteada_lulo">
+        <div class="opt-box" id="box_malteada_lulo" onclick="selectMalteadaFlavor('lulo', 'Malteada De Lulo')">
           <span>MALTEADA DE LULO</span>
-          <div class="qty-controls">
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('lulo', -1)">-</button>
-            <span class="qty-value" id="qty_malteada_lulo">0</span>
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('lulo', 1)">+</button>
-          </div>
         </div>
-        <div class="opt-box" id="box_malteada_maracuya">
+        <div class="opt-box" id="box_malteada_maracuya" onclick="selectMalteadaFlavor('maracuya', 'Malteada De Maracuya')">
           <span>MALTEADA DE MARACUYA</span>
+        </div>
+
+        <div class="section-title">TOPPINGS MALTEADA <span id="malteadaToppingsCounterText">(Opcional) Máximo 2</span></div>
+        <div class="opt-box" id="box_malteadatop_chantilly">
+          <span>CHANTILLY</span>
           <div class="qty-controls">
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('maracuya', -1)">-</button>
-            <span class="qty-value" id="qty_malteada_maracuya">0</span>
-            <button type="button" class="qty-btn" onclick="changeMalteadaQty('maracuya', 1)">+</button>
+            <button type="button" class="qty-btn" onclick="changeMalteadaToppingQty('chantilly', -1)">-</button>
+            <span class="qty-value" id="qty_malteadatop_chantilly">0</span>
+            <button type="button" class="qty-btn" onclick="changeMalteadaToppingQty('chantilly', 1)">+</button>
           </div>
         </div>
+        <div class="opt-box" id="box_malteadatop_galletablanca">
+          <span>GALLETA TRITURADA BLANCA</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeMalteadaToppingQty('galletablanca', -1)">-</button>
+            <span class="qty-value" id="qty_malteadatop_galletablanca">0</span>
+            <button type="button" class="qty-btn" onclick="changeMalteadaToppingQty('galletablanca', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_malteadatop_galletaoreo">
+          <span>GALLETA TRITURADA OREO</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeMalteadaToppingQty('galletaoreo', -1)">-</button>
+            <span class="qty-value" id="qty_malteadatop_galletaoreo">0</span>
+            <button type="button" class="qty-btn" onclick="changeMalteadaToppingQty('galletaoreo', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="section-title">SALSA DE MALTEADA <span>(Opcional) Máximo 1</span></div>
+        <div class="opt-box" id="box_malteadasalsa_chocolate" onclick="selectMalteadaSalsa('chocolate', 'Chocolate')"><span>CHOCOLATE</span></div>
+        <div class="opt-box" id="box_malteadasalsa_lechera" onclick="selectMalteadaSalsa('lechera', 'Lechera')"><span>LECHERA</span></div>
+        <div class="opt-box" id="box_malteadasalsa_miel" onclick="selectMalteadaSalsa('miel', 'Miel')"><span>MIEL</span></div>
 
         <div class="section-title">COMENTARIOS</div>
         <textarea id="malteadaComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
@@ -1391,10 +1402,31 @@
         <textarea id="tortaComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
       </div>
 
+      <!-- CONTENEDOR ESPECÍFICO PARA PRODUCTOS SIMPLES (SOLO COMPRA) -->
+      <div id="simpleCustomizationContainer" style="display:none;">
+
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="simpleComentarios" rows="3" placeholder="Comentarios"></textarea>
+
+        <div class="section-title" style="display:flex; align-items:center; justify-content:space-between;">
+          <span>CANTIDAD</span>
+          <div class="qty-controls" style="margin-left:0;">
+            <button type="button" class="qty-btn" onclick="changeSimpleProductQty(-1)">-</button>
+            <span class="qty-value" id="simpleProductQty">1</span>
+            <button type="button" class="qty-btn" onclick="changeSimpleProductQty(1)">+</button>
+          </div>
+        </div>
+
+        <div style="margin-top:12px; font-size:13px; color:#666;">
+          Categoría: <strong id="simpleCategoryLabel"></strong>
+        </div>
+
+      </div>
+
       <!-- ACCIONES DENTRO DEL MODAL -->
       <div class="modal-footer-action">
         <div class="item-total-price">Total: <span id="modalTotalPrice">$ 0</span></div>
-        <button class="btn-add-cart" onclick="addToCart()">Agregar a la canasta</button>
+        <button class="btn-add-cart" onclick="addToCart()">Agregar A La Canasta</button>
       </div>
     </div>
   </div>
@@ -1422,10 +1454,16 @@
     let totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, bbq: 0, ajo: 0, tatemada: 0, sourcream: 0 };
 
     // Variables de configuración de Malteada
-    let malteadaQuantities = { cafe: 0, frutosrojos: 0, lulo: 0, maracuya: 0 };
+    let malteadaSelectedFlavor = null;
+    let malteadaToppingQuantities = { chantilly: 0, galletablanca: 0, galletaoreo: 0 };
+    let malteadaSelectedSalsa = null;
 
     // Variables de configuración de Porción de Torta
     let tortaSelections = { cakeA: null, toppingA: null, cakeB: null, toppingB: null, salsa: null };
+
+    // Variables de configuración de Productos Simples
+    let simpleProductQty = 1;
+    let simpleCategory = '';
 
     // Configuración del horario de atención (formato 24h)
     const STORE_OPEN_HOUR = 10;   // 10:00 am
@@ -1484,7 +1522,7 @@
       }
     }
 
-    function openProductModal(name, price, type) {
+    function openProductModal(name, price, type, category) {
       currentProduct = { name, basePrice: price, type };
       document.getElementById('modalProductName').innerText = name;
       document.getElementById('modalBasePrice').innerText = '$ ' + price.toLocaleString();
@@ -1510,17 +1548,27 @@
       document.getElementById('totoposComentarios').value = '';
 
       // Resetear selecciones de Malteada
-      malteadaQuantities = { cafe: 0, frutosrojos: 0, lulo: 0, maracuya: 0 };
+      malteadaSelectedFlavor = null;
+      malteadaToppingQuantities = { chantilly: 0, galletablanca: 0, galletaoreo: 0 };
+      malteadaSelectedSalsa = null;
       document.getElementById('malteadaComentarios').value = '';
 
       // Resetear selecciones de Porción de Torta
       tortaSelections = { cakeA: null, toppingA: null, cakeB: null, toppingB: null, salsa: null };
       document.getElementById('tortaComentarios').value = '';
 
+      // Resetear selecciones de Productos Simples
+      simpleProductQty = 1;
+      simpleCategory = category || '';
+      document.getElementById('simpleComentarios').value = '';
+      document.getElementById('simpleProductQty').innerText = '1';
+      document.getElementById('simpleCategoryLabel').innerText = simpleCategory;
+
       // Actualizar UI del modal
       document.querySelectorAll('.qty-value').forEach(el => el.innerText = '0');
       document.querySelectorAll('.opt-box').forEach(el => el.classList.remove('selected-blue'));
       document.getElementById('sandwichProductQty').innerText = '1';
+      document.getElementById('simpleProductQty').innerText = '1';
 
       // Mostrar u ocultar personalizaciones según el tipo
       document.getElementById('bowlCustomizationContainer').style.display = 'none';
@@ -1528,6 +1576,7 @@
       document.getElementById('totoposCustomizationContainer').style.display = 'none';
       document.getElementById('malteadaCustomizationContainer').style.display = 'none';
       document.getElementById('tortaCustomizationContainer').style.display = 'none';
+      document.getElementById('simpleCustomizationContainer').style.display = 'none';
 
       if (type === 'sandwich') {
         document.getElementById('sandwichCustomizationContainer').style.display = 'block';
@@ -1537,6 +1586,8 @@
         document.getElementById('malteadaCustomizationContainer').style.display = 'block';
       } else if (type === 'torta') {
         document.getElementById('tortaCustomizationContainer').style.display = 'block';
+      } else if (type === 'simple') {
+        document.getElementById('simpleCustomizationContainer').style.display = 'block';
       } else {
         document.getElementById('bowlCustomizationContainer').style.display = 'block';
       }
@@ -1776,18 +1827,57 @@
       calculateModalTotal();
     }
 
-    // 13. Lógica de Sabores de Malteada (sin límite, define la cantidad total del producto)
-    function changeMalteadaQty(key, delta) {
-      let newVal = malteadaQuantities[key] + delta;
+    // 13. Lógica de Sabor de Malteada (Selección única, opcional, Máximo 1)
+    function selectMalteadaFlavor(key, displayName) {
+      if (malteadaSelectedFlavor && malteadaSelectedFlavor.key === key) {
+        malteadaSelectedFlavor = null;
+        document.getElementById('box_malteada_' + key).classList.remove('selected-blue');
+      } else {
+        if (malteadaSelectedFlavor) {
+          document.getElementById('box_malteada_' + malteadaSelectedFlavor.key).classList.remove('selected-blue');
+        }
+        malteadaSelectedFlavor = { key, displayName };
+        document.getElementById('box_malteada_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
+    // 13b. Lógica de Toppings de Malteada (Máximo 2 en total)
+    function changeMalteadaToppingQty(key, delta) {
+      let currentVal = malteadaToppingQuantities[key];
+      let newVal = currentVal + delta;
+
       if (newVal < 0) newVal = 0;
 
-      malteadaQuantities[key] = newVal;
-      document.getElementById('qty_malteada_' + key).innerText = newVal;
+      let totalOthers = Object.keys(malteadaToppingQuantities).reduce((sum, k) => k === key ? sum : sum + malteadaToppingQuantities[k], 0);
 
-      const box = document.getElementById('box_malteada_' + key);
+      if (totalOthers + newVal > 2) {
+        alert('Solo puedes seleccionar un máximo de 2 toppings en total.');
+        return;
+      }
+
+      malteadaToppingQuantities[key] = newVal;
+      document.getElementById('qty_malteadatop_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_malteadatop_' + key);
       if (newVal > 0) box.classList.add('selected-blue');
       else box.classList.remove('selected-blue');
 
+      calculateModalTotal();
+    }
+
+    // 13c. Lógica de Salsa de Malteada (Selección única, opcional, Máximo 1)
+    function selectMalteadaSalsa(key, displayName) {
+      if (malteadaSelectedSalsa && malteadaSelectedSalsa.key === key) {
+        malteadaSelectedSalsa = null;
+        document.getElementById('box_malteadasalsa_' + key).classList.remove('selected-blue');
+      } else {
+        if (malteadaSelectedSalsa) {
+          document.getElementById('box_malteadasalsa_' + malteadaSelectedSalsa.key).classList.remove('selected-blue');
+        }
+        malteadaSelectedSalsa = { key, displayName };
+        document.getElementById('box_malteadasalsa_' + key).classList.add('selected-blue');
+      }
       calculateModalTotal();
     }
 
@@ -1807,6 +1897,15 @@
       calculateModalTotal();
     }
 
+    // 15. Lógica de Cantidad de Productos Simples (mínimo 1)
+    function changeSimpleProductQty(delta) {
+      let newVal = simpleProductQty + delta;
+      if (newVal < 1) newVal = 1;
+      simpleProductQty = newVal;
+      document.getElementById('simpleProductQty').innerText = newVal;
+      calculateModalTotal();
+    }
+
     // Cálculo dinámico del precio total en el modal
     function calculateModalTotal() {
       // Cálculo específico para Totopos Wed (precio fijo, sin adiciones de costo)
@@ -1815,13 +1914,10 @@
         return currentProduct.basePrice;
       }
 
-      // Cálculo específico para Malteada (precio base x cantidad total de sabores elegidos)
+      // Cálculo específico para Malteada (precio base fijo, sin adiciones de costo)
       if (currentProduct.type === 'malteada') {
-        let totalQty = Object.values(malteadaQuantities).reduce((a, b) => a + b, 0);
-        if (totalQty === 0) totalQty = 1;
-        let malteadaTotal = currentProduct.basePrice * totalQty;
-        document.getElementById('modalTotalPrice').innerText = '$ ' + malteadaTotal.toLocaleString();
-        return malteadaTotal;
+        document.getElementById('modalTotalPrice').innerText = '$ ' + currentProduct.basePrice.toLocaleString();
+        return currentProduct.basePrice;
       }
 
       // Cálculo específico para Porción de Torta (precio fijo, sin adiciones de costo)
@@ -1837,6 +1933,13 @@
         swTotal = swTotal * sandwichProductQty;
         document.getElementById('modalTotalPrice').innerText = '$ ' + swTotal.toLocaleString();
         return swTotal;
+      }
+
+      // Cálculo específico para Productos Simples (precio base x cantidad)
+      if (currentProduct.type === 'simple') {
+        let simpleTotal = currentProduct.basePrice * simpleProductQty;
+        document.getElementById('modalTotalPrice').innerText = '$ ' + simpleTotal.toLocaleString();
+        return simpleTotal;
       }
 
       let total = currentProduct.basePrice;
@@ -1896,18 +1999,19 @@
 
       // Rama específica para Malteada
       if (currentProduct.type === 'malteada') {
-        let flavorNames = { cafe: 'Malteada De Café', frutosrojos: 'Malteada De Frutos Rojos', lulo: 'Malteada De Lulo', maracuya: 'Malteada De Maracuyá' };
-        let parts = [];
-        let totalQty = 0;
-        for (let k in malteadaQuantities) {
-          if (malteadaQuantities[k] > 0) {
-            parts.push(`${flavorNames[k]} x${malteadaQuantities[k]}`);
-            totalQty += malteadaQuantities[k];
-          }
-        }
-        if (totalQty === 0) totalQty = 1;
+        let details = [];
 
-        let details = parts.length > 0 ? [`Sabor: ${parts.join(', ')}`] : [];
+        if (malteadaSelectedFlavor) details.push(`Sabor: ${malteadaSelectedFlavor.displayName}`);
+
+        let toppingNames = { chantilly: 'Chantilly', galletablanca: 'Galleta Triturada Blanca', galletaoreo: 'Galleta Triturada Oreo' };
+        let toppingParts = [];
+        for (let k in malteadaToppingQuantities) {
+          if (malteadaToppingQuantities[k] > 0) toppingParts.push(`${toppingNames[k]} x${malteadaToppingQuantities[k]}`);
+        }
+        if (toppingParts.length > 0) details.push(`Toppings: ${toppingParts.join(', ')}`);
+
+        if (malteadaSelectedSalsa) details.push(`Salsa: ${malteadaSelectedSalsa.displayName}`);
+
         let comentarios = document.getElementById('malteadaComentarios').value.trim();
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
@@ -1915,7 +2019,7 @@
           name: currentProduct.name,
           price: currentProduct.basePrice,
           details: details.join(' | ') || 'Estándar',
-          quantity: totalQty
+          quantity: 1
         });
 
         updateCartBadge();
@@ -1970,6 +2074,25 @@
           price: unitPrice,
           details: details.join(' | ') || 'Estándar',
           quantity: sandwichProductQty
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
+      // Rama específica para Productos Simples (solo comentarios y cantidad)
+      if (currentProduct.type === 'simple') {
+        let details = [];
+        let comentarios = document.getElementById('simpleComentarios').value.trim();
+        if (comentarios) details.push(`Comentarios: ${comentarios}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: currentProduct.basePrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: simpleProductQty
         });
 
         updateCartBadge();
