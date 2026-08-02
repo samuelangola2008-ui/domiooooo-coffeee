@@ -772,7 +772,7 @@
                 <div class="product-info">
                   <h4>$ 19.000</h4>
                   <h3>Nachos con Queso y Carne</h3>
-                  <button class="btn-buy" onclick="openProductModal('Nachos con Queso y Carne', 19000, 'simple', 'NACHOS')">¡COMPRAR!</button>
+                  <button class="btn-buy" onclick="openProductModal('Nachos con Queso y Carne', 19000, 'nachos')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -1399,6 +1399,49 @@
         <textarea id="tortaComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
       </div>
 
+      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE NACHOS -->
+      <div id="nachosCustomizationContainer" style="display:none;">
+
+        <div class="section-title">PASO 1. PROTEÍNA <span>(Elige 1)</span></div>
+        <div class="opt-box" id="box_nachosprot_carne" onclick="selectNachosProtein('carne', 'Carne Desmechada', 3000)">
+          <span>CARNE DESMECHADA</span> <span class="price-add">+ $ 3.000</span>
+        </div>
+        <div class="opt-box" id="box_nachosprot_costilla" onclick="selectNachosProtein('costilla', 'Costilla Ahumada BBQ', 3000)">
+          <span>COSTILLA AHUMADA BBQ</span> <span class="price-add">+ $ 3.000</span>
+        </div>
+        <div class="opt-box" id="box_nachosprot_cerdo" onclick="selectNachosProtein('cerdo', 'Cerdo Pulled Pork', 0)">
+          <span>CERDO PULLED PORK</span>
+        </div>
+        <div class="opt-box" id="box_nachosprot_tender" onclick="selectNachosProtein('tender', 'Tender de Pechuga', 0)">
+          <span>TENDER DE PECHUGA</span>
+        </div>
+        <div class="opt-box" id="box_nachosprot_chorizo" onclick="selectNachosProtein('chorizo', 'Chorizo de Cerdo', 0)">
+          <span>CHORIZO DE CERDO (NUEVA PROTEÍNA)</span>
+        </div>
+
+        <div class="section-title">PASO 2. TOPPINGS <span id="nachosToppingsCounterText">(Elige 7)</span></div>
+        <div class="opt-box" id="box_nachostop_chicharron" onclick="toggleNachosTop('chicharron', 'Chicharrón', 0)"><span>CHICHARRÓN</span></div>
+        <div class="opt-box" id="box_nachostop_topdeldia" onclick="toggleNachosTop('topdeldia', 'Topping del Día', 0)"><span>TOPPING DEL DÍA</span></div>
+        <div class="opt-box" id="box_nachostop_maizcitos" onclick="toggleNachosTop('maizcitos', 'Maizcitos', 0)"><span>MAIZCITOS</span></div>
+        <div class="opt-box" id="box_nachostop_cebollapimenton" onclick="toggleNachosTop('cebollapimenton', 'Cebolla y Pimentón Encurtido', 0)"><span>CEBOLLA Y PIMENTÓN ENCURTIDO</span></div>
+        <div class="opt-box" id="box_nachostop_guacamole" onclick="toggleNachosTop('guacamole', 'Guacamole', 0)"><span>GUACAMOLE</span></div>
+        <div class="opt-box" id="box_nachostop_pico" onclick="toggleNachosTop('pico', 'Pico de Gallo', 0)"><span>PICO DE GALLO</span></div>
+        <div class="opt-box" id="box_nachostop_doritox" onclick="toggleNachosTop('doritox', 'Doritox', 0)"><span>DORITOX</span></div>
+        <div class="opt-box" id="box_nachostop_pepino" onclick="toggleNachosTop('pepino', 'Pepino al Cilantro', 0)"><span>PEPINO AL CILANTRO</span></div>
+        <div class="opt-box" id="box_nachostop_sour" onclick="toggleNachosTop('sour', 'Sour Cream', 0)"><span>SOUR CREAM</span></div>
+        <div class="opt-box" id="box_nachostop_cebollacrispy" onclick="toggleNachosTop('cebollacrispy', 'Cebolla Crispy', 0)"><span>CEBOLLA CRISPY</span></div>
+        <div class="opt-box" id="box_nachostop_jalapenos" onclick="toggleNachosTop('jalapenos', 'Jalapeños', 0)"><span>JALAPEÑOS</span></div>
+        <div class="opt-box" id="box_nachostop_queso" onclick="toggleNachosTop('queso', 'Queso Mozzarella', 2000)"><span>QUESO MOZZARELLA</span> <span class="price-add">+ $ 2.000</span></div>
+
+        <div class="section-title">PASO 3. SALSAS <span>(Elige 1)</span></div>
+        <div class="opt-box" id="box_nachossalsa_tatemada" onclick="selectNachosSalsa('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
+        <div class="opt-box" id="box_nachossalsa_ajo" onclick="selectNachosSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
+        <div class="opt-box" id="box_nachossalsa_bbq" onclick="selectNachosSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
+
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="nachosComentarios" rows="3" placeholder="Comentarios (opcional)"></textarea>
+      </div>
+
       <!-- CONTENEDOR ESPECÍFICO PARA PRODUCTOS SIMPLES (SOLO COMPRA) -->
       <div id="simpleCustomizationContainer" style="display:none;">
 
@@ -1457,6 +1500,11 @@
 
     // Variables de configuración de Porción de Torta
     let tortaSelections = { cakeA: null, toppingA: null, cakeB: null, toppingB: null, salsa: null };
+
+    // Variables de configuración de Nachos
+    let nachosSelectedProtein = null;
+    let nachosSelectedTops = {};
+    let nachosSelectedSalsa = null;
 
     // Variables de configuración de Productos Simples
     let simpleProductQty = 1;
@@ -1554,6 +1602,13 @@
       tortaSelections = { cakeA: null, toppingA: null, cakeB: null, toppingB: null, salsa: null };
       document.getElementById('tortaComentarios').value = '';
 
+      // Resetear selecciones de Nachos
+      nachosSelectedProtein = null;
+      nachosSelectedTops = {};
+      nachosSelectedSalsa = null;
+      document.getElementById('nachosComentarios').value = '';
+      document.getElementById('nachosToppingsCounterText').innerText = '(0 / 7 elegidos)';
+
       // Resetear selecciones de Productos Simples
       simpleProductQty = 1;
       simpleCategory = category || '';
@@ -1573,6 +1628,7 @@
       document.getElementById('totoposCustomizationContainer').style.display = 'none';
       document.getElementById('malteadaCustomizationContainer').style.display = 'none';
       document.getElementById('tortaCustomizationContainer').style.display = 'none';
+      document.getElementById('nachosCustomizationContainer').style.display = 'none';
       document.getElementById('simpleCustomizationContainer').style.display = 'none';
 
       if (type === 'sandwich') {
@@ -1583,6 +1639,8 @@
         document.getElementById('malteadaCustomizationContainer').style.display = 'block';
       } else if (type === 'torta') {
         document.getElementById('tortaCustomizationContainer').style.display = 'block';
+      } else if (type === 'nachos') {
+        document.getElementById('nachosCustomizationContainer').style.display = 'block';
       } else if (type === 'simple') {
         document.getElementById('simpleCustomizationContainer').style.display = 'block';
       } else {
@@ -1903,6 +1961,57 @@
       calculateModalTotal();
     }
 
+    // 16. Lógica de Proteína de Nachos (Paso 1, elige 1)
+    function selectNachosProtein(key, displayName, price) {
+      if (nachosSelectedProtein && nachosSelectedProtein.key === key) {
+        nachosSelectedProtein = null;
+        document.getElementById('box_nachosprot_' + key).classList.remove('selected-blue');
+      } else {
+        if (nachosSelectedProtein) {
+          document.getElementById('box_nachosprot_' + nachosSelectedProtein.key).classList.remove('selected-blue');
+        }
+        nachosSelectedProtein = { key, displayName, price };
+        document.getElementById('box_nachosprot_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
+    // 17. Lógica de Toppings de Nachos (Paso 2, elige 7)
+    function toggleNachosTop(key, displayName, price) {
+      const box = document.getElementById('box_nachostop_' + key);
+      if (nachosSelectedTops[key]) {
+        delete nachosSelectedTops[key];
+        box.classList.remove('selected-blue');
+      } else {
+        const currentCount = Object.keys(nachosSelectedTops).length;
+        if (currentCount >= 7) {
+          alert('Solo puedes seleccionar un máximo de 7 toppings.');
+          return;
+        }
+        nachosSelectedTops[key] = { displayName, price };
+        box.classList.add('selected-blue');
+      }
+
+      let count = Object.keys(nachosSelectedTops).length;
+      document.getElementById('nachosToppingsCounterText').innerText = `(${count} / 7 elegidos)`;
+      calculateModalTotal();
+    }
+
+    // 18. Lógica de Salsa de Nachos (Paso 3, elige 1)
+    function selectNachosSalsa(key, displayName) {
+      if (nachosSelectedSalsa && nachosSelectedSalsa.key === key) {
+        nachosSelectedSalsa = null;
+        document.getElementById('box_nachossalsa_' + key).classList.remove('selected-blue');
+      } else {
+        if (nachosSelectedSalsa) {
+          document.getElementById('box_nachossalsa_' + nachosSelectedSalsa.key).classList.remove('selected-blue');
+        }
+        nachosSelectedSalsa = { key, displayName };
+        document.getElementById('box_nachossalsa_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
     // Cálculo dinámico del precio total en el modal
     function calculateModalTotal() {
       // Cálculo específico para Totopos Wed (precio fijo, sin adiciones de costo)
@@ -1921,6 +2030,17 @@
       if (currentProduct.type === 'torta') {
         document.getElementById('modalTotalPrice').innerText = '$ ' + currentProduct.basePrice.toLocaleString();
         return currentProduct.basePrice;
+      }
+
+      // Cálculo específico para Nachos (proteína + toppings con costo)
+      if (currentProduct.type === 'nachos') {
+        let nachosTotal = currentProduct.basePrice;
+        if (nachosSelectedProtein) nachosTotal += nachosSelectedProtein.price;
+        for (let k in nachosSelectedTops) {
+          nachosTotal += nachosSelectedTops[k].price;
+        }
+        document.getElementById('modalTotalPrice').innerText = '$ ' + nachosTotal.toLocaleString();
+        return nachosTotal;
       }
 
       // Cálculo específico para Sandwich
@@ -2037,6 +2157,38 @@
         cart.push({
           name: currentProduct.name,
           price: currentProduct.basePrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: 1
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
+      // Rama específica para Nachos
+      if (currentProduct.type === 'nachos') {
+        let unitPrice = currentProduct.basePrice;
+        if (nachosSelectedProtein) unitPrice += nachosSelectedProtein.price;
+        let details = [];
+
+        if (nachosSelectedProtein) details.push(`Proteína: ${nachosSelectedProtein.displayName}`);
+
+        let topParts = [];
+        for (let k in nachosSelectedTops) {
+          topParts.push(nachosSelectedTops[k].displayName);
+        }
+        if (topParts.length > 0) details.push(`Toppings: ${topParts.join(', ')}`);
+
+        if (nachosSelectedSalsa) details.push(`Salsa: ${nachosSelectedSalsa.displayName}`);
+
+        let comentarios = document.getElementById('nachosComentarios').value.trim();
+        if (comentarios) details.push(`Comentarios: ${comentarios}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: unitPrice,
           details: details.join(' | ') || 'Estándar',
           quantity: 1
         });
