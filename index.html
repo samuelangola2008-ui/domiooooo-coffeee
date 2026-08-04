@@ -2707,38 +2707,57 @@
       // El mensaje de WhatsApp es texto plano (no HTML), por lo que no hay
       // riesgo de XSS aquí; igualmente usamos los valores ya recortados arriba.
       let lines = [];
-      lines.push('🛒 *NUEVO PEDIDO*');
+      lines.push('╔════════════════════════════╗');
+      lines.push('🛵 *NUEVO PEDIDO DE DOMICILIO*');
+      lines.push('╚════════════════════════════╝');
       lines.push('');
-      lines.push(`👤 *Cliente:* ${nombre}`);
-      lines.push(`📞 *WhatsApp:* ${whatsapp}`);
+      lines.push('👤 *DATOS DEL CLIENTE*');
+      lines.push('───────────────────');
+      lines.push(`Nombre: ${nombre}`);
+      lines.push(`WhatsApp: ${whatsapp}`);
       lines.push('');
-      lines.push(`📍 *Dirección:* ${direccion}`);
-      lines.push(`🏘️ *Barrio:* ${barrio}`);
-      if (referencia) lines.push(`📌 *Referencia:* ${referencia}`);
+      lines.push('📍 *DIRECCIÓN DE ENTREGA*');
+      lines.push('──────────────────────');
+      lines.push(`Dirección: ${direccion}`);
+      lines.push(`Barrio: ${barrio}`);
+      if (referencia) lines.push(`Referencia: ${referencia}`);
       lines.push('');
-      lines.push('🍽️ *Productos:*');
+      lines.push('🛒 *PRODUCTOS SOLICITADOS*');
+      lines.push('───────────────────────');
 
       let subtotal = 0;
       cart.forEach((item) => {
         let itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
 
-        lines.push(`• ${item.quantity}x ${item.name} - $${itemTotal.toLocaleString()}`);
+        let label = `${item.quantity} × ${item.name}`;
+        let priceStr = `$${itemTotal.toLocaleString()}`;
+        let dotsCount = Math.max(3, 40 - label.length - priceStr.length);
+        lines.push(`• ${label} ${'.'.repeat(dotsCount)} ${priceStr}`);
+
         if (item.details && item.details !== 'Estándar') {
           lines.push(`   ↳ ${item.details}`);
         }
       });
 
       lines.push('');
-      lines.push(`💳 *Método de pago:* ${pago}`);
+      lines.push('💳 *FORMA DE PAGO*');
+      lines.push('────────────────');
+      lines.push(pago);
 
       if (observaciones) {
         lines.push('');
-        lines.push(`📝 *Observaciones:* ${observaciones}`);
+        lines.push('📝 *OBSERVACIONES*');
+        lines.push('───────────────');
+        lines.push(observaciones);
       }
 
       lines.push('');
-      lines.push(`💰 *Total: $${subtotal.toLocaleString()}*`);
+      lines.push('💰 *RESUMEN DEL PEDIDO*');
+      lines.push('────────────────────');
+      lines.push(`Total a pagar: $${subtotal.toLocaleString()}`);
+      lines.push('');
+      lines.push('✅ Gracias por tu pedido');
 
       let mensaje = lines.join('\n');
 
