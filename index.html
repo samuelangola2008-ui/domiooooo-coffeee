@@ -1021,30 +1021,6 @@
       <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE BOWL -->
       <div id="bowlCustomizationContainer">
 
-        <!-- MODALIDAD (Para comer en mesa / Para llevar) -->
-        <div class="section-title">MODALIDAD <span>(Elige 1)</span></div>
-        <div class="opt-box" id="box_bowlmod_mesa" onclick="selectBowlModality('mesa', 'Para Comer en Mesa', 19000)">
-          <span>PARA COMER EN MESA</span> <span class="price-add">$ 19.000</span>
-        </div>
-        <div class="opt-box" id="box_bowlmod_llevar" onclick="selectBowlModality('llevar', 'Para Llevar', 21000)">
-          <span>PARA LLEVAR</span> <span class="price-add">$ 21.000</span>
-        </div>
-
-        <!-- COMBO CON SODA ITALIANA -->
-        <div class="section-title">COMBO <span>(Opcional · En combo bowl + soda: $20.000 mesa / $22.000 llevar)</span></div>
-        <div class="opt-box" id="box_bowl_combo_soda" onclick="toggleBowlComboSoda()">
-          <span>AGREGAR SODA ITALIANA (COMBO)</span> <span class="price-add">+ $ 1.000</span>
-        </div>
-
-        <!-- FORMULARIO: SABOR DE LA SODA ITALIANA DEL COMBO -->
-        <div id="bowlSodaFlavorForm" style="display:none;">
-          <div class="section-title">ELIGE EL SABOR DE TU SODA ITALIANA <span>(Elige 1)</span></div>
-          <div class="opt-box" id="box_bowl_sodaflavor_frutosrojos" onclick="selectBowlSodaFlavor('frutosrojos', 'Frutos Rojos')"><span>FRUTOS ROJOS</span></div>
-          <div class="opt-box" id="box_bowl_sodaflavor_maracuya" onclick="selectBowlSodaFlavor('maracuya', 'Maracuyá')"><span>MARACUYÁ</span></div>
-          <div class="opt-box" id="box_bowl_sodaflavor_lulo" onclick="selectBowlSodaFlavor('lulo', 'Lulo')"><span>LULO</span></div>
-          <div class="opt-box" id="box_bowl_sodaflavor_panelalimon" onclick="selectBowlSodaFlavor('panelalimon', 'Panela y Limón')"><span>PANELA Y LIMÓN</span></div>
-        </div>
-
         <!-- BASES (Máx 3 porciones en total, 0 a 2 por ingrediente) -->
         <div class="section-title">PASO 1. BASES DE BOWL <span>(Elige las 3 · Máx 3 porciones en total)</span></div>
         <div class="opt-box" id="box_base_arroz">
@@ -1379,21 +1355,6 @@
         <div class="opt-box" id="box_sw_salsa_ajo" onclick="selectSandwichSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
         <div class="opt-box" id="box_sw_salsa_bbq" onclick="selectSandwichSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
 
-        <!-- COMBO CON SODA ITALIANA -->
-        <div class="section-title">COMBO <span>(Opcional · Sándwich $26.000 · Combo Sándwich + Soda $27.000)</span></div>
-        <div class="opt-box" id="box_sw_combo_soda" onclick="toggleSandwichComboSoda()">
-          <span>AGREGAR SODA ITALIANA (COMBO)</span> <span class="price-add">+ $ 1.000</span>
-        </div>
-
-        <!-- FORMULARIO: SABOR DE LA SODA ITALIANA DEL COMBO -->
-        <div id="swSodaFlavorForm" style="display:none;">
-          <div class="section-title">ELIGE EL SABOR DE TU SODA ITALIANA <span>(Elige 1)</span></div>
-          <div class="opt-box" id="box_sw_sodaflavor_frutosrojos" onclick="selectSandwichSodaFlavor('frutosrojos', 'Frutos Rojos')"><span>FRUTOS ROJOS</span></div>
-          <div class="opt-box" id="box_sw_sodaflavor_maracuya" onclick="selectSandwichSodaFlavor('maracuya', 'Maracuyá')"><span>MARACUYÁ</span></div>
-          <div class="opt-box" id="box_sw_sodaflavor_lulo" onclick="selectSandwichSodaFlavor('lulo', 'Lulo')"><span>LULO</span></div>
-          <div class="opt-box" id="box_sw_sodaflavor_panelalimon" onclick="selectSandwichSodaFlavor('panelalimon', 'Panela y Limón')"><span>PANELA Y LIMÓN</span></div>
-        </div>
-
         <div style="font-size:12px; color:#777; margin: -4px 0 10px;">Nota: los sándwichs vienen acompañados con totopos.</div>
 
         <!-- COMENTARIOS -->
@@ -1468,21 +1429,6 @@
             <span class="qty-value" id="qty_totopos_tatemada">0</span>
             <button type="button" class="qty-btn" onclick="changeTotoposQty('tatemada', 1)">+</button>
           </div>
-        </div>
-
-        <!-- COMBO CON SODA ITALIANA -->
-        <div class="section-title">COMBO <span>(Opcional · Totopos $9.000 · Combo Totopos + Soda $10.000)</span></div>
-        <div class="opt-box" id="box_totopos_combo_soda" onclick="toggleTotoposComboSoda()">
-          <span>AGREGAR SODA ITALIANA (COMBO)</span> <span class="price-add">+ $ 1.000</span>
-        </div>
-
-        <!-- FORMULARIO: SABOR DE LA SODA ITALIANA DEL COMBO -->
-        <div id="totoposSodaFlavorForm" style="display:none;">
-          <div class="section-title">ELIGE EL SABOR DE TU SODA ITALIANA <span>(Elige 1)</span></div>
-          <div class="opt-box" id="box_totopos_sodaflavor_frutosrojos" onclick="selectTotoposSodaFlavor('frutosrojos', 'Frutos Rojos')"><span>FRUTOS ROJOS</span></div>
-          <div class="opt-box" id="box_totopos_sodaflavor_maracuya" onclick="selectTotoposSodaFlavor('maracuya', 'Maracuyá')"><span>MARACUYÁ</span></div>
-          <div class="opt-box" id="box_totopos_sodaflavor_lulo" onclick="selectTotoposSodaFlavor('lulo', 'Lulo')"><span>LULO</span></div>
-          <div class="opt-box" id="box_totopos_sodaflavor_panelalimon" onclick="selectTotoposSodaFlavor('panelalimon', 'Panela y Limón')"><span>PANELA Y LIMÓN</span></div>
         </div>
 
         <div class="section-title">COMENTARIOS</div>
@@ -1612,21 +1558,6 @@
         <div class="opt-box" id="box_nachossalsa_ajo" onclick="selectNachosSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
         <div class="opt-box" id="box_nachossalsa_bbq" onclick="selectNachosSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
 
-        <!-- COMBO CON SODA ITALIANA -->
-        <div class="section-title">COMBO <span>(Opcional · Nachos $27.000 · Combo Nachos + Soda $28.000)</span></div>
-        <div class="opt-box" id="box_nachos_combo_soda" onclick="toggleNachosComboSoda()">
-          <span>AGREGAR SODA ITALIANA (COMBO)</span> <span class="price-add">+ $ 1.000</span>
-        </div>
-
-        <!-- FORMULARIO: SABOR DE LA SODA ITALIANA DEL COMBO -->
-        <div id="nachosSodaFlavorForm" style="display:none;">
-          <div class="section-title">ELIGE EL SABOR DE TU SODA ITALIANA <span>(Elige 1)</span></div>
-          <div class="opt-box" id="box_nachos_sodaflavor_frutosrojos" onclick="selectNachosSodaFlavor('frutosrojos', 'Frutos Rojos')"><span>FRUTOS ROJOS</span></div>
-          <div class="opt-box" id="box_nachos_sodaflavor_maracuya" onclick="selectNachosSodaFlavor('maracuya', 'Maracuyá')"><span>MARACUYÁ</span></div>
-          <div class="opt-box" id="box_nachos_sodaflavor_lulo" onclick="selectNachosSodaFlavor('lulo', 'Lulo')"><span>LULO</span></div>
-          <div class="opt-box" id="box_nachos_sodaflavor_panelalimon" onclick="selectNachosSodaFlavor('panelalimon', 'Panela y Limón')"><span>PANELA Y LIMÓN</span></div>
-        </div>
-
         <div class="section-title">COMENTARIOS</div>
         <textarea id="nachosComentarios" rows="3" maxlength="250" placeholder="Ej: extra queso, sin jalapeños, salsa aparte, etc."></textarea>
       </div>
@@ -1715,12 +1646,12 @@
     let cart = [];
     let currentProduct = null;
 
-    // Etiquetas y precios de combo por tipo de producto (para el tagline del modal)
+    // Etiquetas del modal por tipo de producto
     const comboInfo = {
-      sandwich: 'Arma tu sándwich en 3 pasos · Sándwich $26.000 · Combo + Soda $27.000',
-      nachos: 'Arma tus nachos en 3 pasos · Nachos $27.000 · Combo + Soda $28.000',
-      totopos: 'Arma tus totopos en 1 paso · Totopos $9.000 · Combo + Soda $10.000',
-      bowl: 'Arma tu bowl en 4 pasos · Mesa $19.000 · Llevar $21.000 · Combo + Soda $20.000 mesa / $22.000 llevar',
+      sandwich: 'Arma tu sándwich en 3 pasos',
+      nachos: 'Arma tus nachos en 3 pasos',
+      totopos: 'Arma tus totopos en 1 paso',
+      bowl: 'Arma tu bowl en 4 pasos',
       malteada: 'Elige tu malteada',
       torta: 'Elige tu porción de torta',
       sodaitaliana: 'Elige el sabor de tu soda italiana',
@@ -1728,9 +1659,6 @@
     };
 
     // Variables de configuración del Bowl
-    let bowlModality = null;
-    let bowlComboSoda = false;
-    let bowlSodaFlavor = null;
     let baseQuantities = { arroz: 0, lechugas: 0, dia: 0 };
     let selectedProtein = null;
     let addProtQuantities = { carne: 0, cerdo: 0, costilla: 0, tenders: 0, chorizo: 0 };
@@ -1744,13 +1672,9 @@
     let sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0, cebollaencurtida: 0, jalapeno: 0, chicharron: 0, doritox: 0, maizcito: 0 };
     let sandwichSelectedSalsa = null;
     let sandwichProductQty = 1;
-    let sandwichComboSoda = false;
-    let sandwichSodaFlavor = null;
 
     // Variables de configuración de Totopos Wed
     let totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, ajo: 0, tatemada: 0, sourcream: 0 };
-    let totoposComboSoda = false;
-    let totoposSodaFlavor = null;
 
     // Variables de configuración de Malteada
     let malteadaSelectedFlavor = null;
@@ -1764,8 +1688,6 @@
     let nachosSelectedProtein = null;
     let nachosSelectedTops = {};
     let nachosSelectedSalsa = null;
-    let nachosComboSoda = false;
-    let nachosSodaFlavor = null;
 
     // Variables de configuración de Soda Italiana
     let sodaItalianaSelectedFlavor = null;
@@ -1841,12 +1763,9 @@
       currentProduct = { name, basePrice: price, type };
       document.getElementById('modalProductName').innerText = name;
       document.getElementById('modalTagline').innerText = comboInfo[type] || '';
-      document.getElementById('modalBasePrice').innerText = (type === 'bowl') ? 'Desde $ 19.000' : ('$ ' + price.toLocaleString());
-      
+      document.getElementById('modalBasePrice').innerText = '$ ' + price.toLocaleString();
+
       // Resetear selecciones del Bowl
-      bowlModality = null;
-      bowlComboSoda = false;
-      bowlSodaFlavor = null;
       baseQuantities = { arroz: 0, lechugas: 0, dia: 0 };
       selectedProtein = null;
       addProtQuantities = { carne: 0, cerdo: 0, costilla: 0, tenders: 0, chorizo: 0 };
@@ -1855,7 +1774,6 @@
       selectedSalsaBase = null;
       addSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
       document.getElementById('bowlComentarios').value = '';
-      document.getElementById('bowlSodaFlavorForm').style.display = 'none';
       document.getElementById('toppingsCounterText').innerText = '(Elige 7 · 0 / 7)';
 
       // Resetear selecciones del Sandwich
@@ -1863,18 +1781,12 @@
       sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0, cebollaencurtida: 0, jalapeno: 0, chicharron: 0, doritox: 0, maizcito: 0 };
       sandwichSelectedSalsa = null;
       sandwichProductQty = 1;
-      sandwichComboSoda = false;
-      sandwichSodaFlavor = null;
       document.getElementById('sandwichComentarios').value = '';
-      document.getElementById('swSodaFlavorForm').style.display = 'none';
       document.getElementById('swToppingsCounterText').innerText = '(Elige 3 · 0 / 3)';
 
       // Resetear selecciones de Totopos Wed
       totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, ajo: 0, tatemada: 0, sourcream: 0 };
-      totoposComboSoda = false;
-      totoposSodaFlavor = null;
       document.getElementById('totoposComentarios').value = '';
-      document.getElementById('totoposSodaFlavorForm').style.display = 'none';
       document.getElementById('totoposCounterText').innerText = '(Elige 2 · 0 / 2)';
 
       // Resetear selecciones de Malteada
@@ -1891,10 +1803,7 @@
       nachosSelectedProtein = null;
       nachosSelectedTops = {};
       nachosSelectedSalsa = null;
-      nachosComboSoda = false;
-      nachosSodaFlavor = null;
       document.getElementById('nachosComentarios').value = '';
-      document.getElementById('nachosSodaFlavorForm').style.display = 'none';
       document.getElementById('nachosToppingsCounterText').innerText = '(Elige 7 · 0 / 7)';
 
       // Resetear selecciones de Soda Italiana
@@ -1951,52 +1860,6 @@
 
     function closeProductModal() {
       document.getElementById('productModal').classList.remove('active');
-    }
-
-    // 0. Lógica de Modalidad del Bowl (Mesa / Llevar, obligatoria)
-    function selectBowlModality(key, displayName, price) {
-      if (bowlModality && bowlModality.key === key) {
-        bowlModality = null;
-        document.getElementById('box_bowlmod_' + key).classList.remove('selected-blue');
-      } else {
-        if (bowlModality) {
-          document.getElementById('box_bowlmod_' + bowlModality.key).classList.remove('selected-blue');
-        }
-        bowlModality = { key, displayName, price };
-        document.getElementById('box_bowlmod_' + key).classList.add('selected-blue');
-      }
-      calculateModalTotal();
-    }
-
-    // 0b. Lógica del Combo Bowl + Soda (muestra el formulario de sabor)
-    function toggleBowlComboSoda() {
-      bowlComboSoda = !bowlComboSoda;
-      const box = document.getElementById('box_bowl_combo_soda');
-      const form = document.getElementById('bowlSodaFlavorForm');
-      if (bowlComboSoda) {
-        box.classList.add('selected-blue');
-        form.style.display = 'block';
-      } else {
-        box.classList.remove('selected-blue');
-        form.style.display = 'none';
-        bowlSodaFlavor = null;
-        document.querySelectorAll('#bowlSodaFlavorForm .opt-box').forEach(el => el.classList.remove('selected-blue'));
-      }
-      calculateModalTotal();
-    }
-
-    // 0c. Lógica de Sabor de Soda Italiana del combo Bowl
-    function selectBowlSodaFlavor(key, displayName) {
-      if (bowlSodaFlavor && bowlSodaFlavor.key === key) {
-        bowlSodaFlavor = null;
-        document.getElementById('box_bowl_sodaflavor_' + key).classList.remove('selected-blue');
-      } else {
-        if (bowlSodaFlavor) {
-          document.getElementById('box_bowl_sodaflavor_' + bowlSodaFlavor.key).classList.remove('selected-blue');
-        }
-        bowlSodaFlavor = { key, displayName };
-        document.getElementById('box_bowl_sodaflavor_' + key).classList.add('selected-blue');
-      }
     }
 
     // 1. Lógica de Bases (Máximo 3 porciones en total, 0-2 por ítem)
@@ -2195,37 +2058,6 @@
       calculateModalTotal();
     }
 
-    // 10b. Lógica del Combo Sandwich + Soda (muestra el formulario de sabor)
-    function toggleSandwichComboSoda() {
-      sandwichComboSoda = !sandwichComboSoda;
-      const box = document.getElementById('box_sw_combo_soda');
-      const form = document.getElementById('swSodaFlavorForm');
-      if (sandwichComboSoda) {
-        box.classList.add('selected-blue');
-        form.style.display = 'block';
-      } else {
-        box.classList.remove('selected-blue');
-        form.style.display = 'none';
-        sandwichSodaFlavor = null;
-        document.querySelectorAll('#swSodaFlavorForm .opt-box').forEach(el => el.classList.remove('selected-blue'));
-      }
-      calculateModalTotal();
-    }
-
-    // 10c. Lógica de Sabor de Soda Italiana del combo Sandwich
-    function selectSandwichSodaFlavor(key, displayName) {
-      if (sandwichSodaFlavor && sandwichSodaFlavor.key === key) {
-        sandwichSodaFlavor = null;
-        document.getElementById('box_sw_sodaflavor_' + key).classList.remove('selected-blue');
-      } else {
-        if (sandwichSodaFlavor) {
-          document.getElementById('box_sw_sodaflavor_' + sandwichSodaFlavor.key).classList.remove('selected-blue');
-        }
-        sandwichSodaFlavor = { key, displayName };
-        document.getElementById('box_sw_sodaflavor_' + key).classList.add('selected-blue');
-      }
-    }
-
     // 11. Lógica de Cantidad del producto Sandwich (mínimo 1, máximo MAX_ITEM_QTY)
     function changeSandwichProductQty(delta) {
       let newVal = sandwichProductQty + delta;
@@ -2261,37 +2093,6 @@
       document.getElementById('totoposCounterText').innerText = `(Elige 2 · ${total} / 2)`;
 
       calculateModalTotal();
-    }
-
-    // 12b. Lógica del Combo Totopos + Soda (muestra el formulario de sabor)
-    function toggleTotoposComboSoda() {
-      totoposComboSoda = !totoposComboSoda;
-      const box = document.getElementById('box_totopos_combo_soda');
-      const form = document.getElementById('totoposSodaFlavorForm');
-      if (totoposComboSoda) {
-        box.classList.add('selected-blue');
-        form.style.display = 'block';
-      } else {
-        box.classList.remove('selected-blue');
-        form.style.display = 'none';
-        totoposSodaFlavor = null;
-        document.querySelectorAll('#totoposSodaFlavorForm .opt-box').forEach(el => el.classList.remove('selected-blue'));
-      }
-      calculateModalTotal();
-    }
-
-    // 12c. Lógica de Sabor de Soda Italiana del combo Totopos
-    function selectTotoposSodaFlavor(key, displayName) {
-      if (totoposSodaFlavor && totoposSodaFlavor.key === key) {
-        totoposSodaFlavor = null;
-        document.getElementById('box_totopos_sodaflavor_' + key).classList.remove('selected-blue');
-      } else {
-        if (totoposSodaFlavor) {
-          document.getElementById('box_totopos_sodaflavor_' + totoposSodaFlavor.key).classList.remove('selected-blue');
-        }
-        totoposSodaFlavor = { key, displayName };
-        document.getElementById('box_totopos_sodaflavor_' + key).classList.add('selected-blue');
-      }
     }
 
     // 13. Lógica de Sabor de Malteada (Selección única, opcional, Máximo 1)
@@ -2425,37 +2226,6 @@
       calculateModalTotal();
     }
 
-    // 18b. Lógica del Combo Nachos + Soda (muestra el formulario de sabor)
-    function toggleNachosComboSoda() {
-      nachosComboSoda = !nachosComboSoda;
-      const box = document.getElementById('box_nachos_combo_soda');
-      const form = document.getElementById('nachosSodaFlavorForm');
-      if (nachosComboSoda) {
-        box.classList.add('selected-blue');
-        form.style.display = 'block';
-      } else {
-        box.classList.remove('selected-blue');
-        form.style.display = 'none';
-        nachosSodaFlavor = null;
-        document.querySelectorAll('#nachosSodaFlavorForm .opt-box').forEach(el => el.classList.remove('selected-blue'));
-      }
-      calculateModalTotal();
-    }
-
-    // 18c. Lógica de Sabor de Soda Italiana del combo Nachos
-    function selectNachosSodaFlavor(key, displayName) {
-      if (nachosSodaFlavor && nachosSodaFlavor.key === key) {
-        nachosSodaFlavor = null;
-        document.getElementById('box_nachos_sodaflavor_' + key).classList.remove('selected-blue');
-      } else {
-        if (nachosSodaFlavor) {
-          document.getElementById('box_nachos_sodaflavor_' + nachosSodaFlavor.key).classList.remove('selected-blue');
-        }
-        nachosSodaFlavor = { key, displayName };
-        document.getElementById('box_nachos_sodaflavor_' + key).classList.add('selected-blue');
-      }
-    }
-
     // 19. Lógica de Sabor de Soda Italiana (Selección única, obligatoria)
     function selectSodaItalianaFlavor(key, displayName) {
       if (sodaItalianaSelectedFlavor && sodaItalianaSelectedFlavor.key === key) {
@@ -2483,10 +2253,9 @@
 
     // Cálculo dinámico del precio total en el modal
     function calculateModalTotal() {
-      // Cálculo específico para Totopos Wed (precio base + combo con soda)
+      // Cálculo específico para Totopos Wed
       if (currentProduct.type === 'totopos') {
         let totoposTotal = currentProduct.basePrice;
-        if (totoposComboSoda) totoposTotal += 1000;
         document.getElementById('modalTotalPrice').innerText = '$ ' + totoposTotal.toLocaleString();
         return totoposTotal;
       }
@@ -2503,23 +2272,21 @@
         return currentProduct.basePrice;
       }
 
-      // Cálculo específico para Nachos (proteína + toppings con costo + combo soda)
+      // Cálculo específico para Nachos (proteína + toppings con costo)
       if (currentProduct.type === 'nachos') {
         let nachosTotal = currentProduct.basePrice;
         if (nachosSelectedProtein) nachosTotal += nachosSelectedProtein.price;
         for (let k in nachosSelectedTops) {
           nachosTotal += nachosSelectedTops[k].price;
         }
-        if (nachosComboSoda) nachosTotal += 1000;
         document.getElementById('modalTotalPrice').innerText = '$ ' + nachosTotal.toLocaleString();
         return nachosTotal;
       }
 
-      // Cálculo específico para Sandwich (proteína + combo soda) x cantidad
+      // Cálculo específico para Sandwich (proteína) x cantidad
       if (currentProduct.type === 'sandwich') {
         let swTotal = currentProduct.basePrice;
         if (sandwichSelectedProtein) swTotal += sandwichSelectedProtein.price;
-        if (sandwichComboSoda) swTotal += 1000;
         swTotal = swTotal * sandwichProductQty;
         document.getElementById('modalTotalPrice').innerText = '$ ' + swTotal.toLocaleString();
         return swTotal;
@@ -2539,9 +2306,7 @@
         return simpleTotal;
       }
 
-      let total = bowlModality ? bowlModality.price : currentProduct.basePrice;
-
-      if (bowlComboSoda) total += 1000;
+      let total = currentProduct.basePrice;
 
       if (selectedProtein) total += selectedProtein.price;
 
@@ -2583,15 +2348,11 @@
           if (totoposQuantities[k] > 0) parts.push(`${salsaNames[k]} x${totoposQuantities[k]}`);
         }
         if (parts.length > 0) details.push(`Toppings: ${parts.join(', ')}`);
-        if (totoposComboSoda) {
-          let flavorText = totoposSodaFlavor ? ` (${totoposSodaFlavor.displayName})` : '';
-          details.push(`Combo: + Soda Italiana${flavorText}`);
-        }
 
         let comentarios = clampText(document.getElementById('totoposComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
 
-        let totoposPrice = currentProduct.basePrice + (totoposComboSoda ? 1000 : 0);
+        let totoposPrice = currentProduct.basePrice;
 
         cart.push({
           name: currentProduct.name,
@@ -2663,7 +2424,6 @@
       if (currentProduct.type === 'nachos') {
         let unitPrice = currentProduct.basePrice;
         if (nachosSelectedProtein) unitPrice += nachosSelectedProtein.price;
-        if (nachosComboSoda) unitPrice += 1000;
         let details = [];
 
         if (nachosSelectedProtein) details.push(`Proteína: ${nachosSelectedProtein.displayName}`);
@@ -2675,10 +2435,6 @@
         if (topParts.length > 0) details.push(`Toppings: ${topParts.join(', ')}`);
 
         if (nachosSelectedSalsa) details.push(`Salsa: ${nachosSelectedSalsa.displayName}`);
-        if (nachosComboSoda) {
-          let flavorText = nachosSodaFlavor ? ` (${nachosSodaFlavor.displayName})` : '';
-          details.push(`Combo: + Soda Italiana${flavorText}`);
-        }
 
         let comentarios = clampText(document.getElementById('nachosComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
@@ -2698,7 +2454,7 @@
 
       // Rama específica para Sandwich
       if (currentProduct.type === 'sandwich') {
-        let unitPrice = currentProduct.basePrice + (sandwichSelectedProtein ? sandwichSelectedProtein.price : 0) + (sandwichComboSoda ? 1000 : 0);
+        let unitPrice = currentProduct.basePrice + (sandwichSelectedProtein ? sandwichSelectedProtein.price : 0);
         let details = [];
 
         if (sandwichSelectedProtein) details.push(`Proteína: ${sandwichSelectedProtein.displayName}`);
@@ -2711,10 +2467,6 @@
         if (toppingParts.length > 0) details.push(`Toppings: ${toppingParts.join(', ')}`);
 
         if (sandwichSelectedSalsa) details.push(`Salsa: ${sandwichSelectedSalsa.displayName}`);
-        if (sandwichComboSoda) {
-          let flavorText = sandwichSodaFlavor ? ` (${sandwichSodaFlavor.displayName})` : '';
-          details.push(`Combo: + Soda Italiana${flavorText}`);
-        }
 
         let comentarios = clampText(document.getElementById('sandwichComentarios').value.trim(), 250);
         if (comentarios) details.push(`Comentarios: ${comentarios}`);
@@ -2773,22 +2525,8 @@
       }
 
       // Lógica del Bowl
-      if (!bowlModality) {
-        alert('Por favor selecciona la modalidad: Para comer en mesa o Para llevar.');
-        return;
-      }
-
       let finalPrice = calculateModalTotal();
       let details = [];
-
-      // Modalidad
-      details.push(`Modalidad: ${bowlModality.displayName}`);
-
-      // Combo con soda
-      if (bowlComboSoda) {
-        let flavorText = bowlSodaFlavor ? ` (${bowlSodaFlavor.displayName})` : '';
-        details.push(`Combo: + Soda Italiana${flavorText}`);
-      }
 
       // Bases
       let baseParts = [];
@@ -2969,34 +2707,38 @@
       // El mensaje de WhatsApp es texto plano (no HTML), por lo que no hay
       // riesgo de XSS aquí; igualmente usamos los valores ya recortados arriba.
       let lines = [];
-      lines.push('*¡Nuevo Pedido - Dominio & Coffee!*');
+      lines.push('🛒 *NUEVO PEDIDO*');
       lines.push('');
-      lines.push(`*Nombre:* ${nombre}`);
-      lines.push(`*Teléfono:* ${whatsapp}`);
-      lines.push(`*Dirección:* ${direccion}`);
-      lines.push(`*Barrio:* ${barrio}`);
-      if (referencia) lines.push(`*Referencia:* ${referencia}`);
-      lines.push(`*Método de pago:* ${pago}`);
-      if (observaciones) lines.push(`*Observaciones:* ${observaciones}`);
+      lines.push(`👤 *Cliente:* ${nombre}`);
+      lines.push(`📞 *WhatsApp:* ${whatsapp}`);
       lines.push('');
-      lines.push('*--- DETALLE DEL PEDIDO ---*');
+      lines.push(`📍 *Dirección:* ${direccion}`);
+      lines.push(`🏘️ *Barrio:* ${barrio}`);
+      if (referencia) lines.push(`📌 *Referencia:* ${referencia}`);
+      lines.push('');
+      lines.push('🍽️ *Productos:*');
 
       let subtotal = 0;
-      cart.forEach((item, i) => {
+      cart.forEach((item) => {
         let itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
 
-        lines.push('');
-        lines.push(`${i + 1}. *${item.name}*`);
-        lines.push(`   Configuración: ${item.details}`);
-        lines.push(`   Cantidad: ${item.quantity}`);
-        lines.push(`   Precio unit.: $${item.price.toLocaleString()}`);
-        lines.push(`   Subtotal: $${itemTotal.toLocaleString()}`);
+        lines.push(`• ${item.quantity}x ${item.name} - $${itemTotal.toLocaleString()}`);
+        if (item.details && item.details !== 'Estándar') {
+          lines.push(`   ↳ ${item.details}`);
+        }
       });
 
       lines.push('');
-      lines.push(`*Subtotal: $${subtotal.toLocaleString()}*`);
-      lines.push(`*Total a pagar: $${subtotal.toLocaleString()}*`);
+      lines.push(`💳 *Método de pago:* ${pago}`);
+
+      if (observaciones) {
+        lines.push('');
+        lines.push(`📝 *Observaciones:* ${observaciones}`);
+      }
+
+      lines.push('');
+      lines.push(`💰 *Total: $${subtotal.toLocaleString()}*`);
 
       let mensaje = lines.join('\n');
 
