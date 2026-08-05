@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -1066,6 +1066,28 @@
           <span>CHORIZO DE CERDO (NUEVA PROTEÍNA)</span>
         </div>
 
+        
+        <!-- TOPPINGS (Máximo 7 incluidos) -->
+        <div class="section-title">PASO 3. TOPPINGS <span id="toppingsCounterText">(Elige 7 · 0 / 7)</span></div>
+        <div class="opt-box" id="box_top_chicharron" onclick="toggleTop('chicharron', 'Chicharrón', 0)"><span>CHICHARRÓN</span></div>
+        <div class="opt-box" id="box_top_topdeldia" onclick="toggleTop('topdeldia', 'Topping del Día', 0)"><span>TOPPING DEL DÍA</span></div>
+        <div class="opt-box" id="box_top_maizcitos" onclick="toggleTop('maizcitos', 'Maizcitos', 0)"><span>MAIZCITOS</span></div>
+        <div class="opt-box" id="box_top_cebollapimenton" onclick="toggleTop('cebollapimenton', 'Cebolla y Pimentón Encurtido', 0)"><span>CEBOLLA Y PIMENTÓN ENCURTIDO</span></div>
+        <div class="opt-box" id="box_top_guacamole" onclick="toggleTop('guacamole', 'Guacamole', 0)"><span>GUACAMOLE</span></div>
+        <div class="opt-box" id="box_top_pico" onclick="toggleTop('pico', 'Pico de Gallo', 0)"><span>PICO DE GALLO</span></div>
+        <div class="opt-box" id="box_top_doritox" onclick="toggleTop('doritox', 'Doritox', 0)"><span>DORITOX</span></div>
+        <div class="opt-box" id="box_top_pepino" onclick="toggleTop('pepino', 'Pepino al Cilantro', 0)"><span>PEPINO AL CILANTRO</span></div>
+        <div class="opt-box" id="box_top_sour" onclick="toggleTop('sour', 'Sour Cream', 0)"><span>SOUR CREAM</span></div>
+        <div class="opt-box" id="box_top_cebollacrispy" onclick="toggleTop('cebollacrispy', 'Cebolla Crispy', 0)"><span>CEBOLLA CRISPY</span></div>
+        <div class="opt-box" id="box_top_jalapenos" onclick="toggleTop('jalapenos', 'Jalapeños', 0)"><span>JALAPEÑOS</span></div>
+        <div class="opt-box" id="box_top_queso" onclick="toggleTop('queso', 'Queso Mozzarella', 2000)"><span>QUESO MOZZARELLA</span> <span class="price-add">+ $ 2.000</span></div>
+
+        <!-- SALSA BASE (Escoge 1 incluida) -->
+        <div class="section-title">PASO 4. SALSA <span>(Elige 1)</span></div>
+        <div class="opt-box" id="box_salsabase_bbq" onclick="selectSalsaBase('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
+        <div class="opt-box" id="box_salsabase_tatemada" onclick="selectSalsaBase('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
+        <div class="opt-box" id="box_salsabase_ajo" onclick="selectSalsaBase('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
+
         <!-- ADICIÓN DE PROTEÍNA -->
         <div class="section-title">ADICIÓN DE PROTEÍNA <span>(Opcional • Todas las proteínas adicionales: $8.000 c/u)</span></div>
         <div class="opt-box" id="box_addprot_carne">
@@ -1108,21 +1130,6 @@
             <button type="button" class="qty-btn" onclick="changeAddProtQty('chorizo', 1)">+</button>
           </div>
         </div>
-
-        <!-- TOPPINGS (Máximo 7 incluidos) -->
-        <div class="section-title">PASO 3. TOPPINGS <span id="toppingsCounterText">(Elige 7 · 0 / 7)</span></div>
-        <div class="opt-box" id="box_top_chicharron" onclick="toggleTop('chicharron', 'Chicharrón', 0)"><span>CHICHARRÓN</span></div>
-        <div class="opt-box" id="box_top_topdeldia" onclick="toggleTop('topdeldia', 'Topping del Día', 0)"><span>TOPPING DEL DÍA</span></div>
-        <div class="opt-box" id="box_top_maizcitos" onclick="toggleTop('maizcitos', 'Maizcitos', 0)"><span>MAIZCITOS</span></div>
-        <div class="opt-box" id="box_top_cebollapimenton" onclick="toggleTop('cebollapimenton', 'Cebolla y Pimentón Encurtido', 0)"><span>CEBOLLA Y PIMENTÓN ENCURTIDO</span></div>
-        <div class="opt-box" id="box_top_guacamole" onclick="toggleTop('guacamole', 'Guacamole', 0)"><span>GUACAMOLE</span></div>
-        <div class="opt-box" id="box_top_pico" onclick="toggleTop('pico', 'Pico de Gallo', 0)"><span>PICO DE GALLO</span></div>
-        <div class="opt-box" id="box_top_doritox" onclick="toggleTop('doritox', 'Doritox', 0)"><span>DORITOX</span></div>
-        <div class="opt-box" id="box_top_pepino" onclick="toggleTop('pepino', 'Pepino al Cilantro', 0)"><span>PEPINO AL CILANTRO</span></div>
-        <div class="opt-box" id="box_top_sour" onclick="toggleTop('sour', 'Sour Cream', 0)"><span>SOUR CREAM</span></div>
-        <div class="opt-box" id="box_top_cebollacrispy" onclick="toggleTop('cebollacrispy', 'Cebolla Crispy', 0)"><span>CEBOLLA CRISPY</span></div>
-        <div class="opt-box" id="box_top_jalapenos" onclick="toggleTop('jalapenos', 'Jalapeños', 0)"><span>JALAPEÑOS</span></div>
-        <div class="opt-box" id="box_top_queso" onclick="toggleTop('queso', 'Queso Mozzarella', 2000)"><span>QUESO MOZZARELLA</span> <span class="price-add">+ $ 2.000</span></div>
 
         <!-- ADICIÓN DE TOPPINGS DE BOWL (Máximo 1 unidad por cada topping, no pasar de 1) -->
         <div class="section-title">ADICIÓN DE TOPPINGS DE BOWL <span id="addTopCounterText">(Opcional • Todos los toppings adicionales: $3.000 c/u)</span></div>
@@ -1223,12 +1230,7 @@
           </div>
         </div>
 
-        <!-- SALSA BASE (Escoge 1 incluida) -->
-        <div class="section-title">PASO 4. SALSA <span>(Elige 1)</span></div>
-        <div class="opt-box" id="box_salsabase_bbq" onclick="selectSalsaBase('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
-        <div class="opt-box" id="box_salsabase_tatemada" onclick="selectSalsaBase('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
-        <div class="opt-box" id="box_salsabase_ajo" onclick="selectSalsaBase('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
-
+       
         <!-- ADICIÓN DE SALSA DEL BOWL (Máx 1 unidad por cada salsa) -->
         <div class="section-title">ADICIÓN DE SALSA BOWL <span id="addSalsaCounterText">(Opcional • Todas las salsas adicionales: $1.000 c/u)</span></div>
         <div class="opt-box" id="box_addsalsa_tatemada">
@@ -1558,6 +1560,175 @@
         <div class="opt-box" id="box_nachossalsa_ajo" onclick="selectNachosSalsa('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
         <div class="opt-box" id="box_nachossalsa_bbq" onclick="selectNachosSalsa('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
 
+        <!-- ADICIÓN DE PROTEÍNA -->
+        <div class="section-title">ADICIÓN DE PROTEÍNA <span>(Opcional • Todas las proteínas adicionales: $8.000 c/u)</span></div>
+        <div class="opt-box" id="box_addprot_carne">
+          <span>CARNE DESMECHADA</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('carne', -1)">-</button>
+            <span class="qty-value" id="qty_addprot_carne">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('carne', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_addprot_cerdo">
+          <span>CERDO PULLED PORK</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('cerdo', -1)">-</button>
+            <span class="qty-value" id="qty_addprot_cerdo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('cerdo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_addprot_costilla">
+          <span>COSTILLA AHUMADA BBQ</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('costilla', -1)">-</button>
+            <span class="qty-value" id="qty_addprot_costilla">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('costilla', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_addprot_tenders">
+          <span>TENDER DE PECHUGA</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('tenders', -1)">-</button>
+            <span class="qty-value" id="qty_addprot_tenders">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('tenders', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_addprot_chorizo">
+          <span>CHORIZO DE CERDO</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('chorizo', -1)">-</button>
+            <span class="qty-value" id="qty_addprot_chorizo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddProtQty('chorizo', 1)">+</button>
+          </div>
+        </div>
+
+        <!-- ADICIÓN DE TOPPINGS DE BOWL (Máximo 1 unidad por cada topping, no pasar de 1) -->
+        <div class="section-title">ADICIÓN DE TOPPINGS DE BOWL <span id="addTopCounterText">(Opcional • Todos los toppings adicionales: $3.000 c/u)</span></div>
+        <div class="opt-box" id="box_add_chicharron">
+          <span>CHICHARRÓN</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('chicharron', -1)">-</button>
+            <span class="qty-value" id="qty_add_chicharron">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('chicharron', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_chorizo">
+          <span>TOPPING DEL DÍA</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('chorizo', -1)">-</button>
+            <span class="qty-value" id="qty_add_chorizo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('chorizo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_maduro">
+          <span>MAIZCITOS</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('maduro', -1)">-</button>
+            <span class="qty-value" id="qty_add_maduro">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('maduro', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_maicitos">
+          <span>CEBOLLA Y PIMENTÓN ENCURTIDO</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('maicitos', -1)">-</button>
+            <span class="qty-value" id="qty_add_maicitos">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('maicitos', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_guacamole">
+          <span>GUACAMOLE</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('guacamole', -1)">-</button>
+            <span class="qty-value" id="qty_add_guacamole">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('guacamole', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_pico">
+          <span>PICO DE GALLO</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('pico', -1)">-</button>
+            <span class="qty-value" id="qty_add_pico">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('pico', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_doritox">
+          <span>DORITOX</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('doritox', -1)">-</button>
+            <span class="qty-value" id="qty_add_doritox">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('doritox', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_sour">
+          <span>SOUR CREAM</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('sour', -1)">-</button>
+            <span class="qty-value" id="qty_add_sour">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('sour', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_cebolla">
+          <span>CEBOLLA CRISPY</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('cebolla', -1)">-</button>
+            <span class="qty-value" id="qty_add_cebolla">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('cebolla', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_queso">
+          <span>QUESO MOZZARELLA</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('queso', -1)">-</button>
+            <span class="qty-value" id="qty_add_queso">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('queso', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_pepino">
+          <span>PEPINO AL CILANTRO</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('pepino', -1)">-</button>
+            <span class="qty-value" id="qty_add_pepino">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('pepino', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_add_jalapenos">
+          <span>JALAPEÑOS</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('jalapenos', -1)">-</button>
+            <span class="qty-value" id="qty_add_jalapenos">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddTopQty('jalapenos', 1)">+</button>
+          </div>
+        </div>
+
+       
+        <!-- ADICIÓN DE SALSA DEL BOWL (Máx 1 unidad por cada salsa) -->
+        <div class="section-title">ADICIÓN DE SALSA BOWL <span id="addSalsaCounterText">(Opcional • Todas las salsas adicionales: $1.000 c/u)</span></div>
+        <div class="opt-box" id="box_addsalsa_tatemada">
+          <span>SALSA TATEMADA</span> <span class="price-add">+ $ 1.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('tatemada', -1)">-</button>
+            <span class="qty-value" id="qty_addsalsa_tatemada">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('tatemada', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_addsalsa_ajo">
+          <span>SALSA DE AJO</span> <span class="price-add">+ $ 1.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('ajo', -1)">-</button>
+            <span class="qty-value" id="qty_addsalsa_ajo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('ajo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_addsalsa_bbq">
+          <span>SALSA BBQ</span> <span class="price-add">+ $ 1.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', -1)">-</button>
+            <span class="qty-value" id="qty_addsalsa_bbq">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddSalsaQty('bbq', 1)">+</button>
+          </div>
+        </div>
         <div class="section-title">COMENTARIOS</div>
         <textarea id="nachosComentarios" rows="3" maxlength="250" placeholder="Ej: extra queso, sin jalapeños, salsa aparte, etc."></textarea>
       </div>
