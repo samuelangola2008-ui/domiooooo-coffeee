@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -586,6 +586,241 @@
 
         <div class="section-title">COMENTARIOS</div>
         <textarea id="bowlComentarios" rows="3" maxlength="250" placeholder="Ej: sin lechuga, salsa aparte, punto de la carne, etc."></textarea>
+
+      </div>
+
+      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE BURRITO -->
+      <div id="burritoCustomizationContainer" style="display:none;">
+
+        <!-- BASES (Máx 3 porciones en total, 0 a 2 por ingrediente) -->
+        <div class="section-title">PASO 1. BASES DE BURRITO <span>(Elige · Máx 3 porciones en total)</span></div>
+        <div class="opt-box" id="box_burrbase_arroz">
+          <span>ARROZ DEL DÍA</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeBurrBaseQty('arroz', -1)">-</button>
+            <span class="qty-value" id="qty_burrbase_arroz">0</span>
+            <button type="button" class="qty-btn" onclick="changeBurrBaseQty('arroz', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burrbase_lechugas">
+          <span>LECHUGA MIX</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeBurrBaseQty('lechugas', -1)">-</button>
+            <span class="qty-value" id="qty_burrbase_lechugas">0</span>
+            <button type="button" class="qty-btn" onclick="changeBurrBaseQty('lechugas', 1)">+</button>
+          </div>
+        </div>
+
+        <!-- PROTEÍNA (Exactamente 1 opción obligatoria) -->
+        <div class="section-title">PASO 2. PROTEÍNA <span>(Elige 1)</span></div>
+        <div class="opt-box" id="box_burrprot_carne" onclick="selectBurrProtein('carne', 'Carne Desmechada', 3000)">
+          <span>CARNE DESMECHADA</span> <span class="price-add">+ $ 3.000</span>
+        </div>
+        <div class="opt-box" id="box_burrprot_cerdo" onclick="selectBurrProtein('cerdo', 'Cerdo Pulled Pork', 0)">
+          <span>CERDO PULLED PORK</span>
+        </div>
+        <div class="opt-box" id="box_burrprot_tenders" onclick="selectBurrProtein('tenders', 'Tender de Pechuga', 0)">
+          <span>TENDER DE PECHUGA</span>
+        </div>
+        <div class="opt-box" id="box_burrprot_costilla" onclick="selectBurrProtein('costilla', 'Costilla Ahumada BBQ', 3000)">
+          <span>COSTILLA AHUMADA BBQ</span> <span class="price-add">+ $ 3.000</span>
+        </div>
+        <div class="opt-box" id="box_burrprot_chorizo_cerdo" onclick="selectBurrProtein('chorizo_cerdo', 'Chorizo de Cerdo', 0)">
+          <span>CHORIZO DE CERDO (NUEVA PROTEÍNA)</span>
+        </div>
+
+        <!-- TOPPINGS (Máximo 7 incluidos) -->
+        <div class="section-title">PASO 3. TOPPINGS <span id="burrToppingsCounterText">(Elige 7 · 0 / 7)</span></div>
+        <div class="opt-box" id="box_burrtop_chicharron" onclick="toggleBurrTop('chicharron', 'Chicharrón', 0)"><span>CHICHARRÓN</span></div>
+        <div class="opt-box" id="box_burrtop_topdeldia" onclick="toggleBurrTop('topdeldia', 'Topping del Día', 0)"><span>TOPPING DEL DÍA</span></div>
+        <div class="opt-box" id="box_burrtop_maizcitos" onclick="toggleBurrTop('maizcitos', 'Maizcitos', 0)"><span>MAIZCITOS</span></div>
+        <div class="opt-box" id="box_burrtop_cebollapimenton" onclick="toggleBurrTop('cebollapimenton', 'Cebolla y Pimentón Encurtido', 0)"><span>CEBOLLA Y PIMENTÓN ENCURTIDO</span></div>
+        <div class="opt-box" id="box_burrtop_guacamole" onclick="toggleBurrTop('guacamole', 'Guacamole', 0)"><span>GUACAMOLE</span></div>
+        <div class="opt-box" id="box_burrtop_pico" onclick="toggleBurrTop('pico', 'Pico de Gallo', 0)"><span>PICO DE GALLO</span></div>
+        <div class="opt-box" id="box_burrtop_doritox" onclick="toggleBurrTop('doritox', 'Doritox', 0)"><span>DORITOX</span></div>
+        <div class="opt-box" id="box_burrtop_pepino" onclick="toggleBurrTop('pepino', 'Pepino al Cilantro', 0)"><span>PEPINO AL CILANTRO</span></div>
+        <div class="opt-box" id="box_burrtop_sour" onclick="toggleBurrTop('sour', 'Sour Cream', 0)"><span>SOUR CREAM</span></div>
+        <div class="opt-box" id="box_burrtop_cebollacrispy" onclick="toggleBurrTop('cebollacrispy', 'Cebolla Crispy', 0)"><span>CEBOLLA CRISPY</span></div>
+        <div class="opt-box" id="box_burrtop_jalapenos" onclick="toggleBurrTop('jalapenos', 'Jalapeños', 0)"><span>JALAPEÑOS</span></div>
+        <div class="opt-box" id="box_burrtop_queso" onclick="toggleBurrTop('queso', 'Queso Mozzarella', 2000)"><span>QUESO MOZZARELLA</span> <span class="price-add">+ $ 2.000</span></div>
+
+        <!-- SALSA BASE (Escoge 1 incluida) -->
+        <div class="section-title">PASO 4. SALSA <span>(Elige 1)</span></div>
+        <div class="opt-box" id="box_burrsalsabase_bbq" onclick="selectBurrSalsaBase('bbq', 'Salsa BBQ')"><span>SALSA BBQ</span></div>
+        <div class="opt-box" id="box_burrsalsabase_tatemada" onclick="selectBurrSalsaBase('tatemada', 'Salsa Tatemada')"><span>SALSA TATEMADA</span></div>
+        <div class="opt-box" id="box_burrsalsabase_ajo" onclick="selectBurrSalsaBase('ajo', 'Salsa de Ajo')"><span>SALSA DE AJO</span></div>
+
+        <!-- ADICIÓN DE PROTEÍNA -->
+        <div class="section-title">ADICIÓN DE PROTEÍNA <span>(Opcional • Todas las proteínas adicionales: $8.000 c/u)</span></div>
+        <div class="opt-box" id="box_burraddprot_carne">
+          <span>CARNE DESMECHADA</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('carne', -1)">-</button>
+            <span class="qty-value" id="qty_burraddprot_carne">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('carne', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burraddprot_cerdo">
+          <span>CERDO PULLED PORK</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('cerdo', -1)">-</button>
+            <span class="qty-value" id="qty_burraddprot_cerdo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('cerdo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burraddprot_costilla">
+          <span>COSTILLA AHUMADA BBQ</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('costilla', -1)">-</button>
+            <span class="qty-value" id="qty_burraddprot_costilla">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('costilla', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burraddprot_tenders">
+          <span>TENDER DE PECHUGA</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('tenders', -1)">-</button>
+            <span class="qty-value" id="qty_burraddprot_tenders">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('tenders', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burraddprot_chorizo">
+          <span>CHORIZO DE CERDO</span> <span class="price-add">$ 8.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('chorizo', -1)">-</button>
+            <span class="qty-value" id="qty_burraddprot_chorizo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrProtQty('chorizo', 1)">+</button>
+          </div>
+        </div>
+
+        <!-- ADICIÓN DE TOPPINGS (Máximo 1 unidad por cada topping, no pasar de 1) -->
+        <div class="section-title">ADICIÓN DE TOPPINGS <span id="burrAddTopCounterText">(Opcional • Todos los toppings adicionales: $3.000 c/u)</span></div>
+        <div class="opt-box" id="box_burradd_chicharron">
+          <span>CHICHARRÓN</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('chicharron', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_chicharron">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('chicharron', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_chorizo">
+          <span>TOPPING DEL DÍA</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('chorizo', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_chorizo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('chorizo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_maduro">
+          <span>MAIZCITOS</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('maduro', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_maduro">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('maduro', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_maicitos">
+          <span>CEBOLLA Y PIMENTÓN ENCURTIDO</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('maicitos', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_maicitos">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('maicitos', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_guacamole">
+          <span>GUACAMOLE</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('guacamole', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_guacamole">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('guacamole', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_pico">
+          <span>PICO DE GALLO</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('pico', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_pico">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('pico', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_doritox">
+          <span>DORITOX</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('doritox', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_doritox">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('doritox', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_sour">
+          <span>SOUR CREAM</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('sour', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_sour">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('sour', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_cebolla">
+          <span>CEBOLLA CRISPY</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('cebolla', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_cebolla">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('cebolla', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_queso">
+          <span>QUESO MOZZARELLA</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('queso', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_queso">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('queso', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_pepino">
+          <span>PEPINO AL CILANTRO</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('pepino', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_pepino">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('pepino', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burradd_jalapenos">
+          <span>JALAPEÑOS</span> <span class="price-add">+ $ 3.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('jalapenos', -1)">-</button>
+            <span class="qty-value" id="qty_burradd_jalapenos">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrTopQty('jalapenos', 1)">+</button>
+          </div>
+        </div>
+
+        <!-- ADICIÓN DE SALSA (Máx 1 unidad por cada salsa) -->
+        <div class="section-title">ADICIÓN DE SALSA <span id="burrAddSalsaCounterText">(Opcional • Todas las salsas adicionales: $1.000 c/u)</span></div>
+        <div class="opt-box" id="box_burraddsalsa_tatemada">
+          <span>SALSA TATEMADA</span> <span class="price-add">+ $ 1.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrSalsaQty('tatemada', -1)">-</button>
+            <span class="qty-value" id="qty_burraddsalsa_tatemada">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrSalsaQty('tatemada', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burraddsalsa_ajo">
+          <span>SALSA DE AJO</span> <span class="price-add">+ $ 1.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrSalsaQty('ajo', -1)">-</button>
+            <span class="qty-value" id="qty_burraddsalsa_ajo">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrSalsaQty('ajo', 1)">+</button>
+          </div>
+        </div>
+        <div class="opt-box" id="box_burraddsalsa_bbq">
+          <span>SALSA BBQ</span> <span class="price-add">+ $ 1.000</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeAddBurrSalsaQty('bbq', -1)">-</button>
+            <span class="qty-value" id="qty_burraddsalsa_bbq">0</span>
+            <button type="button" class="qty-btn" onclick="changeAddBurrSalsaQty('bbq', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="section-title">COMENTARIOS</div>
+        <textarea id="burritoComentarios" rows="3" maxlength="250" placeholder="Ej: sin lechuga, salsa aparte, punto de la carne, etc."></textarea>
 
       </div>
 
