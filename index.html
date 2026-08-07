@@ -2861,6 +2861,48 @@
 
       // El mensaje de WhatsApp es texto plano (no HTML), por lo que no hay
       // riesgo de XSS aquí; igualmente usamos los valores ya recortados arriba.
+      //
+      // NOTA: item.details llega ya armado desde addToCart() como un único
+      // string con segmentos separados por " | " (ej: "Bases: ... | Proteína: ...
+      // | Toppings: ... | Salsa: ... | Comentarios: ..."). Esa lógica NO se toca.
+      // Aquí solo se "desarma" ese string para imprimir cada sección en líneas
+      // separadas, tal como lo pediste.
+      const LIST_LABELS = ['Bases', 'Toppings', 'Adición Proteína', 'Adición Toppings', 'Adición Salsas'];
+
+      function buildConfigLines(details) {
+        const out = [];
+        if (!details || details === 'Estándar') {
+          out.push('Estándar');
+          out.push('');
+          return out;
+        }
+
+        details.split(' | ').forEach(segment => {
+          const sep = segment.indexOf(': ');
+          if (sep === -1) return;
+          const label = segment.substring(0, sep);
+          const value = segment.substring(sep + 2);
+
+          if (label === 'Salsa' || label === 'Comentarios') {
+            // Formato de una sola línea: "Salsa: Salsa BBQ"
+            out.push(`${label}: ${value}`);
+            out.push('');
+          } else if (LIST_LABELS.includes(label)) {
+            // Formato de lista: label en su propia línea, cada valor debajo
+            out.push(`${label}:`);
+            value.split(', ').forEach(v => out.push(v));
+            out.push('');
+          } else {
+            // Ej. "Proteína": label en su línea, valor en la siguiente
+            out.push(`${label}:`);
+            out.push(value);
+            out.push('');
+          }
+        });
+
+        return out;
+      }
+
       let lines = [];
       lines.push('¡Nuevo Pedido - Dominio & Coffee!');
       lines.push(`Nombre: ${nombre}`);
@@ -2869,7 +2911,9 @@
       lines.push(`Barrio: ${barrio}`);
       if (referencia) lines.push(`Referencia: ${referencia}`);
       lines.push(`Método de pago: ${pago}`);
+      lines.push('');
       lines.push('--- DETALLE DEL PEDIDO ---');
+      lines.push('');
 
       let subtotal = 0;
       cart.forEach((item, idx) => {
@@ -2877,18 +2921,19 @@
         subtotal += itemTotal;
 
         lines.push(`${idx + 1}. ${item.name}`);
-        if (item.details && item.details !== 'Estándar') {
-          lines.push(`   Configuración: ${item.details}`);
-        }
-        lines.push(`   Cantidad: ${item.quantity}`);
-        lines.push(`   Precio unit.: $${item.price.toLocaleString()}`);
-        lines.push(`   Subtotal: $${itemTotal.toLocaleString()}`);
+        lines.push('');
+        lines.push('Configuración:');
+        lines = lines.concat(buildConfigLines(item.details));
+
+        lines.push(`Cantidad: ${item.quantity}`);
+        lines.push(`Precio unit.: $${item.price.toLocaleString('es-CO')}`);
+        lines.push(`Subtotal: $${itemTotal.toLocaleString('es-CO')}`);
         lines.push('');
       });
 
-      lines.push(`Subtotal: $${subtotal.toLocaleString()}`);
+      lines.push(`Subtotal: $${subtotal.toLocaleString('es-CO')}`);
       if (observaciones) lines.push(`Observaciones: ${observaciones}`);
-      lines.push(`Total a pagar: $${subtotal.toLocaleString()}`);
+      lines.push(`Total a pagar: $${subtotal.toLocaleString('es-CO')}`);
 
       let mensaje = lines.join('\n');
 
