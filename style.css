@@ -1,5 +1,4 @@
-
-    * {
+* {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -38,7 +37,6 @@
       object-fit: cover;
     }
 
-    /* TOPBAR & MAIN NAV */
     .topbar {
       background: var(--dark);
       color: var(--white);
@@ -97,7 +95,6 @@
       font-weight: 800;
     }
 
-    /* HERO SECTION */
     .hero {
       padding: 18px 18px 0;
     }
@@ -186,7 +183,6 @@
       margin: 26px auto 0;
     }
 
-    /* CATALOGO */
     .shop-layout {
       display: grid;
       grid-template-columns: 240px 1fr;
@@ -303,7 +299,6 @@
       transform: translateY(-2px);
     }
 
-    /* MODAL DE CONFIGURACIÓN */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -381,7 +376,6 @@
       text-transform: none;
     }
 
-    /* ESTILO DE OPCIONES */
     .opt-box {
       background: var(--green-light);
       border: 1px solid transparent;
@@ -412,7 +406,6 @@
       font-weight: 800;
     }
 
-    /* CONTROLES NUMÉRICOS DE CANTIDAD (+ / -) */
     .qty-controls {
       display: flex;
       align-items: center;
@@ -479,7 +472,6 @@
       background: #000;
     }
 
-    /* CARRITO / CANASTA */
     .cart-section {
       display: none;
       margin-top: 20px;
@@ -547,7 +539,6 @@
       background: #000;
     }
 
-    /* FORMULARIO DE CHECKOUT */
     .checkout-section {
       display: none;
       margin-top: 20px;
