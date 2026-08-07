@@ -2865,8 +2865,9 @@
       // NOTA: item.details llega ya armado desde addToCart() como un único
       // string con segmentos separados por " | " (ej: "Bases: ... | Proteína: ...
       // | Toppings: ... | Salsa: ... | Comentarios: ..."). Esa lógica NO se toca.
-      // Aquí solo se "desarma" ese string para imprimir cada sección en líneas
-      // separadas, tal como lo pediste.
+      // Aquí solo se "desarma" ese string para imprimir cada sección, mostrando
+      // las listas como un único párrafo con comas (igual a como se ve en la
+      // vista previa del carrito), en vez de una línea por cada ítem.
       const LIST_LABELS = ['Bases', 'Toppings', 'Adición Proteína', 'Adición Toppings', 'Adición Salsas'];
 
       function buildConfigLines(details) {
@@ -2887,13 +2888,11 @@
             // Formato de una sola línea: "Salsa: Salsa BBQ"
             out.push(`${label}: ${value}`);
             out.push('');
-          } else if (LIST_LABELS.includes(label)) {
-            // Formato de lista: label en su propia línea, cada valor debajo
-            out.push(`${label}:`);
-            value.split(', ').forEach(v => out.push(v));
-            out.push('');
           } else {
-            // Ej. "Proteína": label en su línea, valor en la siguiente
+            // Ej. "Bases", "Proteína", "Toppings", "Adición Proteína",
+            // "Adición Toppings", "Adición Salsas": el label va en su propia
+            // línea y el valor completo (con comas) va debajo, en un solo
+            // párrafo, tal como aparece en la canasta.
             out.push(`${label}:`);
             out.push(value);
             out.push('');
