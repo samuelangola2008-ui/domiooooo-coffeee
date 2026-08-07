@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -719,10 +719,9 @@
           <ul class="categories-list">
             <li onclick="scrollToCategory('cat-bowl')">BOWL</li>
             <li onclick="scrollToCategory('cat-burrito')">BURRITO</li>
-            <li onclick="scrollToCategory('cat-burrito-soda')">BURRITO + SODA</li>
             <li onclick="scrollToCategory('cat-sandwichs')">SANDWICHS</li>
             <li onclick="scrollToCategory('cat-nachos')">NACHOS</li>
-            <li onclick="scrollToCategory('cat-totopos')">TOTOPOS WED</li>
+            <li onclick="scrollToCategory('cat-totopos')">TOTOPOS</li>
             <li onclick="scrollToCategory('cat-torta')">PORCION DE TORTA</li>
             <li onclick="scrollToCategory('cat-cafe')">CAFÉ</li>
             <li onclick="scrollToCategory('cat-malteada')">MALTEADA</li>
@@ -763,21 +762,6 @@
             </div>
           </div>
 
-          <!-- BURRITO + SODA -->
-          <div id="cat-burrito-soda">
-            <div class="category-section-title">Burrito + Soda</div>
-            <div class="category-grid">
-              <div class="product-card">
-                <div class="product-img"><img src="burrito.jpg.jpeg" alt="Burrito + Soda"></div>
-                <div class="product-info">
-                  <h4>$ 25.000</h4>
-                  <h3>Burrito + Soda Italiana</h3>
-                  <button class="btn-buy" onclick="openProductModal('Burrito + Soda Italiana', 25000, 'food')">¡COMPRAR!</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- SANDWICHS -->
           <div id="cat-sandwichs">
             <div class="category-section-title">Sandwichs</div>
@@ -808,16 +792,16 @@
             </div>
           </div>
 
-          <!-- TOTOPOS WED -->
+          <!-- TOTOPOS -->
           <div id="cat-totopos">
-            <div class="category-section-title">Totopos Wed</div>
+            <div class="category-section-title">Totopos</div>
             <div class="category-grid">
               <div class="product-card">
                 <div class="product-img"><img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80" alt="Totopos"></div>
                 <div class="product-info">
                   <h4>$ 9.000</h4>
-                  <h3>Totopos Wed</h3>
-                  <button class="btn-buy" onclick="openProductModal('Totopos Wed', 9000, 'totopos')">¡COMPRAR!</button>
+                  <h3>Totopos</h3>
+                  <button class="btn-buy" onclick="openProductModal('Totopos', 9000, 'totopos')">¡COMPRAR!</button>
                 </div>
               </div>
             </div>
@@ -1380,7 +1364,7 @@
 
       </div>
 
-      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE TOTOPOS WED -->
+      <!-- CONTENEDOR ESPECÍFICO PARA PERSONALIZACIÓN DE TOTOPOS -->
       <div id="totoposCustomizationContainer" style="display:none;">
 
         <div class="section-title">PASO ÚNICO. TOPPINGS <span id="totoposCounterText">(Elige 2 · 0 / 2)</span></div>
@@ -1844,7 +1828,7 @@
     let sandwichSelectedSalsa = null;
     let sandwichProductQty = 1;
 
-    // Variables de configuración de Totopos Wed
+    // Variables de configuración de Totopos
     let totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, ajo: 0, tatemada: 0, sourcream: 0 };
 
     // Variables de configuración de Malteada
@@ -1955,7 +1939,7 @@
       document.getElementById('sandwichComentarios').value = '';
       document.getElementById('swToppingsCounterText').innerText = '(Elige 3 · 0 / 3)';
 
-      // Resetear selecciones de Totopos Wed
+      // Resetear selecciones de Totopos
       totoposQuantities = { guacamole: 0, jalapenos: 0, picodegallo: 0, ajo: 0, tatemada: 0, sourcream: 0 };
       document.getElementById('totoposComentarios').value = '';
       document.getElementById('totoposCounterText').innerText = '(Elige 2 · 0 / 2)';
@@ -2239,7 +2223,7 @@
       calculateModalTotal();
     }
 
-    // 12. Lógica de Toppings de Totopos Wed (Máximo 2 en total)
+    // 12. Lógica de Toppings de Totopos (Máximo 2 en total)
     function changeTotoposQty(key, delta) {
       let currentVal = totoposQuantities[key];
       let newVal = currentVal + delta;
@@ -2424,7 +2408,7 @@
 
     // Cálculo dinámico del precio total en el modal
     function calculateModalTotal() {
-      // Cálculo específico para Totopos Wed
+      // Cálculo específico para Totopos
       if (currentProduct.type === 'totopos') {
         let totoposTotal = currentProduct.basePrice;
         document.getElementById('modalTotalPrice').innerText = '$ ' + totoposTotal.toLocaleString();
@@ -2510,7 +2494,7 @@
         return;
       }
 
-      // Rama específica para Totopos Wed
+      // Rama específica para Totopos
       if (currentProduct.type === 'totopos') {
         let salsaNames = { guacamole: 'Guacamole', jalapenos: 'Jalapeños', picodegallo: 'Pico De Gallo', ajo: 'Salsa De Ajo', tatemada: 'Salsa Tatemada', sourcream: 'Sour Cream' };
         let details = [];
@@ -2878,57 +2862,33 @@
       // El mensaje de WhatsApp es texto plano (no HTML), por lo que no hay
       // riesgo de XSS aquí; igualmente usamos los valores ya recortados arriba.
       let lines = [];
-      lines.push('╔════════════════════════════╗');
-      lines.push('🛵 *NUEVO PEDIDO DE DOMICILIO*');
-      lines.push('╚════════════════════════════╝');
-      lines.push('');
-      lines.push('👤 *DATOS DEL CLIENTE*');
-      lines.push('───────────────────');
+      lines.push('¡Nuevo Pedido - Dominio & Coffee!');
       lines.push(`Nombre: ${nombre}`);
-      lines.push(`WhatsApp: ${whatsapp}`);
-      lines.push('');
-      lines.push('📍 *DIRECCIÓN DE ENTREGA*');
-      lines.push('──────────────────────');
+      lines.push(`Teléfono: ${whatsapp}`);
       lines.push(`Dirección: ${direccion}`);
       lines.push(`Barrio: ${barrio}`);
       if (referencia) lines.push(`Referencia: ${referencia}`);
-      lines.push('');
-      lines.push('🛒 *PRODUCTOS SOLICITADOS*');
-      lines.push('───────────────────────');
+      lines.push(`Método de pago: ${pago}`);
+      lines.push('--- DETALLE DEL PEDIDO ---');
 
       let subtotal = 0;
-      cart.forEach((item) => {
+      cart.forEach((item, idx) => {
         let itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
 
-        let label = `${item.quantity} × ${item.name}`;
-        let priceStr = `$${itemTotal.toLocaleString()}`;
-        let dotsCount = Math.max(3, 40 - label.length - priceStr.length);
-        lines.push(`• ${label} ${'.'.repeat(dotsCount)} ${priceStr}`);
-
+        lines.push(`${idx + 1}. ${item.name}`);
         if (item.details && item.details !== 'Estándar') {
-          lines.push(`   ↳ ${item.details}`);
+          lines.push(`   Configuración: ${item.details}`);
         }
+        lines.push(`   Cantidad: ${item.quantity}`);
+        lines.push(`   Precio unit.: $${item.price.toLocaleString()}`);
+        lines.push(`   Subtotal: $${itemTotal.toLocaleString()}`);
+        lines.push('');
       });
 
-      lines.push('');
-      lines.push('💳 *FORMA DE PAGO*');
-      lines.push('────────────────');
-      lines.push(pago);
-
-      if (observaciones) {
-        lines.push('');
-        lines.push('📝 *OBSERVACIONES*');
-        lines.push('───────────────');
-        lines.push(observaciones);
-      }
-
-      lines.push('');
-      lines.push('💰 *RESUMEN DEL PEDIDO*');
-      lines.push('────────────────────');
+      lines.push(`Subtotal: $${subtotal.toLocaleString()}`);
+      if (observaciones) lines.push(`Observaciones: ${observaciones}`);
       lines.push(`Total a pagar: $${subtotal.toLocaleString()}`);
-      lines.push('');
-      lines.push('✅ Gracias por tu pedido');
 
       let mensaje = lines.join('\n');
 
