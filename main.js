@@ -1,7 +1,4 @@
-
-
-
-    /* =====================================================================
+/* =====================================================================
        SEGURIDAD: utilidades de saneamiento
        - escapeHtml(): evita XSS al insertar texto proveniente del usuario
          (comentarios, nombre, dirección, etc.) dentro de innerHTML.
@@ -36,6 +33,7 @@
       nachos: 'Arma tus nachos en 3 pasos',
       totopos: 'Arma tus totopos en 1 paso',
       bowl: 'Arma tu bowl en 4 pasos',
+      burrito: 'Arma tu burrito en 4 pasos',
       malteada: 'Elige tu malteada',
       torta: 'Elige tu porción de torta',
       sodaitaliana: 'Elige el sabor de tu soda italiana',
@@ -50,6 +48,15 @@
     let addTopQuantities = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
     let selectedSalsaBase = null;
     let addSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
+
+    // Variables de configuración del Burrito (idéntico al Bowl, pero SIN "La Base del Día")
+    let burrBaseQuantities = { arroz: 0, lechugas: 0 };
+    let burrSelectedProtein = null;
+    let burrAddProtQuantities = { carne: 0, cerdo: 0, costilla: 0, tenders: 0, chorizo: 0 };
+    let burrSelectedTops = {}; // hasta 7
+    let burrAddTopQuantities = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
+    let burrSelectedSalsaBase = null;
+    let burrAddSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
 
     // Variables de configuración del Sandwich
     let sandwichSelectedProtein = null;
@@ -160,6 +167,17 @@
       document.getElementById('bowlComentarios').value = '';
       document.getElementById('toppingsCounterText').innerText = '(Elige 7 · 0 / 7)';
 
+      // Resetear selecciones del Burrito
+      burrBaseQuantities = { arroz: 0, lechugas: 0 };
+      burrSelectedProtein = null;
+      burrAddProtQuantities = { carne: 0, cerdo: 0, costilla: 0, tenders: 0, chorizo: 0 };
+      burrSelectedTops = {};
+      burrAddTopQuantities = { chicharron: 0, chorizo: 0, maduro: 0, maicitos: 0, guacamole: 0, pico: 0, doritox: 0, sour: 0, cebolla: 0, queso: 0, pepino: 0, jalapenos: 0 };
+      burrSelectedSalsaBase = null;
+      burrAddSalsaQuantities = { tatemada: 0, ajo: 0, bbq: 0 };
+      document.getElementById('burritoComentarios').value = '';
+      document.getElementById('burrToppingsCounterText').innerText = '(Elige 7 · 0 / 7)';
+
       // Resetear selecciones del Sandwich
       sandwichSelectedProtein = null;
       sandwichToppingQuantities = { lechuga: 0, tomate: 0, cebolla: 0, cebollaencurtida: 0, jalapeno: 0, chicharron: 0, doritox: 0, maizcito: 0 };
@@ -212,6 +230,7 @@
 
       // Mostrar u ocultar personalizaciones según el tipo
       document.getElementById('bowlCustomizationContainer').style.display = 'none';
+      document.getElementById('burritoCustomizationContainer').style.display = 'none';
       document.getElementById('sandwichCustomizationContainer').style.display = 'none';
       document.getElementById('totoposCustomizationContainer').style.display = 'none';
       document.getElementById('malteadaCustomizationContainer').style.display = 'none';
@@ -220,7 +239,9 @@
       document.getElementById('sodaItalianaCustomizationContainer').style.display = 'none';
       document.getElementById('simpleCustomizationContainer').style.display = 'none';
 
-      if (type === 'sandwich') {
+      if (type === 'burrito') {
+        document.getElementById('burritoCustomizationContainer').style.display = 'block';
+      } else if (type === 'sandwich') {
         document.getElementById('sandwichCustomizationContainer').style.display = 'block';
       } else if (type === 'totopos') {
         document.getElementById('totoposCustomizationContainer').style.display = 'block';
@@ -271,6 +292,31 @@
       calculateModalTotal();
     }
 
+    // 1b. Lógica de Bases del BURRITO (Máximo 3 porciones en total, 0-2 por ítem, sin "La Base del Día")
+    function changeBurrBaseQty(key, delta) {
+      let currentVal = burrBaseQuantities[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) newVal = 0;
+      if (newVal > 2) newVal = 2;
+
+      let totalOthers = Object.keys(burrBaseQuantities).reduce((sum, k) => k === key ? sum : sum + burrBaseQuantities[k], 0);
+
+      if (totalOthers + newVal > 3) {
+        alert('Solo puedes seleccionar un máximo de 3 porciones.');
+        return;
+      }
+
+      burrBaseQuantities[key] = newVal;
+      document.getElementById('qty_burrbase_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_burrbase_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
     // 2. Lógica de Proteínas (Una única opción obligatoria)
     function selectProtein(key, displayName, price) {
       if (selectedProtein && selectedProtein.key === key) {
@@ -282,6 +328,21 @@
         }
         selectedProtein = { key, displayName, price };
         document.getElementById('box_prot_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
+    // 2b. Lógica de Proteínas del BURRITO (Una única opción obligatoria)
+    function selectBurrProtein(key, displayName, price) {
+      if (burrSelectedProtein && burrSelectedProtein.key === key) {
+        burrSelectedProtein = null;
+        document.getElementById('box_burrprot_' + key).classList.remove('selected-blue');
+      } else {
+        if (burrSelectedProtein) {
+          document.getElementById('box_burrprot_' + burrSelectedProtein.key).classList.remove('selected-blue');
+        }
+        burrSelectedProtein = { key, displayName, price };
+        document.getElementById('box_burrprot_' + key).classList.add('selected-blue');
       }
       calculateModalTotal();
     }
@@ -301,6 +362,27 @@
       document.getElementById('qty_addprot_' + key).innerText = newVal;
 
       const box = document.getElementById('box_addprot_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
+    // 3b. Lógica de Adición de Proteína del BURRITO (Máximo 1)
+    function changeAddBurrProtQty(key, delta) {
+      let currentVal = burrAddProtQuantities[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) newVal = 0;
+      if (newVal > 1) {
+        alert('Solo puedes agregar un máximo de 1 unidad de esta proteína.');
+        return;
+      }
+
+      burrAddProtQuantities[key] = newVal;
+      document.getElementById('qty_burraddprot_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_burraddprot_' + key);
       if (newVal > 0) box.classList.add('selected-blue');
       else box.classList.remove('selected-blue');
 
@@ -328,6 +410,27 @@
       calculateModalTotal();
     }
 
+    // 4b. Lógica de Toppings del BURRITO (Máximo 7 incluidos)
+    function toggleBurrTop(key, displayName, price) {
+      const box = document.getElementById('box_burrtop_' + key);
+      if (burrSelectedTops[key]) {
+        delete burrSelectedTops[key];
+        box.classList.remove('selected-blue');
+      } else {
+        const currentCount = Object.keys(burrSelectedTops).length;
+        if (currentCount >= 7) {
+          alert('Solo puedes seleccionar un máximo de 7 toppings.');
+          return;
+        }
+        burrSelectedTops[key] = { displayName, price };
+        box.classList.add('selected-blue');
+      }
+
+      let count = Object.keys(burrSelectedTops).length;
+      document.getElementById('burrToppingsCounterText').innerText = `(Elige 7 · ${count} / 7)`;
+      calculateModalTotal();
+    }
+
     // 5. Lógica de Adición de Toppings (Máximo 1 unidad por cada topping, no pasar de 1)
     function changeAddTopQty(key, delta) {
       let currentVal = addTopQuantities[key];
@@ -349,6 +452,27 @@
       calculateModalTotal();
     }
 
+    // 5b. Lógica de Adición de Toppings del BURRITO (Máximo 1 unidad por cada topping, no pasar de 1)
+    function changeAddBurrTopQty(key, delta) {
+      let currentVal = burrAddTopQuantities[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) newVal = 0;
+      if (newVal > 1) {
+        alert('No se puede pasar de 1 al adicionar topping.');
+        return;
+      }
+
+      burrAddTopQuantities[key] = newVal;
+      document.getElementById('qty_burradd_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_burradd_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
     // 6. Lógica de Salsa Base (Escoge 1)
     function selectSalsaBase(key, displayName) {
       if (selectedSalsaBase && selectedSalsaBase.key === key) {
@@ -360,6 +484,21 @@
         }
         selectedSalsaBase = { key, displayName };
         document.getElementById('box_salsabase_' + key).classList.add('selected-blue');
+      }
+      calculateModalTotal();
+    }
+
+    // 6b. Lógica de Salsa Base del BURRITO (Escoge 1)
+    function selectBurrSalsaBase(key, displayName) {
+      if (burrSelectedSalsaBase && burrSelectedSalsaBase.key === key) {
+        burrSelectedSalsaBase = null;
+        document.getElementById('box_burrsalsabase_' + key).classList.remove('selected-blue');
+      } else {
+        if (burrSelectedSalsaBase) {
+          document.getElementById('box_burrsalsabase_' + burrSelectedSalsaBase.key).classList.remove('selected-blue');
+        }
+        burrSelectedSalsaBase = { key, displayName };
+        document.getElementById('box_burrsalsabase_' + key).classList.add('selected-blue');
       }
       calculateModalTotal();
     }
@@ -379,6 +518,27 @@
       document.getElementById('qty_addsalsa_' + key).innerText = newVal;
 
       const box = document.getElementById('box_addsalsa_' + key);
+      if (newVal > 0) box.classList.add('selected-blue');
+      else box.classList.remove('selected-blue');
+
+      calculateModalTotal();
+    }
+
+    // 7b. Lógica de Adición de Salsas del BURRITO (Máximo 1 por cada salsa)
+    function changeAddBurrSalsaQty(key, delta) {
+      let currentVal = burrAddSalsaQuantities[key];
+      let newVal = currentVal + delta;
+
+      if (newVal < 0) newVal = 0;
+      if (newVal > 1) {
+        alert('Solo puedes agregar un máximo de 1 unidad de esta salsa.');
+        return;
+      }
+
+      burrAddSalsaQuantities[key] = newVal;
+      document.getElementById('qty_burraddsalsa_' + key).innerText = newVal;
+
+      const box = document.getElementById('box_burraddsalsa_' + key);
       if (newVal > 0) box.classList.add('selected-blue');
       else box.classList.remove('selected-blue');
 
@@ -690,6 +850,29 @@
         return simpleTotal;
       }
 
+      // Cálculo específico para Burrito (idéntico al Bowl, sin "La Base del Día")
+      if (currentProduct.type === 'burrito') {
+        let burrTotal = currentProduct.basePrice;
+
+        if (burrSelectedProtein) burrTotal += burrSelectedProtein.price;
+
+        let totalAddProtQty = Object.values(burrAddProtQuantities).reduce((a, b) => a + b, 0);
+        burrTotal += totalAddProtQty * 8000;
+
+        for (let k in burrSelectedTops) {
+          burrTotal += burrSelectedTops[k].price;
+        }
+
+        let totalAddTopQty = Object.values(burrAddTopQuantities).reduce((a, b) => a + b, 0);
+        burrTotal += totalAddTopQty * 3000;
+
+        let totalSalsasQty = Object.values(burrAddSalsaQuantities).reduce((a, b) => a + b, 0);
+        burrTotal += totalSalsasQty * 1000;
+
+        document.getElementById('modalTotalPrice').innerText = '$ ' + burrTotal.toLocaleString();
+        return burrTotal;
+      }
+
       let total = currentProduct.basePrice;
 
       if (selectedProtein) total += selectedProtein.price;
@@ -900,6 +1083,67 @@
           price: currentProduct.basePrice,
           details: details.join(' | ') || 'Estándar',
           quantity: simpleProductQty
+        });
+
+        updateCartBadge();
+        closeProductModal();
+        showSection('cart');
+        return;
+      }
+
+      // Rama específica para Burrito (idéntica al Bowl, sin "La Base del Día")
+      if (currentProduct.type === 'burrito') {
+        let finalPrice = calculateModalTotal();
+        let details = [];
+
+        // Bases
+        let baseParts = [];
+        if (burrBaseQuantities.arroz > 0) baseParts.push(`Arroz del Día x${burrBaseQuantities.arroz}`);
+        if (burrBaseQuantities.lechugas > 0) baseParts.push(`Lechuga Mix x${burrBaseQuantities.lechugas}`);
+        if (baseParts.length > 0) details.push(`Bases: ${baseParts.join(', ')}`);
+
+        // Proteína
+        if (burrSelectedProtein) details.push(`Proteína: ${burrSelectedProtein.displayName}`);
+
+        // Adición de Proteína
+        let addProtNames = { carne: 'Carne Desmechada', cerdo: 'Cerdo Pulled Pork', costilla: 'Costilla Ahumada BBQ', tenders: 'Tender de Pechuga', chorizo: 'Chorizo de Cerdo' };
+        let addProtParts = [];
+        for (let k in burrAddProtQuantities) {
+          if (burrAddProtQuantities[k] > 0) addProtParts.push(`${addProtNames[k]} x${burrAddProtQuantities[k]}`);
+        }
+        if (addProtParts.length > 0) details.push(`Adición Proteína: ${addProtParts.join(', ')}`);
+
+        // Toppings incluidos
+        let topNames = Object.values(burrSelectedTops).map(t => t.displayName);
+        if (topNames.length > 0) details.push(`Toppings: ${topNames.join(', ')}`);
+
+        // Adición de toppings
+        let addTopNames = { chicharron: 'Chicharrón', chorizo: 'Topping del Día', maduro: 'Maizcitos', maicitos: 'Cebolla y Pimentón Encurtido', guacamole: 'Guacamole', pico: 'Pico de Gallo', doritox: 'Doritox', sour: 'Sour Cream', cebolla: 'Cebolla Crispy', queso: 'Queso Mozzarella', pepino: 'Pepino al Cilantro', jalapenos: 'Jalapeños' };
+        let addTopParts = [];
+        for (let k in burrAddTopQuantities) {
+          if (burrAddTopQuantities[k] > 0) addTopParts.push(`${addTopNames[k]} x${burrAddTopQuantities[k]}`);
+        }
+        if (addTopParts.length > 0) details.push(`Adición Toppings: ${addTopParts.join(', ')}`);
+
+        // Salsa Base
+        if (burrSelectedSalsaBase) details.push(`Salsa: ${burrSelectedSalsaBase.displayName}`);
+
+        // Adición de Salsas
+        let addSalsaNames = { tatemada: 'Salsa Tatemada', ajo: 'Salsa de Ajo', bbq: 'Salsa BBQ' };
+        let addSalsaParts = [];
+        for (let k in burrAddSalsaQuantities) {
+          if (burrAddSalsaQuantities[k] > 0) addSalsaParts.push(`${addSalsaNames[k]} x${burrAddSalsaQuantities[k]}`);
+        }
+        if (addSalsaParts.length > 0) details.push(`Adición Salsas: ${addSalsaParts.join(', ')}`);
+
+        let comentariosBurrito = clampText(document.getElementById('burritoComentarios').value.trim(), 250);
+        if (comentariosBurrito) details.push(`Comentarios: ${comentariosBurrito}`);
+
+        cart.push({
+          name: currentProduct.name,
+          price: finalPrice,
+          details: details.join(' | ') || 'Estándar',
+          quantity: 1
         });
 
         updateCartBadge();
