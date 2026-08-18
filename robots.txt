@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://samuelangola2008-ui.github.io/domiooooo-coffeee/sitemap.xml
